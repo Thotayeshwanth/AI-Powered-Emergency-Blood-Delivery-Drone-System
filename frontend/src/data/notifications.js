@@ -1,0 +1,47 @@
+export const INITIAL_NOTIFICATIONS = [
+  {
+    id: 'notif-1',
+    type: 'emergency', // 'emergency' | 'temperature' | 'drone' | 'inventory' | 'info'
+    title: 'Critical Emergency Blood Request',
+    message: 'REQ-1024 (O- Negative, 2 units) requested by City Care Hospital with 18 min window.',
+    timestamp: '2 mins ago',
+    read: false,
+    link: '/blood-requests',
+  },
+  {
+    id: 'notif-2',
+    type: 'drone',
+    title: 'Drone In-Flight Telemetry Active',
+    message: 'FROWWY J2 has reached 120m cruising altitude on AeroCorridor Med-North-2. ETA 4 mins.',
+    timestamp: '5 mins ago',
+    read: false,
+    link: '/drone-tracking',
+  },
+  {
+    id: 'notif-3',
+    type: 'temperature',
+    title: 'Cold-Chain Container Verified',
+    message: 'Container ISOTHERM-409 sensor DS18B20 reporting stable 4.2°C (Safe Range 2°C – 6°C).',
+    timestamp: '8 mins ago',
+    read: true,
+    link: '/temperature-monitoring',
+  },
+  {
+    id: 'notif-4',
+    type: 'inventory',
+    title: 'O- Negative Blood Stock Alert',
+    message: 'O- available inventory has dropped to 1 unit. Immediate donor recruitment suggested.',
+    timestamp: '25 mins ago',
+    read: false,
+    link: '/blood-inventory',
+  },
+  {
+    id: 'notif-5',
+    type: 'drone',
+    title: 'Delivery Mission Completed',
+    message: 'DEL-1022 safely landed at City Care Hospital Rooftop. Secure handover validated.',
+    timestamp: '2 hours ago',
+    read: true,
+    link: '/deliveries/DEL-1022',
+  },
+];

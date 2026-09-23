@@ -1,0 +1,38 @@
+export const MOCK_USERS = [
+  {
+    id: 'user-01',
+    name: 'Dr. Sarah Chen, MD',
+    email: 'sarah.chen@citycare.org',
+    role: 'HOSPITAL', // 'HOSPITAL' | 'BLOOD_BANK' | 'ADMIN'
+    title: 'Chief Emergency Surgeon',
+    organization: 'City Care Hospital',
+    department: 'Trauma & Emergency Care',
+    avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=200',
+    phone: '+1 (555) 432-8901',
+    status: 'ACTIVE',
+  },
+  {
+    id: 'user-02',
+    name: 'Marcus Vance, PhD',
+    email: 'marcus.vance@bloodhubs.org',
+    role: 'BLOOD_BANK',
+    title: 'Director of Cryogenic Logistics',
+    organization: 'Central Blood Logistics Hub',
+    department: 'Hematology & Quality Assurance',
+    avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=200',
+    phone: '+1 (555) 019-2834',
+    status: 'ACTIVE',
+  },
+  {
+    id: 'user-03',
+    name: 'Elena Rostova',
+    email: 'admin@aeromedsystem.gov',
+    role: 'ADMIN',
+    title: 'Aviation Fleet Operations Commander',
+    organization: 'AeroMed Emergency Network',
+    department: 'Autonomous Flight Operations',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200',
+    phone: '+1 (555) 882-9900',
+    status: 'ACTIVE',
+  },
+];

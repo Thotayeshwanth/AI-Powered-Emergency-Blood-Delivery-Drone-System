@@ -1,0 +1,12 @@
+{
+  "name": "aeromed-drone-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-Powered Emergency Blood Delivery Drone System (Frontend + Backend)",
+  "scripts": {
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "install:all": "npm --prefix frontend install && npm --prefix backend install"
+  }
+}
