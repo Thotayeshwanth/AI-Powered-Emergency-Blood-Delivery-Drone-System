@@ -1,84 +1,114 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthStore } from './store/useAuthStore';
-import { useSettingsStore } from './store/useSettingsStore';
-import { useSimulationTicker } from './hooks/useSimulationTicker';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 
-// Layout
-import DashboardLayout from './components/layout/DashboardLayout';
+import Home from './pages/Home';
+import HowItWorks from './pages/HowItWorks';
+import BloodAccess from './pages/BloodAccess';
+import Contact from './pages/Contact';
+import Login from './pages/Login';
+import HospitalDashboard from './pages/HospitalDashboard';
+import BloodBankDashboard from './pages/BloodBankDashboard';
+import RequestBlood from './pages/RequestBlood';
+import RequestDetails from './pages/RequestDetails';
+import DeliveryTracking from './pages/DeliveryTracking';
+import NotFound from './pages/NotFound';
 
-// Pages
-import LoginPage from './pages/LoginPage';
-import DashboardPage from './pages/DashboardPage';
-import BloodRequestsPage from './pages/BloodRequestsPage';
-import NewBloodRequestPage from './pages/NewBloodRequestPage';
-import BloodInventoryPage from './pages/BloodInventoryPage';
-import DroneTrackingPage from './pages/DroneTrackingPage';
-import TemperatureMonitoringPage from './pages/TemperatureMonitoringPage';
-import DeliveriesPage from './pages/DeliveriesPage';
-import DeliveryDetailPage from './pages/DeliveryDetailPage';
-import DeliveryHistoryPage from './pages/DeliveryHistoryPage';
-import AdminAnalyticsPage from './pages/AdminAnalyticsPage';
-import UsersPage from './pages/UsersPage';
-import SettingsPage from './pages/SettingsPage';
+function ProtectedRoute({ children, requiredType }) {
+  const { user, isAuthenticated, loading } = useAuth();
 
-// Protected Route Guard
-function ProtectedRoute({ children }) {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center', padding: '100px 20px', color: '#64748B' }}>
+        Verifying authorization credentials...
+      </div>
+    );
+  }
+
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
+
+  if (requiredType && user?.institutionType !== requiredType) {
+    return (
+      <Navigate
+        to={user?.institutionType === 'HOSPITAL' ? '/hospital/dashboard' : '/blood-bank/dashboard'}
+        replace
+      />
+    );
+  }
+
   return children;
 }
 
 export default function App() {
-  // Activate background drone telemetry and temperature tick engine
-  useSimulationTicker();
-
-  const darkMode = useSettingsStore((state) => state.darkMode);
-
-  // Sync dark mode class on mount and update
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public Login Route */}
-        <Route path="/login" element={<LoginPage />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Header />
+        <main style={{ flex: 1 }}>
+          <Routes>
+            {/* Public Pages */}
+            <Route path="/" element={<Home />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/blood-access" element={<BloodAccess />} />
+            <Route path="/contact" element={<Contact />} />
+            
+            {/* Login & Portal Entry Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/hospital/login" element={<Login />} />
+            <Route path="/blood-bank/login" element={<Login />} />
 
-        {/* Authenticated Dashboard Shell */}
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <DashboardLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<Navigate to="/dashboard" replace />} />
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="blood-requests" element={<BloodRequestsPage />} />
-          <Route path="blood-requests/new" element={<NewBloodRequestPage />} />
-          <Route path="blood-inventory" element={<BloodInventoryPage />} />
-          <Route path="drone-tracking" element={<DroneTrackingPage />} />
-          <Route path="temperature-monitoring" element={<TemperatureMonitoringPage />} />
-          <Route path="deliveries" element={<DeliveriesPage />} />
-          <Route path="deliveries/:id" element={<DeliveryDetailPage />} />
-          <Route path="delivery-history" element={<DeliveryHistoryPage />} />
-          <Route path="analytics" element={<AdminAnalyticsPage />} />
-          <Route path="users" element={<UsersPage />} />
-          <Route path="settings" element={<SettingsPage />} />
-        </Route>
+            {/* Protected Portals */}
+            <Route
+              path="/hospital/dashboard"
+              element={
+                <ProtectedRoute requiredType="HOSPITAL">
+                  <HospitalDashboard />
+                </ProtectedRoute>
+              }
+            />
 
-        {/* Fallback to Dashboard */}
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
-      </Routes>
-    </BrowserRouter>
+            <Route
+              path="/blood-bank/dashboard"
+              element={
+                <ProtectedRoute requiredType="BLOOD_BANK">
+                  <BloodBankDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/request-blood"
+              element={
+                <ProtectedRoute requiredType="HOSPITAL">
+                  <RequestBlood />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/requests/:id"
+              element={
+                <ProtectedRoute>
+                  <RequestDetails />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/deliveries/:id/tracking"
+              element={<DeliveryTracking />}
+            />
+
+            {/* 404 Fallback */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
