@@ -156,13 +156,9 @@ export default function Home() {
             </p>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px' }}>
-              <Link to="/blood-access" className="btn-primary" style={{ padding: '13px 26px', fontSize: '15px' }}>
-                <span>Request Blood</span>
+              <Link to="/how-it-works" className="btn-primary" style={{ padding: '14px 28px', fontSize: '16px' }}>
+                <span>How It Works</span>
                 <ArrowRight size={18} />
-              </Link>
-
-              <Link to="/how-it-works" className="btn-outline" style={{ padding: '13px 26px', fontSize: '15px' }}>
-                <span>Discover How It Works</span>
               </Link>
             </div>
           </div>
