@@ -64,19 +64,9 @@ export default function Home() {
     <div style={{ backgroundColor: '#FFFFFF' }}>
       
       {/* ====================================================
-          SECTION 1: HERO SECTION (WITH BACKGROUND VIDEO)
+          SECTION 1: HERO SECTION (16:9 ASPECT RATIO ON LAPTOP SCREEN WITH BG VIDEO)
           ==================================================== */}
-      <section
-        style={{
-          position: 'relative',
-          padding: '80px 0 100px 0',
-          minHeight: '82vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          overflow: 'hidden'
-        }}
-      >
+      <section className="hero-16-9-section">
         {/* Responsive Background Video Container */}
         <div
           style={{
@@ -116,15 +106,8 @@ export default function Home() {
           />
         </div>
 
-        <div className="container-custom" style={{ position: 'relative', zIndex: 1 }}>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '48px',
-              alignItems: 'center'
-            }}
-          >
+        <div className="container-custom" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
+          <div className="hero-16-9-grid">
             {/* Left Hero Text */}
             <div>
               <div
@@ -134,26 +117,26 @@ export default function Home() {
                   gap: '8px',
                   backgroundColor: '#EEF5FA',
                   border: '1px solid #B8D3E9',
-                  padding: '6px 14px',
+                  padding: '5px 12px',
                   borderRadius: '9999px',
-                  fontSize: '13px',
+                  fontSize: '12.5px',
                   fontWeight: '700',
                   color: '#124676',
-                  marginBottom: '20px'
+                  marginBottom: '12px'
                 }}
               >
-                <Zap size={14} fill="#124676" />
+                <Zap size={13} fill="#124676" />
                 <span>AI-Assisted Emergency Medical Drone Logistics</span>
               </div>
 
               <h1
                 style={{
-                  fontSize: 'clamp(36px, 5.5vw, 62px)',
+                  fontSize: 'clamp(28px, 3.2vw, 48px)',
                   fontWeight: '800',
                   lineHeight: '1.1',
                   color: '#152238',
-                  letterSpacing: '-1.5px',
-                  marginBottom: '24px'
+                  letterSpacing: '-1.2px',
+                  marginBottom: '14px'
                 }}
               >
                 FROM BLOOD BANK<br />
@@ -163,33 +146,33 @@ export default function Home() {
 
               <p
                 style={{
-                  fontSize: '18px',
-                  lineHeight: '1.6',
+                  fontSize: 'clamp(14px, 1.05vw, 16px)',
+                  lineHeight: '1.5',
                   color: '#64748B',
-                  maxWidth: '540px',
-                  marginBottom: '36px'
+                  maxWidth: '520px',
+                  marginBottom: '20px'
                 }}
               >
                 LifeDrone connects hospitals and blood banks through intelligent delivery coordination,
                 secure package handovers, and drone-assisted medical logistics.
               </p>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px' }}>
-                <Link to="/blood-access" className="btn-primary" style={{ padding: '14px 28px', fontSize: '16px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                <Link to="/blood-access" className="btn-primary" style={{ padding: '11px 22px', fontSize: '14.5px' }}>
                   <span>Request Blood</span>
-                  <ArrowRight size={18} />
+                  <ArrowRight size={17} />
                 </Link>
 
-                <Link to="/how-it-works" className="btn-outline" style={{ padding: '14px 28px', fontSize: '16px' }}>
+                <Link to="/how-it-works" className="btn-outline" style={{ padding: '11px 22px', fontSize: '14.5px' }}>
                   <span>Discover How It Works</span>
                 </Link>
               </div>
 
               {/* Pilot indicator snippet */}
-              <div style={{ marginTop: '36px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span className="pulse-indicator pulse-green" style={{ marginRight: '8px' }} />
-                  <span style={{ fontSize: '13px', color: '#64748B', fontWeight: '500' }}>
+                  <span className="pulse-indicator pulse-green" style={{ marginRight: '7px' }} />
+                  <span style={{ fontSize: '12.5px', color: '#64748B', fontWeight: '500' }}>
                     Active Pilot in <strong>Prakasam District</strong>, AP &bull; 5 Vertipads Configured
                   </span>
                 </div>
@@ -202,31 +185,31 @@ export default function Home() {
                 className="animate-float"
                 style={{
                   width: '100%',
-                  maxWidth: '500px',
-                  background: 'rgba(255, 255, 255, 0.94)',
+                  maxWidth: '440px',
+                  background: 'rgba(255, 255, 255, 0.95)',
                   backdropFilter: 'blur(16px)',
-                  borderRadius: '24px',
+                  borderRadius: '20px',
                   border: '1px solid rgba(226, 232, 240, 0.9)',
-                  boxShadow: '0 25px 50px -12px rgba(18, 70, 118, 0.16)',
-                  padding: '28px',
+                  boxShadow: '0 20px 40px -10px rgba(18, 70, 118, 0.14)',
+                  padding: '20px',
                   position: 'relative'
                 }}
               >
                 {/* Visual Header: Traveling Drone with Blood Packet Animation */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
                   <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '10px',
+                      gap: '8px',
                       backgroundColor: '#F1F5F9',
-                      padding: '5px 12px',
-                      borderRadius: '12px',
+                      padding: '4px 10px',
+                      borderRadius: '10px',
                       border: '1px solid #E2E8F0',
                       overflow: 'hidden',
                       position: 'relative',
-                      minWidth: '200px',
-                      height: '42px'
+                      minWidth: '185px',
+                      height: '38px'
                     }}
                   >
                     {/* Dotted Flight Track */}
@@ -254,7 +237,7 @@ export default function Home() {
                       }}
                     >
                       {/* Mini Drone Body with Spinning Rotors */}
-                      <svg width="32" height="18" viewBox="0 0 32 18" fill="none">
+                      <svg width="28" height="16" viewBox="0 0 32 18" fill="none">
                         <ellipse className="rotor-active" cx="6" cy="3" rx="5" ry="1.2" fill="#64748B" />
                         <ellipse className="rotor-active" cx="26" cy="3" rx="5" ry="1.2" fill="#64748B" />
                         <path d="M6 4 L16 8 L26 4" stroke="#152238" strokeWidth="1.8" strokeLinecap="round" />
@@ -267,8 +250,8 @@ export default function Home() {
                       <div
                         style={{
                           marginTop: '-3px',
-                          width: '11px',
-                          height: '13px',
+                          width: '10px',
+                          height: '12px',
                           backgroundColor: '#DC2626',
                           borderRadius: '2px 2px 3px 3px',
                           border: '1px solid #991B1B',
@@ -279,7 +262,7 @@ export default function Home() {
                         }}
                         title="Blood Packet in Transit"
                       >
-                        <span style={{ color: '#FFFFFF', fontSize: '8px', fontWeight: '900', lineHeight: 1 }}>+</span>
+                        <span style={{ color: '#FFFFFF', fontSize: '7.5px', fontWeight: '900', lineHeight: 1 }}>+</span>
                       </div>
                     </div>
 
@@ -288,15 +271,15 @@ export default function Home() {
                       <span>Blood Transit</span>
                     </div>
                   </div>
-                  <span className="badge badge-intransit">Cruising 65 km/h</span>
+                  <span className="badge badge-intransit" style={{ fontSize: '11px', padding: '3px 8px' }}>Cruising 65 km/h</span>
                 </div>
 
                 {/* Drone SVG Graphic */}
                 <div
                   style={{
-                    height: '220px',
+                    height: '165px',
                     backgroundColor: '#F8FAFC',
-                    borderRadius: '16px',
+                    borderRadius: '14px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -322,7 +305,7 @@ export default function Home() {
 
                   {/* Drone SVG */}
                   <div style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-                    <svg width="100" height="70" viewBox="0 0 100 70" fill="none">
+                    <svg width="88" height="60" viewBox="0 0 100 70" fill="none">
                       {/* Propellers */}
                       <ellipse cx="20" cy="18" rx="16" ry="3" fill="#64748B" opacity="0.7" />
                       <ellipse cx="80" cy="18" rx="16" ry="3" fill="#64748B" opacity="0.7" />
@@ -335,7 +318,7 @@ export default function Home() {
                       <path d="M 50 50 v 8 M 46 54 h 8" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
                     </svg>
 
-                    <div style={{ marginTop: '8px', fontSize: '13px', fontWeight: '700', color: '#152238' }}>
+                    <div style={{ marginTop: '6px', fontSize: '12.5px', fontWeight: '700', color: '#152238' }}>
                       LD-HEXA-01 Medical Lifter
                     </div>
                     <div style={{ fontSize: '11px', color: '#D2252F', fontWeight: '600' }}>
@@ -349,52 +332,55 @@ export default function Home() {
                   style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '12px',
-                    marginTop: '20px',
+                    gap: '10px',
+                    marginTop: '14px',
                     backgroundColor: '#F5F8FC',
-                    padding: '12px',
-                    borderRadius: '12px',
+                    padding: '10px',
+                    borderRadius: '10px',
                     textAlign: 'center'
                   }}
                 >
                   <div>
-                    <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '600' }}>ETA</div>
-                    <div style={{ fontSize: '15px', fontWeight: '800', color: '#124676' }}>3.2 min</div>
+                    <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '600' }}>ETA</div>
+                    <div style={{ fontSize: '14px', fontWeight: '800', color: '#124676' }}>3.2 min</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '600' }}>Altitude</div>
-                    <div style={{ fontSize: '15px', fontWeight: '800', color: '#152238' }}>75 m</div>
+                    <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '600' }}>Altitude</div>
+                    <div style={{ fontSize: '14px', fontWeight: '800', color: '#152238' }}>75 m</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '600' }}>Passkey</div>
-                    <div style={{ fontSize: '15px', fontWeight: '800', color: '#16A34A' }}>Secured</div>
+                    <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '600' }}>Passkey</div>
+                    <div style={{ fontSize: '14px', fontWeight: '800', color: '#16A34A' }}>Secured</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Scroll Down Responsive Indicator (fades on scroll down, returns on scroll up) */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '4px',
-              marginTop: '40px',
-              opacity: scrollY > 60 ? 0 : 0.85,
-              transform: scrollY > 60 ? 'translateY(12px)' : 'translateY(0)',
-              transition: 'opacity 0.35s ease, transform 0.35s ease',
-              pointerEvents: 'none'
-            }}
-          >
-            <span style={{ fontSize: '11px', fontWeight: '700', color: '#124676', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              Scroll To Explore
-            </span>
-            <div className="animate-bounce">
-              <ChevronDown size={18} color="#D2252F" />
-            </div>
+        {/* Floating Scroll Down Responsive Indicator (fades on scroll down, returns on scroll up) */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '10px',
+            left: '50%',
+            transform: scrollY > 60 ? 'translate(-50%, 12px)' : 'translate(-50%, 0)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '2px',
+            opacity: scrollY > 60 ? 0 : 0.85,
+            transition: 'opacity 0.35s ease, transform 0.35s ease',
+            pointerEvents: 'none',
+            zIndex: 2
+          }}
+        >
+          <span style={{ fontSize: '10px', fontWeight: '700', color: '#124676', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            Scroll To Explore
+          </span>
+          <div className="animate-bounce">
+            <ChevronDown size={16} color="#D2252F" />
           </div>
         </div>
       </section>
