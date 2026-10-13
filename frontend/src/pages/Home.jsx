@@ -64,31 +64,59 @@ export default function Home() {
     <div style={{ backgroundColor: '#FFFFFF' }}>
       
       {/* ====================================================
-          SECTION 1: HERO SECTION
+          SECTION 1: HERO SECTION (WITH BACKGROUND VIDEO)
           ==================================================== */}
       <section
         style={{
           position: 'relative',
           padding: '80px 0 100px 0',
-          background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8FC 100%)',
+          minHeight: '82vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
           overflow: 'hidden'
         }}
       >
-        {/* Subtle decorative background circles */}
+        {/* Responsive Background Video Container */}
         <div
           style={{
             position: 'absolute',
-            top: '-120px',
-            right: '-100px',
-            width: '500px',
-            height: '500px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(18, 70, 118, 0.08) 0%, rgba(255, 255, 255, 0) 70%)',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden',
+            zIndex: 0,
             pointerEvents: 'none'
           }}
-        />
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              filter: 'brightness(0.95) saturate(1.08)'
+            }}
+          >
+            <source src="/videos/hero-drone-bg.mp4" type="video/mp4" />
+          </video>
 
-        <div className="container-custom">
+          {/* Elegant Translucent Gradient Overlay for Maximum Legibility across Desktop and Mobile */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.82) 45%, rgba(238, 245, 250, 0.68) 100%)',
+              backdropFilter: 'blur(2px)'
+            }}
+          />
+        </div>
+
+        <div className="container-custom" style={{ position: 'relative', zIndex: 1 }}>
           <div
             style={{
               display: 'grid',
@@ -175,10 +203,11 @@ export default function Home() {
                 style={{
                   width: '100%',
                   maxWidth: '500px',
-                  background: '#FFFFFF',
+                  background: 'rgba(255, 255, 255, 0.94)',
+                  backdropFilter: 'blur(16px)',
                   borderRadius: '24px',
-                  border: '1px solid #E2E8F0',
-                  boxShadow: '0 25px 50px -12px rgba(18, 70, 118, 0.15)',
+                  border: '1px solid rgba(226, 232, 240, 0.9)',
+                  boxShadow: '0 25px 50px -12px rgba(18, 70, 118, 0.16)',
                   padding: '28px',
                   position: 'relative'
                 }}
