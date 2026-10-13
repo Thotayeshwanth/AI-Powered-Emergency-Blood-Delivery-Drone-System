@@ -301,7 +301,7 @@ export default function BloodBankDashboard() {
 
             <div className="card-light" style={{ padding: '16px' }}>
               <div style={{ fontSize: '12px', color: '#64748B', fontWeight: '600' }}>Available Units in Stock</div>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: '#00A6A6', marginTop: '4px' }}>
+              <div style={{ fontSize: '28px', fontWeight: '800', color: '#D2252F', marginTop: '4px' }}>
                 {stats.availableUnits} <span style={{ fontSize: '14px', fontWeight: '500' }}>Units</span>
               </div>
             </div>
@@ -322,7 +322,7 @@ export default function BloodBankDashboard() {
 
             <div className="card-light" style={{ padding: '16px' }}>
               <div style={{ fontSize: '12px', color: '#64748B', fontWeight: '600' }}>Active Drone Flights</div>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: '#1769FF', marginTop: '4px' }}>
+              <div style={{ fontSize: '28px', fontWeight: '800', color: '#124676', marginTop: '4px' }}>
                 {stats.activeDeliveries}
               </div>
             </div>
@@ -354,8 +354,8 @@ export default function BloodBankDashboard() {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              backgroundColor: activeTab === 'REQUESTS' ? '#E6F7F7' : '#FFFFFF',
-              color: activeTab === 'REQUESTS' ? '#00A6A6' : '#64748B',
+              backgroundColor: activeTab === 'REQUESTS' ? '#FEF2F2' : '#FFFFFF',
+              color: activeTab === 'REQUESTS' ? '#D2252F' : '#64748B',
               border: activeTab === 'REQUESTS' ? '1px solid #99E2E2' : '1px solid #E2E8F0'
             }}
           >
@@ -373,8 +373,8 @@ export default function BloodBankDashboard() {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              backgroundColor: activeTab === 'INVENTORY' ? '#E6F7F7' : '#FFFFFF',
-              color: activeTab === 'INVENTORY' ? '#00A6A6' : '#64748B',
+              backgroundColor: activeTab === 'INVENTORY' ? '#FEF2F2' : '#FFFFFF',
+              color: activeTab === 'INVENTORY' ? '#D2252F' : '#64748B',
               border: activeTab === 'INVENTORY' ? '1px solid #99E2E2' : '1px solid #E2E8F0'
             }}
           >
@@ -392,8 +392,8 @@ export default function BloodBankDashboard() {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              backgroundColor: activeTab === 'PREPARATION' ? '#E6F7F7' : '#FFFFFF',
-              color: activeTab === 'PREPARATION' ? '#00A6A6' : '#64748B',
+              backgroundColor: activeTab === 'PREPARATION' ? '#FEF2F2' : '#FFFFFF',
+              color: activeTab === 'PREPARATION' ? '#D2252F' : '#64748B',
               border: activeTab === 'PREPARATION' ? '1px solid #99E2E2' : '1px solid #E2E8F0'
             }}
           >
@@ -437,7 +437,7 @@ export default function BloodBankDashboard() {
                   ) : (
                     requests.map((r) => (
                       <tr key={r.id} style={{ borderBottom: '1px solid #E2E8F0' }}>
-                        <td style={{ padding: '14px 16px', fontWeight: '700', color: '#1769FF' }}>
+                        <td style={{ padding: '14px 16px', fontWeight: '700', color: '#124676' }}>
                           {r.request_number}
                         </td>
                         <td style={{ padding: '14px 16px', fontWeight: '600', color: '#152238' }}>
@@ -459,7 +459,7 @@ export default function BloodBankDashboard() {
                             padding: '3px 8px',
                             borderRadius: '4px',
                             backgroundColor: r.urgency === 'CRITICAL_EMERGENCY' ? '#FEF2F2' : '#EFF6FF',
-                            color: r.urgency === 'CRITICAL_EMERGENCY' ? '#DC2626' : '#1D4ED8'
+                            color: r.urgency === 'CRITICAL_EMERGENCY' ? '#DC2626' : '#124676'
                           }}>
                             {r.urgency}
                           </span>
@@ -565,7 +565,7 @@ export default function BloodBankDashboard() {
                 <tbody>
                   {inventory.map((item) => (
                     <tr key={item.id} style={{ borderBottom: '1px solid #E2E8F0' }}>
-                      <td style={{ padding: '14px 16px', fontWeight: '800', color: '#1769FF', fontSize: '16px' }}>
+                      <td style={{ padding: '14px 16px', fontWeight: '800', color: '#124676', fontSize: '16px' }}>
                         {item.blood_group}
                       </td>
                       <td style={{ padding: '14px 16px', fontWeight: '600', color: '#152238' }}>
@@ -582,7 +582,7 @@ export default function BloodBankDashboard() {
                       <td style={{ padding: '14px 16px', fontFamily: 'monospace', fontSize: '13px' }}>
                         {item.batch_number}
                       </td>
-                      <td style={{ padding: '14px 16px', color: '#00A6A6', fontWeight: '500' }}>
+                      <td style={{ padding: '14px 16px', color: '#D2252F', fontWeight: '500' }}>
                         {item.storage_temperature}
                       </td>
                       <td style={{ padding: '14px 16px', color: '#64748B' }}>
@@ -619,7 +619,7 @@ export default function BloodBankDashboard() {
                   .map((r) => (
                     <div key={r.id} style={{ border: '1px solid #E2E8F0', borderRadius: '10px', padding: '16px', marginBottom: '12px', backgroundColor: '#FFFFFF' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                        <strong style={{ color: '#1769FF' }}>{r.request_number}</strong>
+                        <strong style={{ color: '#124676' }}>{r.request_number}</strong>
                         <span className="badge badge-accepted">Accepted</span>
                       </div>
                       <div style={{ fontSize: '14px', fontWeight: '700', color: '#152238' }}>
@@ -1025,7 +1025,7 @@ export default function BloodBankDashboard() {
                 </h3>
                 <div style={{ margin: '16px 0', padding: '16px', backgroundColor: '#F8FAFC', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
                   <div style={{ fontSize: '12px', color: '#64748B' }}>Assigned Delivery Reference</div>
-                  <div style={{ fontSize: '22px', fontWeight: '800', color: '#1769FF', marginBottom: '8px' }}>
+                  <div style={{ fontSize: '22px', fontWeight: '800', color: '#124676', marginBottom: '8px' }}>
                     {dispatchSuccessData.deliveryRef}
                   </div>
                   <div style={{ fontSize: '13px', color: '#152238' }}>
@@ -1034,11 +1034,11 @@ export default function BloodBankDashboard() {
                 </div>
 
                 {/* Display Demo Passkey Notice */}
-                <div style={{ backgroundColor: '#EFF6FF', border: '1px solid #BFDBFE', padding: '14px', borderRadius: '8px', marginBottom: '20px' }}>
-                  <div style={{ fontSize: '12px', color: '#1E40AF', fontWeight: '700', textTransform: 'uppercase' }}>
+                <div style={{ backgroundColor: '#EFF6FF', border: '1px solid #B8D3E9', padding: '14px', borderRadius: '8px', marginBottom: '20px' }}>
+                  <div style={{ fontSize: '12px', color: '#0D375E', fontWeight: '700', textTransform: 'uppercase' }}>
                     Issued Single-Use Passkey (Sent to Receiver's Email)
                   </div>
-                  <div style={{ fontSize: '28px', fontWeight: '800', color: '#1D4ED8', letterSpacing: '4px', fontFamily: 'monospace', margin: '6px 0' }}>
+                  <div style={{ fontSize: '28px', fontWeight: '800', color: '#124676', letterSpacing: '4px', fontFamily: 'monospace', margin: '6px 0' }}>
                     {dispatchSuccessData.passkey}
                   </div>
                   <div style={{ fontSize: '11px', color: '#64748B' }}>
@@ -1072,14 +1072,14 @@ export default function BloodBankDashboard() {
 
                 {calculatingRoute ? (
                   <div style={{ textAlign: 'center', padding: '30px' }}>
-                    <div style={{ fontSize: '14px', color: '#1769FF', fontWeight: '600' }}>
+                    <div style={{ fontSize: '14px', color: '#124676', fontWeight: '600' }}>
                       Executing A* Pathfinding across Prakasam Corridor Graph...
                     </div>
                   </div>
                 ) : calculatedRoute ? (
                   <div style={{ marginBottom: '24px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                      <span style={{ fontSize: '13px', fontWeight: '700', color: '#1769FF' }}>
+                      <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676' }}>
                         Algorithm: {calculatedRoute.algorithm}
                       </span>
                       <span className="badge badge-ready">Corridors Locked</span>
@@ -1094,7 +1094,7 @@ export default function BloodBankDashboard() {
                       </div>
                       <div>
                         <div style={{ fontSize: '11px', color: '#64748B' }}>Estimated Flight Duration</div>
-                        <div style={{ fontSize: '18px', fontWeight: '800', color: '#00A6A6' }}>
+                        <div style={{ fontSize: '18px', fontWeight: '800', color: '#D2252F' }}>
                           {calculatedRoute.flightDurationMinutes} minutes
                         </div>
                       </div>
@@ -1104,7 +1104,7 @@ export default function BloodBankDashboard() {
                       <strong>Waypoints Corridor Path:</strong>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
                         {calculatedRoute.waypoints.map((w, idx) => (
-                          <span key={idx} style={{ backgroundColor: '#EEF4FF', color: '#1769FF', padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: '600' }}>
+                          <span key={idx} style={{ backgroundColor: '#EEF5FA', color: '#124676', padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: '600' }}>
                             {idx + 1}. {w.name || w.code}
                           </span>
                         ))}

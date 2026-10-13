@@ -99,7 +99,7 @@ export default function RequestDetails() {
         <div style={{ marginBottom: '24px' }}>
           <Link
             to="/hospital/dashboard"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: '#1769FF', fontWeight: '600' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: '#124676', fontWeight: '600' }}
           >
             <ArrowLeft size={16} />
             <span>Back to Hospital Dashboard</span>
@@ -114,7 +114,7 @@ export default function RequestDetails() {
                 <span className={getStatusBadge(request.status)}>
                   {request.status.replace(/_/g, ' ')}
                 </span>
-                <span style={{ fontSize: '12px', fontWeight: '700', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#EFF6FF', color: '#1D4ED8' }}>
+                <span style={{ fontSize: '12px', fontWeight: '700', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#EFF6FF', color: '#124676' }}>
                   {request.urgency}
                 </span>
               </div>
@@ -164,7 +164,7 @@ export default function RequestDetails() {
               <h3 style={{ fontSize: '14px', fontWeight: '700', color: '#64748B', textTransform: 'uppercase', marginBottom: '12px' }}>
                 Requested Blood Product
               </h3>
-              <div style={{ fontSize: '22px', fontWeight: '800', color: '#1769FF', marginBottom: '4px' }}>
+              <div style={{ fontSize: '22px', fontWeight: '800', color: '#124676', marginBottom: '4px' }}>
                 {request.blood_group} &bull; {request.blood_component}
               </div>
               <div style={{ fontSize: '15px', fontWeight: '600', color: '#152238', marginBottom: '12px' }}>
@@ -227,7 +227,7 @@ export default function RequestDetails() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', backgroundColor: '#F8FAFC', padding: '16px', borderRadius: '10px' }}>
               <div>
                 <div style={{ fontSize: '11px', color: '#64748B', textTransform: 'uppercase' }}>Delivery Reference</div>
-                <div style={{ fontSize: '15px', fontWeight: '800', color: '#1769FF' }}>{request.delivery_reference}</div>
+                <div style={{ fontSize: '15px', fontWeight: '800', color: '#124676' }}>{request.delivery_reference}</div>
               </div>
               <div>
                 <div style={{ fontSize: '11px', color: '#64748B', textTransform: 'uppercase' }}>Drone Platform</div>
@@ -239,7 +239,7 @@ export default function RequestDetails() {
               </div>
               <div>
                 <div style={{ fontSize: '11px', color: '#64748B', textTransform: 'uppercase' }}>Flight ETA</div>
-                <div style={{ fontSize: '15px', fontWeight: '800', color: '#00A6A6' }}>{request.eta_minutes ?? 0} mins</div>
+                <div style={{ fontSize: '15px', fontWeight: '800', color: '#D2252F' }}>{request.eta_minutes ?? 0} mins</div>
               </div>
             </div>
           </div>

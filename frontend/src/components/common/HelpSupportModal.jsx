@@ -150,7 +150,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
           maxHeight: '90vh',
           backgroundColor: '#FFFFFF',
           borderRadius: '20px',
-          boxShadow: '0 25px 50px -12px rgba(23, 105, 255, 0.25)',
+          boxShadow: '0 25px 50px -12px rgba(18, 70, 118, 0.25)',
           border: '1px solid #E2E8F0',
           display: 'flex',
           flexDirection: 'column',
@@ -192,11 +192,11 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                 width: '38px',
                 height: '38px',
                 borderRadius: '10px',
-                backgroundColor: activeView === 'human' ? '#ECFDF5' : '#EEF4FF',
+                backgroundColor: activeView === 'human' ? '#ECFDF5' : '#EEF5FA',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: activeView === 'human' ? '#16A34A' : '#1769FF'
+                color: activeView === 'human' ? '#16A34A' : '#124676'
               }}
             >
               {activeView === 'human' ? <PhoneCall size={20} /> : <Bot size={20} />}
@@ -238,7 +238,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
         {activeView === 'select' && (
           <div style={{ padding: '32px 28px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '12px', fontWeight: '700', color: '#1769FF', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              <span style={{ fontSize: '12px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 How Can We Help You?
               </span>
               <h4 style={{ fontSize: '22px', fontWeight: '800', color: '#152238', marginTop: '4px' }}>
@@ -257,7 +257,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                 style={{
                   padding: '24px',
                   cursor: 'pointer',
-                  border: '2px solid #BFDBFE',
+                  border: '2px solid #B8D3E9',
                   backgroundColor: '#F8FAFF',
                   display: 'flex',
                   flexDirection: 'column',
@@ -271,12 +271,12 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                       width: '46px',
                       height: '46px',
                       borderRadius: '12px',
-                      backgroundColor: '#1769FF',
+                      backgroundColor: '#124676',
                       color: '#FFFFFF',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      boxShadow: '0 4px 12px rgba(23, 105, 255, 0.3)'
+                      boxShadow: '0 4px 12px rgba(18, 70, 118, 0.3)'
                     }}
                   >
                     <Sparkles size={22} />
@@ -285,11 +285,11 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                     style={{
                       fontSize: '11px',
                       fontWeight: '700',
-                      color: '#1769FF',
-                      backgroundColor: '#EEF4FF',
+                      color: '#124676',
+                      backgroundColor: '#EEF5FA',
                       padding: '3px 8px',
                       borderRadius: '999px',
-                      border: '1px solid #BFDBFE'
+                      border: '1px solid #B8D3E9'
                     }}
                   >
                     Gemini AI Powered
@@ -305,7 +305,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                   </p>
                 </div>
 
-                <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '700', color: '#1769FF' }}>
+                <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '700', color: '#124676' }}>
                   <span>Launch AI Assistant</span>
                   <CornerDownRight size={15} />
                 </div>
@@ -386,7 +386,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                 color: '#64748B'
               }}
             >
-              <ShieldCheck size={16} color="#00A6A6" style={{ flexShrink: 0 }} />
+              <ShieldCheck size={16} color="#D2252F" style={{ flexShrink: 0 }} />
               <span>
                 <strong>Safety Notice:</strong> For critical medical trauma emergencies, always alert the attending surgeon and hospital blood bank supervisor immediately.
               </span>
@@ -420,13 +420,13 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                     fontSize: '12px',
                     fontWeight: '600',
                     backgroundColor: '#FFFFFF',
-                    color: '#1E40AF',
-                    border: '1px solid #BFDBFE',
+                    color: '#0D375E',
+                    border: '1px solid #B8D3E9',
                     flexShrink: 0,
                     transition: 'all 0.15s ease'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#EEF4FF';
+                    e.currentTarget.style.backgroundColor = '#EEF5FA';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = '#FFFFFF';
@@ -467,7 +467,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                           width: '32px',
                           height: '32px',
                           borderRadius: '8px',
-                          backgroundColor: '#1769FF',
+                          backgroundColor: '#124676',
                           color: '#FFFFFF',
                           display: 'flex',
                           alignItems: 'center',
@@ -482,7 +482,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                     <div
                       style={{
                         maxWidth: '82%',
-                        backgroundColor: isUser ? '#1769FF' : '#F8FAFC',
+                        backgroundColor: isUser ? '#124676' : '#F8FAFC',
                         color: isUser ? '#FFFFFF' : '#152238',
                         padding: '12px 16px',
                         borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
@@ -490,7 +490,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                         fontSize: '14px',
                         lineHeight: '1.6',
                         whiteSpace: 'pre-wrap',
-                        boxShadow: isUser ? '0 4px 12px rgba(23, 105, 255, 0.2)' : 'none'
+                        boxShadow: isUser ? '0 4px 12px rgba(18, 70, 118, 0.2)' : 'none'
                       }}
                     >
                       {m.text}
@@ -516,7 +516,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                       width: '32px',
                       height: '32px',
                       borderRadius: '8px',
-                      backgroundColor: '#1769FF',
+                      backgroundColor: '#124676',
                       color: '#FFFFFF',
                       display: 'flex',
                       alignItems: 'center',
@@ -643,18 +643,18 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                 style={{
                   padding: '18px',
                   borderRadius: '12px',
-                  backgroundColor: '#EEF4FF',
-                  border: '1px solid #BFDBFE'
+                  backgroundColor: '#EEF5FA',
+                  border: '1px solid #B8D3E9'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1769FF', fontWeight: '700', fontSize: '13px', marginBottom: '6px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#124676', fontWeight: '700', fontSize: '13px', marginBottom: '6px' }}>
                   <Mail size={16} />
                   <span>Emergency Email Desk</span>
                 </div>
-                <div style={{ fontSize: '16px', fontWeight: '800', color: '#1E40AF' }}>
+                <div style={{ fontSize: '16px', fontWeight: '800', color: '#0D375E' }}>
                   emergency@lifedrone.io
                 </div>
-                <div style={{ fontSize: '12px', color: '#1D4ED8', marginTop: '4px' }}>
+                <div style={{ fontSize: '12px', color: '#124676', marginTop: '4px' }}>
                   Monitored continuously by duty flight operators
                 </div>
                 <a
@@ -665,7 +665,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                     gap: '6px',
                     marginTop: '10px',
                     padding: '6px 12px',
-                    backgroundColor: '#1769FF',
+                    backgroundColor: '#124676',
                     color: '#FFFFFF',
                     borderRadius: '6px',
                     fontSize: '12px',

@@ -33,7 +33,7 @@ export default function BloodAccess() {
       {/* Page Header */}
       <div style={{ backgroundColor: '#F5F8FC', borderBottom: '1px solid #E2E8F0', padding: '60px 0' }}>
         <div className="container-custom" style={{ textAlign: 'center', maxWidth: '780px' }}>
-          <span style={{ fontSize: '13px', fontWeight: '700', color: '#1769FF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             Emergency Network Access
           </span>
           <h1 style={{ fontSize: '42px', fontWeight: '800', color: '#152238', margin: '12px 0 16px 0', letterSpacing: '-1px' }}>
@@ -61,7 +61,7 @@ export default function BloodAccess() {
             className="card-light card-hover"
             style={{
               padding: '40px',
-              borderTop: '5px solid #1769FF',
+              borderTop: '5px solid #124676',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between'
@@ -73,11 +73,11 @@ export default function BloodAccess() {
                   width: '60px',
                   height: '60px',
                   borderRadius: '16px',
-                  backgroundColor: '#EEF4FF',
+                  backgroundColor: '#EEF5FA',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#1769FF',
+                  color: '#124676',
                   marginBottom: '24px'
                 }}
               >
@@ -126,7 +126,7 @@ export default function BloodAccess() {
             className="card-light card-hover"
             style={{
               padding: '40px',
-              borderTop: '5px solid #00A6A6',
+              borderTop: '5px solid #D2252F',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between'
@@ -138,11 +138,11 @@ export default function BloodAccess() {
                   width: '60px',
                   height: '60px',
                   borderRadius: '16px',
-                  backgroundColor: '#E6F7F7',
+                  backgroundColor: '#FEF2F2',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#00A6A6',
+                  color: '#D2252F',
                   marginBottom: '24px'
                 }}
               >
@@ -169,7 +169,7 @@ export default function BloodAccess() {
                   'A* drone flight dispatch & crypto passkey generation'
                 ].map((feat, idx) => (
                   <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#152238' }}>
-                    <CheckCircle2 size={16} color="#00A6A6" />
+                    <CheckCircle2 size={16} color="#D2252F" />
                     <span>{feat}</span>
                   </div>
                 ))}
@@ -224,7 +224,7 @@ export default function BloodAccess() {
             }}
           >
             <div className="card-light" style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: '#1769FF', fontWeight: '700' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: '#124676', fontWeight: '700' }}>
                 <CheckCircle2 size={18} />
                 <span>Eligibility Criteria</span>
               </div>
@@ -238,7 +238,7 @@ export default function BloodAccess() {
             </div>
 
             <div className="card-light" style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: '#00A6A6', fontWeight: '700' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: '#D2252F', fontWeight: '700' }}>
                 <Clock size={18} />
                 <span>Donation Procedure</span>
               </div>
@@ -293,7 +293,7 @@ export default function BloodAccess() {
                   {bb.name}
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#64748B', marginBottom: '6px' }}>
-                  <MapPin size={14} color="#1769FF" />
+                  <MapPin size={14} color="#124676" />
                   <span>{bb.address}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#16A34A', fontWeight: '600' }}>
@@ -308,11 +308,11 @@ export default function BloodAccess() {
             style={{
               marginTop: '28px',
               backgroundColor: '#EFF6FF',
-              border: '1px solid #BFDBFE',
+              border: '1px solid #B8D3E9',
               borderRadius: '8px',
               padding: '12px 16px',
               fontSize: '12px',
-              color: '#1E40AF',
+              color: '#0D375E',
               display: 'flex',
               alignItems: 'center',
               gap: '8px'

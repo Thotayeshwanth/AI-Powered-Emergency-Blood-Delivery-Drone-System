@@ -284,7 +284,7 @@ export default function HospitalDashboard() {
           >
             <div className="card-light" style={{ padding: '16px' }}>
               <div style={{ fontSize: '12px', color: '#64748B', fontWeight: '600' }}>Available in Network</div>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: '#1769FF', marginTop: '4px' }}>
+              <div style={{ fontSize: '28px', fontWeight: '800', color: '#124676', marginTop: '4px' }}>
                 {stats.availableNetworkUnits} <span style={{ fontSize: '14px', fontWeight: '500' }}>Units</span>
               </div>
             </div>
@@ -305,7 +305,7 @@ export default function HospitalDashboard() {
 
             <div className="card-light" style={{ padding: '16px' }}>
               <div style={{ fontSize: '12px', color: '#64748B', fontWeight: '600' }}>Active Drone Flights</div>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: '#00A6A6', marginTop: '4px' }}>
+              <div style={{ fontSize: '28px', fontWeight: '800', color: '#D2252F', marginTop: '4px' }}>
                 {stats.activeDeliveries}
               </div>
             </div>
@@ -344,9 +344,9 @@ export default function HospitalDashboard() {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              backgroundColor: activeTab === 'SEARCH' ? '#EEF4FF' : '#FFFFFF',
-              color: activeTab === 'SEARCH' ? '#1769FF' : '#64748B',
-              border: activeTab === 'SEARCH' ? '1px solid #BFDBFE' : '1px solid #E2E8F0'
+              backgroundColor: activeTab === 'SEARCH' ? '#EEF5FA' : '#FFFFFF',
+              color: activeTab === 'SEARCH' ? '#124676' : '#64748B',
+              border: activeTab === 'SEARCH' ? '1px solid #B8D3E9' : '1px solid #E2E8F0'
             }}
           >
             <Search size={16} />
@@ -363,9 +363,9 @@ export default function HospitalDashboard() {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              backgroundColor: activeTab === 'REQUESTS' ? '#EEF4FF' : '#FFFFFF',
-              color: activeTab === 'REQUESTS' ? '#1769FF' : '#64748B',
-              border: activeTab === 'REQUESTS' ? '1px solid #BFDBFE' : '1px solid #E2E8F0'
+              backgroundColor: activeTab === 'REQUESTS' ? '#EEF5FA' : '#FFFFFF',
+              color: activeTab === 'REQUESTS' ? '#124676' : '#64748B',
+              border: activeTab === 'REQUESTS' ? '1px solid #B8D3E9' : '1px solid #E2E8F0'
             }}
           >
             <FileText size={16} />
@@ -382,9 +382,9 @@ export default function HospitalDashboard() {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              backgroundColor: activeTab === 'TRACKING' ? '#EEF4FF' : '#FFFFFF',
-              color: activeTab === 'TRACKING' ? '#1769FF' : '#64748B',
-              border: activeTab === 'TRACKING' ? '1px solid #BFDBFE' : '1px solid #E2E8F0'
+              backgroundColor: activeTab === 'TRACKING' ? '#EEF5FA' : '#FFFFFF',
+              color: activeTab === 'TRACKING' ? '#124676' : '#64748B',
+              border: activeTab === 'TRACKING' ? '1px solid #B8D3E9' : '1px solid #E2E8F0'
             }}
           >
             <Plane size={16} />
@@ -529,11 +529,11 @@ export default function HospitalDashboard() {
                           </div>
                           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <span>Storage Spec:</span>
-                            <strong style={{ color: '#00A6A6' }}>{item.storage_temperature}</strong>
+                            <strong style={{ color: '#D2252F' }}>{item.storage_temperature}</strong>
                           </div>
                           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <span>Aerial Flight Est:</span>
-                            <strong style={{ color: '#1769FF' }}>~{item.distanceKm} km ({item.estFlightMinutes} min flight)</strong>
+                            <strong style={{ color: '#124676' }}>~{item.distanceKm} km ({item.estFlightMinutes} min flight)</strong>
                           </div>
                         </div>
                       </div>
@@ -590,7 +590,7 @@ export default function HospitalDashboard() {
                   ) : (
                     requests.map((r) => (
                       <tr key={r.id} style={{ borderBottom: '1px solid #E2E8F0', transition: 'background 0.15s ease' }}>
-                        <td style={{ padding: '14px 16px', fontWeight: '700', color: '#1769FF' }}>
+                        <td style={{ padding: '14px 16px', fontWeight: '700', color: '#124676' }}>
                           {r.request_number}
                         </td>
                         <td style={{ padding: '14px 16px', color: '#152238', fontWeight: '500' }}>
@@ -612,7 +612,7 @@ export default function HospitalDashboard() {
                             padding: '3px 8px',
                             borderRadius: '4px',
                             backgroundColor: r.urgency === 'CRITICAL_EMERGENCY' ? '#FEF2F2' : '#EFF6FF',
-                            color: r.urgency === 'CRITICAL_EMERGENCY' ? '#DC2626' : '#1D4ED8'
+                            color: r.urgency === 'CRITICAL_EMERGENCY' ? '#DC2626' : '#124676'
                           }}>
                             {r.urgency}
                           </span>
@@ -695,7 +695,7 @@ export default function HospitalDashboard() {
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <span style={{ color: '#64748B' }}>Estimated Arrival:</span>
-                          <strong style={{ color: '#1769FF' }}>{selectedTrackingDelivery.eta_minutes ?? 0} mins</strong>
+                          <strong style={{ color: '#124676' }}>{selectedTrackingDelivery.eta_minutes ?? 0} mins</strong>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <span style={{ color: '#64748B' }}>Remaining Flight Distance:</span>
@@ -744,8 +744,8 @@ export default function HospitalDashboard() {
                         style={{
                           padding: '10px',
                           borderRadius: '8px',
-                          border: selectedTrackingDelivery?.id === del.id ? '1px solid #1769FF' : '1px solid #E2E8F0',
-                          backgroundColor: selectedTrackingDelivery?.id === del.id ? '#EEF4FF' : '#FFFFFF',
+                          border: selectedTrackingDelivery?.id === del.id ? '1px solid #124676' : '1px solid #E2E8F0',
+                          backgroundColor: selectedTrackingDelivery?.id === del.id ? '#EEF5FA' : '#FFFFFF',
                           cursor: 'pointer',
                           display: 'flex',
                           justifyContent: 'space-between',
@@ -931,7 +931,7 @@ export default function HospitalDashboard() {
                 </h3>
                 <div style={{ margin: '16px 0', padding: '14px', backgroundColor: '#F8FAFC', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
                   <div style={{ fontSize: '13px', color: '#64748B' }}>Assigned Request Reference Number</div>
-                  <div style={{ fontSize: '24px', fontWeight: '800', color: '#1769FF', letterSpacing: '1px' }}>
+                  <div style={{ fontSize: '24px', fontWeight: '800', color: '#124676', letterSpacing: '1px' }}>
                     {requestSuccessData.requestNumber}
                   </div>
                 </div>
@@ -957,7 +957,7 @@ export default function HospitalDashboard() {
                   </button>
                 </div>
 
-                <div style={{ backgroundColor: '#EEF4FF', border: '1px solid #BFDBFE', padding: '12px', borderRadius: '8px', fontSize: '13px', color: '#1E40AF' }}>
+                <div style={{ backgroundColor: '#EEF5FA', border: '1px solid #B8D3E9', padding: '12px', borderRadius: '8px', fontSize: '13px', color: '#0D375E' }}>
                   <strong>Target Blood Bank:</strong> {selectedBankForRequest.blood_bank_name} &bull; Distance: ~{selectedBankForRequest.distanceKm} km
                 </div>
 

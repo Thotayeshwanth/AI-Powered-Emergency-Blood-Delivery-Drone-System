@@ -64,7 +64,7 @@ export default function HowItWorks() {
       {/* Page Header */}
       <div style={{ backgroundColor: '#F5F8FC', borderBottom: '1px solid #E2E8F0', padding: '60px 0' }}>
         <div className="container-custom">
-          <span style={{ fontSize: '13px', fontWeight: '700', color: '#1769FF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             Architecture &amp; Methodology
           </span>
           <h1 style={{ fontSize: '42px', fontWeight: '800', color: '#152238', margin: '10px 0 16px 0', letterSpacing: '-1px' }}>
@@ -178,7 +178,7 @@ export default function HowItWorks() {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-              <FileText size={18} color="#1769FF" />
+              <FileText size={18} color="#124676" />
               <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#152238', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Academic &amp; Clinical Research References
               </h3>
@@ -201,8 +201,8 @@ export default function HowItWorks() {
                     transition: 'all 0.2s ease'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#1769FF';
-                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(23, 105, 255, 0.1)';
+                    e.currentTarget.style.borderColor = '#124676';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(18, 70, 118, 0.1)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = '#E2E8F0';
@@ -210,14 +210,14 @@ export default function HowItWorks() {
                   }}
                 >
                   <div>
-                    <div style={{ fontSize: '14px', fontWeight: '600', color: '#1769FF' }}>
+                    <div style={{ fontSize: '14px', fontWeight: '600', color: '#124676' }}>
                       [{idx + 1}] {ref.title}
                     </div>
                     <div style={{ fontSize: '12px', color: '#64748B' }}>
                       {ref.author}
                     </div>
                   </div>
-                  <ExternalLink size={16} color="#1769FF" style={{ flexShrink: 0, marginLeft: '12px' }} />
+                  <ExternalLink size={16} color="#124676" style={{ flexShrink: 0, marginLeft: '12px' }} />
                 </a>
               ))}
             </div>
@@ -228,7 +228,7 @@ export default function HowItWorks() {
             SECTION B: OUR SOLUTION
             ==================================================== */}
         <section style={{ marginBottom: '80px' }}>
-          <span style={{ fontSize: '13px', fontWeight: '700', color: '#00A6A6', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: '13px', fontWeight: '700', color: '#D2252F', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             System Architecture
           </span>
           <h2 style={{ fontSize: '34px', fontWeight: '800', color: '#152238', margin: '10px 0 20px 0' }}>
@@ -297,8 +297,8 @@ export default function HowItWorks() {
                       width: '36px',
                       height: '36px',
                       borderRadius: '50%',
-                      backgroundColor: idx === workflowSteps.length - 1 ? '#ECFDF5' : '#EEF4FF',
-                      color: idx === workflowSteps.length - 1 ? '#16A34A' : '#1769FF',
+                      backgroundColor: idx === workflowSteps.length - 1 ? '#ECFDF5' : '#EEF5FA',
+                      color: idx === workflowSteps.length - 1 ? '#16A34A' : '#124676',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -333,7 +333,7 @@ export default function HowItWorks() {
             SECTION C: TECHNOLOGY OVERVIEW
             ==================================================== */}
         <section>
-          <span style={{ fontSize: '13px', fontWeight: '700', color: '#1769FF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             Implementation Stack
           </span>
           <h2 style={{ fontSize: '34px', fontWeight: '800', color: '#152238', margin: '10px 0 20px 0' }}>
@@ -361,11 +361,11 @@ export default function HowItWorks() {
                         width: '40px',
                         height: '40px',
                         borderRadius: '10px',
-                        backgroundColor: '#EEF4FF',
+                        backgroundColor: '#EEF5FA',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: '#1769FF'
+                        color: '#124676'
                       }}
                     >
                       <Icon size={20} />
@@ -383,11 +383,11 @@ export default function HowItWorks() {
           <div
             style={{
               backgroundColor: '#EFF6FF',
-              border: '1px solid #BFDBFE',
+              border: '1px solid #B8D3E9',
               borderRadius: '12px',
               padding: '20px',
               fontSize: '14px',
-              color: '#1E40AF',
+              color: '#0D375E',
               lineHeight: '1.6'
             }}
           >

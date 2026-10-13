@@ -2,21 +2,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
 
 :root {
-  --primary: #1769FF;
-  --primary-hover: #0F56D9;
-  --primary-light: #EEF4FF;
-  --primary-glow: rgba(23, 105, 255, 0.15);
+  --primary: #124676; /* Official LifeDrone Navy Blue */
+  --primary-hover: #0D375E;
+  --primary-light: #EEF5FA;
+  --primary-glow: rgba(18, 70, 118, 0.2);
   
-  --secondary: #00A6A6;
-  --secondary-hover: #008E8E;
-  --secondary-light: #E6F7F7;
+  --secondary: #D2252F; /* Official LifeDrone Crimson Red */
+  --secondary-hover: #B71D26;
+  --secondary-light: #FEF2F2;
+  --secondary-glow: rgba(210, 37, 47, 0.2);
   
   --bg: #FFFFFF;
-  --section-bg: #F5F8FC;
+  --section-bg: #F8FAFC;
   --card-bg: #FFFFFF;
   
   --text-dark: #152238;
-  --text-muted: #64748B;
+  --text-muted: #5F6F84;
   --text-light: #94A3B8;
   
   --border: #E2E8F0;
@@ -26,14 +27,15 @@
   --success-light: #ECFDF5;
   --warning: #F59E0B;
   --warning-light: #FFFBEB;
-  --error: #DC2626;
+  --error: #D2252F;
   --error-light: #FEF2F2;
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(21, 34, 56, 0.06), 0 2px 4px -2px rgba(21, 34, 56, 0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(21, 34, 56, 0.08), 0 4px 6px -4px rgba(21, 34, 56, 0.04);
-  --shadow-xl: 0 20px 25px -5px rgba(21, 34, 56, 0.1), 0 8px 10px -6px rgba(21, 34, 56, 0.05);
-  --shadow-primary: 0 10px 25px -5px rgba(23, 105, 255, 0.25);
+  --shadow-md: 0 4px 6px -1px rgba(18, 70, 118, 0.06), 0 2px 4px -2px rgba(18, 70, 118, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(18, 70, 118, 0.08), 0 4px 6px -4px rgba(18, 70, 118, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(18, 70, 118, 0.12), 0 8px 10px -6px rgba(18, 70, 118, 0.05);
+  --shadow-primary: 0 10px 25px -5px rgba(18, 70, 118, 0.25);
+  --shadow-secondary: 0 10px 25px -5px rgba(210, 37, 47, 0.25);
   
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -100,13 +102,13 @@ input, select, textarea {
   font-weight: 600;
   font-size: 15px;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px 0 rgba(23, 105, 255, 0.25);
+  box-shadow: 0 4px 14px 0 rgba(18, 70, 118, 0.22);
 }
 
 .btn-primary:hover {
   background-color: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(23, 105, 255, 0.35);
+  box-shadow: 0 6px 20px 0 rgba(18, 70, 118, 0.32);
 }
 
 .btn-secondary {
@@ -121,11 +123,13 @@ input, select, textarea {
   font-weight: 600;
   font-size: 15px;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 14px 0 rgba(210, 37, 47, 0.22);
 }
 
 .btn-secondary:hover {
   background-color: var(--secondary-hover);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 rgba(210, 37, 47, 0.32);
 }
 
 .btn-outline {
@@ -195,8 +199,8 @@ input, select, textarea {
 
 .card-sharp-hover:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 28px -4px rgba(23, 105, 255, 0.14), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
-  border-color: #93C5FD;
+  box-shadow: 0 12px 28px -4px rgba(18, 70, 118, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
+  border-color: #8EB7DC;
 }
 
 /* Badges */
@@ -215,8 +219,8 @@ input, select, textarea {
 .badge-accepted { background: #E0E7FF; color: #4338CA; }
 .badge-preparing { background: #EDE9FE; color: #6D28D9; }
 .badge-ready { background: #CCFBF1; color: #0F766E; }
-.badge-dispatched { background: #EFF6FF; color: #1D4ED8; }
-.badge-intransit { background: #DBEAFE; color: #1E40AF; }
+.badge-dispatched { background: #EFF6FF; color: #124676; }
+.badge-intransit { background: #D3E4F3; color: #0D375E; }
 .badge-arrived { background: #FEF08A; color: #854D0E; }
 .badge-delivered { background: #DCFCE7; color: #15803D; }
 .badge-rejected { background: #FEE2E2; color: #B91C1C; }

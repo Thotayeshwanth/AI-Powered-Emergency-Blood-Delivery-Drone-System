@@ -64,7 +64,7 @@ export default function TrackingMap({
     const bloodBankIcon = L.divIcon({
       className: 'custom-icon',
       html: `
-        <div style="background: #1769FF; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 10px rgba(23, 105, 255, 0.4); border: 2px solid white;">
+        <div style="background: #124676; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 10px rgba(18, 70, 118, 0.4); border: 2px solid white;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
         </div>
       `,
@@ -89,8 +89,8 @@ export default function TrackingMap({
       className: 'custom-drone-icon',
       html: `
         <div style="position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
-          <div style="position: absolute; width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 166, 166, 0.25); animation: pulse-ring 1.8s infinite;"></div>
-          <div style="background: #00A6A6; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(0, 166, 166, 0.5); border: 2px solid white; z-index: 2;">
+          <div style="position: absolute; width: 40px; height: 40px; border-radius: 50%; background: rgba(210, 37, 47, 0.25); animation: pulse-ring 1.8s infinite;"></div>
+          <div style="background: #D2252F; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(210, 37, 47, 0.5); border: 2px solid white; z-index: 2;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3" fill="#ffffff"/></svg>
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function TrackingMap({
     if (waypoints.length >= 2) {
       const latlngs = waypoints.map((w) => [w.lat, w.lng]);
       const routeLine = L.polyline(latlngs, {
-        color: '#1769FF',
+        color: '#124676',
         weight: 4,
         opacity: 0.85,
         dashArray: '8, 8',
@@ -136,7 +136,7 @@ export default function TrackingMap({
     const droneMarker = L.marker([currentLat, currentLng], { icon: droneIcon }).addTo(map);
     droneMarker.bindPopup(`
       <div style="font-family: inherit; font-size: 13px;">
-        <strong style="color: #00A6A6;">${delivery?.drone_identifier || 'LD-HEXA-01'}</strong><br/>
+        <strong style="color: #D2252F;">${delivery?.drone_identifier || 'LD-HEXA-01'}</strong><br/>
         <strong>Status:</strong> ${delivery?.delivery_status || 'IN_TRANSIT'}<br/>
         <strong>ETA:</strong> ${delivery?.eta_minutes ?? 0} mins remaining<br/>
         <strong>Distance:</strong> ${delivery?.distance_km ?? 0} km<br/>
@@ -174,8 +174,8 @@ export default function TrackingMap({
           fontSize: '11px',
           fontWeight: '700',
           letterSpacing: '0.04em',
-          color: '#1E40AF',
-          border: '1px solid #BFDBFE',
+          color: '#0D375E',
+          border: '1px solid #B8D3E9',
           boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
           display: 'flex',
           alignItems: 'center',
@@ -208,7 +208,7 @@ export default function TrackingMap({
         >
           <div>
             <div style={{ color: '#64748B', fontSize: '10px', fontWeight: '600', textTransform: 'uppercase' }}>ETA</div>
-            <div style={{ fontWeight: '700', fontSize: '14px', color: '#1769FF' }}>{delivery.eta_minutes ?? 0} min</div>
+            <div style={{ fontWeight: '700', fontSize: '14px', color: '#124676' }}>{delivery.eta_minutes ?? 0} min</div>
           </div>
           <div>
             <div style={{ color: '#64748B', fontSize: '10px', fontWeight: '600', textTransform: 'uppercase' }}>Speed</div>

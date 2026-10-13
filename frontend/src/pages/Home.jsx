@@ -79,7 +79,7 @@ export default function Home() {
             width: '500px',
             height: '500px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(23, 105, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%)',
+            background: 'radial-gradient(circle, rgba(18, 70, 118, 0.08) 0%, rgba(255, 255, 255, 0) 70%)',
             pointerEvents: 'none'
           }}
         />
@@ -100,17 +100,17 @@ export default function Home() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  backgroundColor: '#EEF4FF',
-                  border: '1px solid #BFDBFE',
+                  backgroundColor: '#EEF5FA',
+                  border: '1px solid #B8D3E9',
                   padding: '6px 14px',
                   borderRadius: '9999px',
                   fontSize: '13px',
                   fontWeight: '700',
-                  color: '#1769FF',
+                  color: '#124676',
                   marginBottom: '20px'
                 }}
               >
-                <Zap size={14} fill="#1769FF" />
+                <Zap size={14} fill="#124676" />
                 <span>AI-Assisted Emergency Medical Drone Logistics</span>
               </div>
 
@@ -126,7 +126,7 @@ export default function Home() {
               >
                 FROM BLOOD BANK<br />
                 TO BEDSIDE<br />
-                <span style={{ color: '#1769FF' }}>IN A FLASH</span>
+                <span style={{ color: '#D2252F' }}>IN A FLASH</span>
               </h1>
 
               <p
@@ -174,7 +174,7 @@ export default function Home() {
                   background: '#FFFFFF',
                   borderRadius: '24px',
                   border: '1px solid #E2E8F0',
-                  boxShadow: '0 25px 50px -12px rgba(23, 105, 255, 0.15)',
+                  boxShadow: '0 25px 50px -12px rgba(18, 70, 118, 0.15)',
                   padding: '28px',
                   position: 'relative'
                 }}
@@ -204,7 +204,7 @@ export default function Home() {
                         right: '10px',
                         top: '50%',
                         height: '1px',
-                        borderTop: '2px dashed #93C5FD',
+                        borderTop: '2px dashed #8EB7DC',
                         zIndex: 1
                       }}
                     />
@@ -225,7 +225,7 @@ export default function Home() {
                         <ellipse className="rotor-active" cx="6" cy="3" rx="5" ry="1.2" fill="#64748B" />
                         <ellipse className="rotor-active" cx="26" cy="3" rx="5" ry="1.2" fill="#64748B" />
                         <path d="M6 4 L16 8 L26 4" stroke="#152238" strokeWidth="1.8" strokeLinecap="round" />
-                        <rect x="11" y="6" width="10" height="5" rx="1.5" fill="#1769FF" />
+                        <rect x="11" y="6" width="10" height="5" rx="1.5" fill="#124676" />
                         <circle cx="16" cy="7" r="1.2" fill="#10B981" />
                         <line x1="16" y1="11" x2="16" y2="15" stroke="#94A3B8" strokeWidth="1.2" />
                       </svg>
@@ -250,7 +250,7 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <div style={{ marginLeft: 'auto', zIndex: 2, fontSize: '11px', fontWeight: '700', color: '#1E40AF', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ marginLeft: 'auto', zIndex: 2, fontSize: '11px', fontWeight: '700', color: '#0D375E', display: 'flex', alignItems: 'center', gap: '4px' }}>
                       <span className="pulse-indicator pulse-green" style={{ width: '6px', height: '6px' }} />
                       <span>Blood Transit</span>
                     </div>
@@ -281,7 +281,7 @@ export default function Home() {
                   >
                     <path
                       d="M 20 160 Q 200 40 380 140"
-                      stroke="#93C5FD"
+                      stroke="#8EB7DC"
                       strokeWidth="3"
                       strokeDasharray="6 6"
                     />
@@ -295,7 +295,7 @@ export default function Home() {
                       <ellipse cx="80" cy="18" rx="16" ry="3" fill="#64748B" opacity="0.7" />
                       {/* Drone Body */}
                       <path d="M 20 22 L 50 35 L 80 22" stroke="#152238" strokeWidth="4" strokeLinecap="round" />
-                      <rect x="36" y="28" width="28" height="18" rx="4" fill="#1769FF" />
+                      <rect x="36" y="28" width="28" height="18" rx="4" fill="#124676" />
                       {/* Medical Cold Container */}
                       <rect x="40" y="46" width="20" height="16" rx="3" fill="#DC2626" />
                       {/* Red cross on container */}
@@ -305,7 +305,7 @@ export default function Home() {
                     <div style={{ marginTop: '8px', fontSize: '13px', fontWeight: '700', color: '#152238' }}>
                       LD-HEXA-01 Medical Lifter
                     </div>
-                    <div style={{ fontSize: '11px', color: '#00A6A6', fontWeight: '600' }}>
+                    <div style={{ fontSize: '11px', color: '#D2252F', fontWeight: '600' }}>
                       Payload: 2 Units O+ Packed RBC &bull; Cold Box 3.8&deg;C
                     </div>
                   </div>
@@ -326,7 +326,7 @@ export default function Home() {
                 >
                   <div>
                     <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '600' }}>ETA</div>
-                    <div style={{ fontSize: '15px', fontWeight: '800', color: '#1769FF' }}>3.2 min</div>
+                    <div style={{ fontSize: '15px', fontWeight: '800', color: '#124676' }}>3.2 min</div>
                   </div>
                   <div>
                     <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '600' }}>Altitude</div>
@@ -349,7 +349,7 @@ export default function Home() {
       <section style={{ padding: '90px 0', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
         <div className="container-custom">
           <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto 60px auto' }}>
-            <span style={{ fontSize: '13px', fontWeight: '700', color: '#00A6A6', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <span style={{ fontSize: '13px', fontWeight: '700', color: '#D2252F', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               The Critical Window
             </span>
             <h2 style={{ fontSize: '38px', fontWeight: '800', color: '#152238', margin: '12px 0 20px 0', letterSpacing: '-0.8px' }}>
@@ -381,11 +381,11 @@ export default function Home() {
                   width: '52px',
                   height: '52px',
                   borderRadius: '12px',
-                  backgroundColor: '#EEF4FF',
+                  backgroundColor: '#EEF5FA',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#1769FF',
+                  color: '#124676',
                   marginBottom: '20px'
                 }}
               >
@@ -407,11 +407,11 @@ export default function Home() {
                   width: '52px',
                   height: '52px',
                   borderRadius: '12px',
-                  backgroundColor: '#E6F7F7',
+                  backgroundColor: '#FEF2F2',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#00A6A6',
+                  color: '#D2252F',
                   marginBottom: '20px'
                 }}
               >
@@ -461,7 +461,7 @@ export default function Home() {
       <section style={{ padding: '90px 0', backgroundColor: '#F5F8FC' }}>
         <div className="container-custom">
           <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 60px auto' }}>
-            <span style={{ fontSize: '13px', fontWeight: '700', color: '#1769FF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               End-to-End Workflow
             </span>
             <h2 style={{ fontSize: '38px', fontWeight: '800', color: '#152238', margin: '12px 0 16px 0', letterSpacing: '-0.8px' }}>
@@ -537,12 +537,12 @@ export default function Home() {
                       width: '64px',
                       height: '64px',
                       borderRadius: '16px',
-                      backgroundColor: '#EEF4FF',
+                      backgroundColor: '#EEF5FA',
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#1769FF'
+                      color: '#124676'
                     }}
                   >
                     <IconComp size={24} />
@@ -567,11 +567,11 @@ export default function Home() {
               marginTop: '36px',
               textAlign: 'center',
               backgroundColor: '#EFF6FF',
-              border: '1px solid #BFDBFE',
+              border: '1px solid #B8D3E9',
               borderRadius: '12px',
               padding: '16px',
               fontSize: '13px',
-              color: '#1E40AF'
+              color: '#0D375E'
             }}
           >
             <strong>Operational Transparency:</strong> LifeDrone currently runs in <em>Demonstration Simulation Mode</em> over the Prakasam District aerial corridor graph. Simulated drone positions are clearly distinguished from physical GPS avionics telemetry.
@@ -585,7 +585,7 @@ export default function Home() {
       <section style={{ padding: '90px 0', backgroundColor: '#FFFFFF' }}>
         <div className="container-custom">
           <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 60px auto' }}>
-            <span style={{ fontSize: '13px', fontWeight: '700', color: '#00A6A6', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <span style={{ fontSize: '13px', fontWeight: '700', color: '#D2252F', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               System Capabilities
             </span>
             <h2 style={{ fontSize: '38px', fontWeight: '800', color: '#152238', margin: '12px 0 16px 0', letterSpacing: '-0.8px' }}>
@@ -643,11 +643,11 @@ export default function Home() {
                       width: '48px',
                       height: '48px',
                       borderRadius: '12px',
-                      backgroundColor: '#EEF4FF',
+                      backgroundColor: '#EEF5FA',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#1769FF',
+                      color: '#124676',
                       marginBottom: '18px'
                     }}
                   >
@@ -680,7 +680,7 @@ export default function Home() {
             }}
           >
             <div>
-              <span style={{ fontSize: '13px', fontWeight: '700', color: '#1769FF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 Operations Center Preview
               </span>
               <h2 style={{ fontSize: '38px', fontWeight: '800', color: '#152238', margin: '12px 0 20px 0', letterSpacing: '-0.8px' }}>
@@ -725,7 +725,7 @@ export default function Home() {
       <section style={{ padding: '80px 0', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
         <div className="container-custom">
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <span style={{ fontSize: '12px', fontWeight: '700', color: '#1769FF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               Network Footprint
             </span>
             <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#152238', marginTop: '8px' }}>
@@ -747,7 +747,7 @@ export default function Home() {
             }}
           >
             <div className="card-sharp-hover" style={{ padding: '32px' }}>
-              <div style={{ fontSize: '46px', fontWeight: '800', color: '#1769FF', lineHeight: '1' }}>
+              <div style={{ fontSize: '46px', fontWeight: '800', color: '#124676', lineHeight: '1' }}>
                 {metrics.hospitalsCount}
               </div>
               <div style={{ fontSize: '17px', fontWeight: '700', color: '#152238', marginTop: '12px' }}>
@@ -759,7 +759,7 @@ export default function Home() {
             </div>
 
             <div className="card-sharp-hover" style={{ padding: '32px' }}>
-              <div style={{ fontSize: '46px', fontWeight: '800', color: '#00A6A6', lineHeight: '1' }}>
+              <div style={{ fontSize: '46px', fontWeight: '800', color: '#D2252F', lineHeight: '1' }}>
                 {metrics.bloodBanksCount}
               </div>
               <div style={{ fontSize: '17px', fontWeight: '700', color: '#152238', marginTop: '12px' }}>
@@ -779,7 +779,7 @@ export default function Home() {
       <section
         style={{
           padding: '90px 0',
-          background: 'linear-gradient(135deg, #1769FF 0%, #0052cc 100%)',
+          background: 'linear-gradient(135deg, #124676 0%, #0B2C4D 100%)',
           color: '#FFFFFF',
           textAlign: 'center'
         }}
@@ -798,7 +798,7 @@ export default function Home() {
               to="/hospital/login"
               style={{
                 backgroundColor: '#FFFFFF',
-                color: '#1769FF',
+                color: '#124676',
                 padding: '14px 28px',
                 borderRadius: '10px',
                 fontWeight: '700',

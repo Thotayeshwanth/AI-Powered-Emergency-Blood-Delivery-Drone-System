@@ -103,7 +103,7 @@ export default function DeliveryTracking() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <Link
             to="/hospital/dashboard"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: '#1769FF', fontWeight: '600' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: '#124676', fontWeight: '600' }}
           >
             <ArrowLeft size={16} />
             <span>Hospital Dashboard</span>
@@ -111,7 +111,7 @@ export default function DeliveryTracking() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span className="pulse-indicator pulse-blue" />
-            <span style={{ fontSize: '12px', fontWeight: '700', color: '#1E40AF' }}>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0D375E' }}>
               SIMULATED DRONE TRACKING &bull; LIVE PING EVERY 3.5s
             </span>
           </div>
@@ -137,7 +137,7 @@ export default function DeliveryTracking() {
             <div style={{ display: 'flex', gap: '20px', textAlign: 'center' }}>
               <div>
                 <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>ETA</div>
-                <div style={{ fontSize: '22px', fontWeight: '800', color: '#1769FF' }}>{delivery.eta_minutes ?? 0}m</div>
+                <div style={{ fontSize: '22px', fontWeight: '800', color: '#124676' }}>{delivery.eta_minutes ?? 0}m</div>
               </div>
               <div>
                 <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>Remaining</div>
@@ -258,7 +258,7 @@ export default function DeliveryTracking() {
                         <span style={{ fontSize: '11px', color: '#94A3B8' }}>{new Date(ev.recorded_at).toLocaleTimeString()}</span>
                       </div>
                       <div style={{ color: '#64748B' }}>{ev.remarks}</div>
-                      <div style={{ color: '#1769FF', fontSize: '11px', marginTop: '4px' }}>
+                      <div style={{ color: '#124676', fontSize: '11px', marginTop: '4px' }}>
                         Lat: {ev.latitude}, Lng: {ev.longitude} &bull; Alt: {ev.altitude_meters}m
                       </div>
                     </div>

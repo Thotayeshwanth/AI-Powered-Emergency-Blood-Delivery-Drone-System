@@ -119,7 +119,7 @@ export default function RequestBlood() {
         <div style={{ marginBottom: '24px' }}>
           <Link
             to="/hospital/dashboard"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: '#1769FF', fontWeight: '600' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: '#124676', fontWeight: '600' }}
           >
             <ArrowLeft size={16} />
             <span>Return to Hospital Dashboard</span>
@@ -161,7 +161,7 @@ export default function RequestBlood() {
             </h2>
             <div style={{ margin: '20px auto', maxWidth: '360px', padding: '16px', backgroundColor: '#F8FAFC', borderRadius: '10px', border: '1px solid #E2E8F0' }}>
               <div style={{ fontSize: '12px', color: '#64748B' }}>Unique Request Reference Number</div>
-              <div style={{ fontSize: '26px', fontWeight: '800', color: '#1769FF', letterSpacing: '1px' }}>
+              <div style={{ fontSize: '26px', fontWeight: '800', color: '#124676', letterSpacing: '1px' }}>
                 {successResult.requestNumber}
               </div>
             </div>
@@ -271,8 +271,8 @@ export default function RequestBlood() {
                           style={{
                             padding: '14px',
                             borderRadius: '8px',
-                            border: isSelected ? '2px solid #1769FF' : '1px solid #E2E8F0',
-                            backgroundColor: isSelected ? '#EEF4FF' : '#FFFFFF',
+                            border: isSelected ? '2px solid #124676' : '1px solid #E2E8F0',
+                            backgroundColor: isSelected ? '#EEF5FA' : '#FFFFFF',
                             cursor: 'pointer',
                             display: 'flex',
                             justifyContent: 'space-between',
@@ -292,7 +292,7 @@ export default function RequestBlood() {
                             <div style={{ fontSize: '16px', fontWeight: '800', color: '#16A34A' }}>
                               {bank.available_quantity} {bank.unit}
                             </div>
-                            <span style={{ fontSize: '11px', fontWeight: '700', color: isSelected ? '#1769FF' : '#64748B' }}>
+                            <span style={{ fontSize: '11px', fontWeight: '700', color: isSelected ? '#124676' : '#64748B' }}>
                               {isSelected ? '✓ Selected' : 'Click to Select'}
                             </span>
                           </div>

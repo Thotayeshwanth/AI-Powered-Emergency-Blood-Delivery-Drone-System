@@ -94,8 +94,8 @@ export default function Header() {
                     borderRadius: '8px',
                     fontSize: '14px',
                     fontWeight: '600',
-                    color: isActive('/how-it-works') ? '#1769FF' : '#334155',
-                    backgroundColor: isActive('/how-it-works') ? '#EEF4FF' : 'transparent',
+                    color: isActive('/how-it-works') ? '#124676' : '#334155',
+                    backgroundColor: isActive('/how-it-works') ? '#EEF5FA' : 'transparent',
                     transition: 'all 0.2s ease',
                     border: '1px solid transparent'
                   }}
@@ -116,8 +116,8 @@ export default function Header() {
                     borderRadius: '8px',
                     fontSize: '14px',
                     fontWeight: '600',
-                    color: isActive('/blood-access') ? '#1769FF' : '#334155',
-                    backgroundColor: isActive('/blood-access') ? '#EEF4FF' : 'transparent',
+                    color: isActive('/blood-access') ? '#124676' : '#334155',
+                    backgroundColor: isActive('/blood-access') ? '#EEF5FA' : 'transparent',
                     transition: 'all 0.2s ease',
                     border: '1px solid transparent'
                   }}
@@ -138,8 +138,8 @@ export default function Header() {
                     borderRadius: '8px',
                     fontSize: '14px',
                     fontWeight: '600',
-                    color: isActive('/contact') ? '#1769FF' : '#334155',
-                    backgroundColor: isActive('/contact') ? '#EEF4FF' : 'transparent',
+                    color: isActive('/contact') ? '#124676' : '#334155',
+                    backgroundColor: isActive('/contact') ? '#EEF5FA' : 'transparent',
                     transition: 'all 0.2s ease',
                     border: '1px solid transparent'
                   }}
@@ -164,30 +164,30 @@ export default function Header() {
                     borderRadius: '999px',
                     fontSize: '13px',
                     fontWeight: '700',
-                    color: '#1769FF',
-                    backgroundColor: '#EEF4FF',
-                    border: '1px solid #BFDBFE',
-                    boxShadow: '0 2px 8px rgba(23, 105, 255, 0.1)',
+                    color: '#124676',
+                    backgroundColor: '#EEF5FA',
+                    border: '1px solid #B8D3E9',
+                    boxShadow: '0 2px 8px rgba(18, 70, 118, 0.1)',
                     transition: 'all 0.2s ease',
                     cursor: 'pointer'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#DBEAFE';
+                    e.currentTarget.style.backgroundColor = '#D3E4F3';
                     e.currentTarget.style.transform = 'translateY(-1px)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(23, 105, 255, 0.2)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(18, 70, 118, 0.2)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#EEF4FF';
+                    e.currentTarget.style.backgroundColor = '#EEF5FA';
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(23, 105, 255, 0.1)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(18, 70, 118, 0.1)';
                   }}
                 >
-                  <Sparkles size={15} color="#1769FF" />
+                  <Sparkles size={15} color="#124676" />
                   <span>Help</span>
                   <span 
                     style={{ 
                       fontSize: '10px', 
-                      backgroundColor: '#1769FF', 
+                      backgroundColor: '#124676', 
                       color: '#FFFFFF', 
                       padding: '1px 6px', 
                       borderRadius: '999px',
@@ -218,8 +218,8 @@ export default function Header() {
                       width: '32px',
                       height: '32px',
                       borderRadius: '8px',
-                      backgroundColor: isHospital ? '#EEF4FF' : '#E6F7F7',
-                      color: isHospital ? '#1769FF' : '#00A6A6',
+                      backgroundColor: isHospital ? '#EEF5FA' : '#FEF2F2',
+                      color: isHospital ? '#124676' : '#D2252F',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center'
@@ -249,9 +249,9 @@ export default function Header() {
                       borderRadius: '8px',
                       fontSize: '13px',
                       fontWeight: '600',
-                      backgroundColor: '#EEF4FF',
-                      color: '#1769FF',
-                      border: '1px solid #BFDBFE',
+                      backgroundColor: '#EEF5FA',
+                      color: '#124676',
+                      border: '1px solid #B8D3E9',
                       transition: 'all 0.15s ease'
                     }}
                   >
@@ -322,9 +322,9 @@ export default function Header() {
                   borderRadius: '999px',
                   fontSize: '12px',
                   fontWeight: '700',
-                  color: '#1769FF',
-                  backgroundColor: '#EEF4FF',
-                  border: '1px solid #BFDBFE'
+                  color: '#124676',
+                  backgroundColor: '#EEF5FA',
+                  border: '1px solid #B8D3E9'
                 }}
                 className="mobile-help-btn"
               >
@@ -376,7 +376,7 @@ export default function Header() {
                     fontSize: '14px',
                     fontWeight: '600',
                     color: '#152238',
-                    backgroundColor: isActive('/how-it-works') ? '#EEF4FF' : '#F8FAFC',
+                    backgroundColor: isActive('/how-it-works') ? '#EEF5FA' : '#F8FAFC',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center'
@@ -395,7 +395,7 @@ export default function Header() {
                     fontSize: '14px',
                     fontWeight: '600',
                     color: '#152238',
-                    backgroundColor: isActive('/blood-access') ? '#EEF4FF' : '#F8FAFC',
+                    backgroundColor: isActive('/blood-access') ? '#EEF5FA' : '#F8FAFC',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center'
@@ -414,7 +414,7 @@ export default function Header() {
                     fontSize: '14px',
                     fontWeight: '600',
                     color: '#152238',
-                    backgroundColor: isActive('/contact') ? '#EEF4FF' : '#F8FAFC',
+                    backgroundColor: isActive('/contact') ? '#EEF5FA' : '#F8FAFC',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center'
@@ -434,19 +434,19 @@ export default function Header() {
                     borderRadius: '8px',
                     fontSize: '14px',
                     fontWeight: '700',
-                    color: '#1769FF',
-                    backgroundColor: '#EEF4FF',
-                    border: '1px solid #BFDBFE',
+                    color: '#124676',
+                    backgroundColor: '#EEF5FA',
+                    border: '1px solid #B8D3E9',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center'
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Sparkles size={16} color="#1769FF" />
+                    <Sparkles size={16} color="#124676" />
                     <span>Help: LifeDrone Chatbot &amp; Support</span>
                   </div>
-                  <ChevronRight size={18} color="#1769FF" />
+                  <ChevronRight size={18} color="#124676" />
                 </button>
               </>
             ) : (
@@ -463,7 +463,7 @@ export default function Header() {
                     gap: '10px'
                   }}
                 >
-                  <User size={18} color="#1769FF" />
+                  <User size={18} color="#124676" />
                   <div>
                     <div style={{ fontSize: '14px', fontWeight: '700', color: '#152238' }}>
                       {user?.fullName}

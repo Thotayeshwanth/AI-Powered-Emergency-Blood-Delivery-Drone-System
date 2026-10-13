@@ -58,10 +58,10 @@ export default function DemoBanner() {
       aria-label="Demonstration Notice"
       style={{
         backgroundColor: '#EFF6FF',
-        borderBottom: '1px solid #BFDBFE',
+        borderBottom: '1px solid #B8D3E9',
         padding: '8px 16px',
         fontSize: '13px',
-        color: '#1E40AF',
+        color: '#0D375E',
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'center',
@@ -72,7 +72,7 @@ export default function DemoBanner() {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <Info size={15} color="#1D4ED8" style={{ flexShrink: 0 }} />
+        <Info size={15} color="#124676" style={{ flexShrink: 0 }} />
         <span>
           <strong>Pilot Demonstration Mode:</strong> Simulated Drone Tracking &amp; Prakasam Corridor Routing.
         </span>
@@ -80,7 +80,7 @@ export default function DemoBanner() {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', position: 'relative' }}>
         {isAuthenticated && user && (
-          <span style={{ fontSize: '12px', color: '#1E3A8A', backgroundColor: '#DBEAFE', padding: '3px 8px', borderRadius: '4px' }}>
+          <span style={{ fontSize: '12px', color: '#1E3A8A', backgroundColor: '#D3E4F3', padding: '3px 8px', borderRadius: '4px' }}>
             Logged in: <strong>{user.fullName}</strong> ({user.role})
           </span>
         )}
@@ -93,8 +93,8 @@ export default function DemoBanner() {
               alignItems: 'center',
               gap: '6px',
               backgroundColor: '#FFFFFF',
-              border: '1px solid #93C5FD',
-              color: '#1D4ED8',
+              border: '1px solid #8EB7DC',
+              color: '#124676',
               padding: '4px 10px',
               borderRadius: '6px',
               fontSize: '12px',
@@ -142,8 +142,8 @@ export default function DemoBanner() {
                       padding: '8px 10px',
                       borderRadius: '6px',
                       textAlign: 'left',
-                      backgroundColor: isCurrent ? '#EEF4FF' : '#FFFFFF',
-                      border: isCurrent ? '1px solid #BFDBFE' : '1px solid transparent',
+                      backgroundColor: isCurrent ? '#EEF5FA' : '#FFFFFF',
+                      border: isCurrent ? '1px solid #B8D3E9' : '1px solid transparent',
                       transition: 'background 0.15s ease'
                     }}
                     onMouseEnter={(e) => {

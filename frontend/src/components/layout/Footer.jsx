@@ -91,11 +91,11 @@ export default function Footer() {
           {/* Dynamic Weather & Time Widget */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '18px', fontSize: '12px', color: '#475569' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Wind size={14} color="#1769FF" />
+              <Wind size={14} color="#124676" />
               <span>Prakasam Wind: <strong>11 km/h ESE</strong></span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Compass size={14} color="#00A6A6" />
+              <Compass size={14} color="#D2252F" />
               <span>Flight Condition: <strong style={{ color: '#16A34A' }}>VFR Clear</strong></span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#F1F5F9', padding: '3px 8px', borderRadius: '6px', fontWeight: '700', color: '#1E293B' }}>
@@ -137,7 +137,7 @@ export default function Footer() {
               Intelligent A* routing, cold-chain accountability (+2°C to +6°C), and single-use passkey verification.
             </p>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#1769FF', fontWeight: '700' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#124676', fontWeight: '700' }}>
               <Heart size={14} color="#DC2626" fill="#DC2626" />
               <span>Every Second Matters. Every Drop Counts.</span>
             </div>
@@ -190,27 +190,27 @@ export default function Footer() {
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', color: '#64748B' }}>
               <li>
-                <Link to="/how-it-works" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#1769FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
+                <Link to="/how-it-works" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#124676'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
                   <span>How It Works</span>
                 </Link>
               </li>
               <li>
-                <Link to="/blood-access" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#1769FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
+                <Link to="/blood-access" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#124676'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
                   <span>Raise Blood &amp; Donate Blood</span>
                 </Link>
               </li>
               <li>
-                <Link to="/contact" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#1769FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
+                <Link to="/contact" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#124676'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
                   <span>Contact Us</span>
                 </Link>
               </li>
               <li>
-                <Link to="/hospital/login" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#1769FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
+                <Link to="/hospital/login" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#124676'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
                   <span>Hospital Access Portal</span>
                 </Link>
               </li>
               <li>
-                <Link to="/blood-bank/login" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#1769FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
+                <Link to="/blood-bank/login" style={{ transition: 'all 0.2s ease', display: 'inline-flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#124676'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}>
                   <span>Blood Bank Operations Portal</span>
                 </Link>
               </li>
@@ -224,14 +224,14 @@ export default function Footer() {
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '13px', color: '#64748B' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <MapPin size={16} color="#1769FF" style={{ marginTop: '2px', flexShrink: 0 }} />
+                <MapPin size={16} color="#124676" style={{ marginTop: '2px', flexShrink: 0 }} />
                 <span>
                   <strong>Prakasam Corridor Network</strong>: Ongole &bull; Chirala &bull; Markapur &bull; Kandukur (Andhra Pradesh, India)
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Mail size={16} color="#1769FF" style={{ flexShrink: 0 }} />
-                <a href="mailto:emergency@lifedrone.io" style={{ color: '#1E40AF', fontWeight: '600' }}>
+                <Mail size={16} color="#124676" style={{ flexShrink: 0 }} />
+                <a href="mailto:emergency@lifedrone.io" style={{ color: '#0D375E', fontWeight: '600' }}>
                   emergency@lifedrone.io
                 </a>
               </div>
@@ -290,10 +290,10 @@ export default function Footer() {
                       borderRadius: '6px',
                       fontSize: '11px',
                       fontWeight: '700',
-                      backgroundColor: selectedBloodGroup === group ? '#1769FF' : '#F1F5F9',
+                      backgroundColor: selectedBloodGroup === group ? '#124676' : '#F1F5F9',
                       color: selectedBloodGroup === group ? '#FFFFFF' : '#334155',
                       border: '1px solid',
-                      borderColor: selectedBloodGroup === group ? '#1769FF' : '#E2E8F0',
+                      borderColor: selectedBloodGroup === group ? '#124676' : '#E2E8F0',
                       transition: 'all 0.15s ease'
                     }}
                   >
@@ -304,7 +304,7 @@ export default function Footer() {
 
               {/* Dynamic Compatibility Box */}
               <div style={{ fontSize: '12px', color: '#152238' }}>
-                <div style={{ fontWeight: '700', color: '#1769FF', marginBottom: '4px' }}>
+                <div style={{ fontWeight: '700', color: '#124676', marginBottom: '4px' }}>
                   {selectedBloodGroup} Profile:
                 </div>
                 <div style={{ color: '#475569', marginBottom: '2px' }}>
@@ -313,7 +313,7 @@ export default function Footer() {
                 <div style={{ color: '#475569', marginBottom: '4px' }}>
                   <strong>Can Receive:</strong> {bloodCompatibilities[selectedBloodGroup].canReceive}
                 </div>
-                <span style={{ fontSize: '10px', fontWeight: '700', color: '#00A6A6', backgroundColor: '#E6F7F7', padding: '1px 6px', borderRadius: '4px' }}>
+                <span style={{ fontSize: '10px', fontWeight: '700', color: '#D2252F', backgroundColor: '#FEF2F2', padding: '1px 6px', borderRadius: '4px' }}>
                   {bloodCompatibilities[selectedBloodGroup].urgency}
                 </span>
               </div>

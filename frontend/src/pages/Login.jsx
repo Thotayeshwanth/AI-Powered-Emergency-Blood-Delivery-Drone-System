@@ -146,7 +146,7 @@ export default function Login() {
         justifyContent: 'center',
         padding: '40px 20px',
         position: 'relative',
-        background: 'radial-gradient(circle at 10% 20%, rgba(23, 105, 255, 0.05) 0%, rgba(0, 166, 166, 0.04) 50%, #FFFFFF 100%)'
+        background: 'radial-gradient(circle at 10% 20%, rgba(18, 70, 118, 0.05) 0%, rgba(210, 37, 47, 0.04) 50%, #FFFFFF 100%)'
       }}
     >
       <div
@@ -180,17 +180,17 @@ export default function Login() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              backgroundColor: '#EEF4FF',
-              border: '1px solid #BFDBFE',
+              backgroundColor: '#EEF5FA',
+              border: '1px solid #B8D3E9',
               padding: '6px 14px',
               borderRadius: '999px',
               fontSize: '12px',
               fontWeight: '700',
-              color: '#1769FF',
+              color: '#124676',
               marginBottom: '20px'
             }}
           >
-            <Radio size={14} color="#1769FF" className="animate-pulse" />
+            <Radio size={14} color="#124676" className="animate-pulse" />
             <span>Prakasam District Drone Network &bull; Active Corridors</span>
           </div>
 
@@ -204,7 +204,7 @@ export default function Login() {
               marginBottom: '16px'
             }}
           >
-            Precision Aerial Delivery for <span style={{ color: '#1769FF' }}>Life-Saving Blood</span>
+            Precision Aerial Delivery for <span style={{ color: '#124676' }}>Life-Saving Blood</span>
           </h1>
 
           <p
@@ -236,8 +236,8 @@ export default function Login() {
                   width: '38px',
                   height: '38px',
                   borderRadius: '10px',
-                  backgroundColor: '#EEF4FF',
-                  color: '#1769FF',
+                  backgroundColor: '#EEF5FA',
+                  color: '#124676',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -272,8 +272,8 @@ export default function Login() {
                   width: '38px',
                   height: '38px',
                   borderRadius: '10px',
-                  backgroundColor: '#E6F7F7',
-                  color: '#00A6A6',
+                  backgroundColor: '#FEF2F2',
+                  color: '#D2252F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -337,7 +337,7 @@ export default function Login() {
               backgroundColor: '#FFFFFF',
               borderRadius: '24px',
               border: '1px solid #E2E8F0',
-              boxShadow: '0 20px 45px -10px rgba(23, 105, 255, 0.12), 0 8px 16px -6px rgba(15, 23, 42, 0.04)',
+              boxShadow: '0 20px 45px -10px rgba(18, 70, 118, 0.12), 0 8px 16px -6px rgba(15, 23, 42, 0.04)',
               padding: '36px 32px',
               position: 'relative'
             }}
@@ -345,7 +345,7 @@ export default function Login() {
             {/* Form Header */}
             <div style={{ marginBottom: '24px' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ fontSize: '12px', fontWeight: '700', color: isHospital ? '#1769FF' : '#00A6A6', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                <span style={{ fontSize: '12px', fontWeight: '700', color: isHospital ? '#124676' : '#D2252F', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                   {isHospital ? 'Clinical Hospital Operations' : 'Blood Bank Logistics Hub'}
                 </span>
                 <span
@@ -402,14 +402,14 @@ export default function Login() {
                   fontSize: '13px',
                   fontWeight: '700',
                   backgroundColor: isHospital ? '#FFFFFF' : 'transparent',
-                  color: isHospital ? '#1769FF' : '#64748B',
-                  boxShadow: isHospital ? '0 2px 8px rgba(23, 105, 255, 0.12)' : 'none',
-                  border: isHospital ? '1px solid #BFDBFE' : '1px solid transparent',
+                  color: isHospital ? '#124676' : '#64748B',
+                  boxShadow: isHospital ? '0 2px 8px rgba(18, 70, 118, 0.12)' : 'none',
+                  border: isHospital ? '1px solid #B8D3E9' : '1px solid transparent',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer'
                 }}
               >
-                <Building2 size={16} color={isHospital ? '#1769FF' : '#64748B'} />
+                <Building2 size={16} color={isHospital ? '#124676' : '#64748B'} />
                 <span>Hospital Portal</span>
               </button>
 
@@ -429,14 +429,14 @@ export default function Login() {
                   fontSize: '13px',
                   fontWeight: '700',
                   backgroundColor: !isHospital ? '#FFFFFF' : 'transparent',
-                  color: !isHospital ? '#00A6A6' : '#64748B',
-                  boxShadow: !isHospital ? '0 2px 8px rgba(0, 166, 166, 0.12)' : 'none',
-                  border: !isHospital ? '1px solid #A5E8E8' : '1px solid transparent',
+                  color: !isHospital ? '#D2252F' : '#64748B',
+                  boxShadow: !isHospital ? '0 2px 8px rgba(210, 37, 47, 0.12)' : 'none',
+                  border: !isHospital ? '1px solid #FECACA' : '1px solid transparent',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer'
                 }}
               >
-                <ShieldCheck size={16} color={!isHospital ? '#00A6A6' : '#64748B'} />
+                <ShieldCheck size={16} color={!isHospital ? '#D2252F' : '#64748B'} />
                 <span>Blood Bank Portal</span>
               </button>
             </div>
@@ -491,7 +491,7 @@ export default function Login() {
                       backgroundColor: '#FFFFFF',
                       transition: 'border-color 0.2s ease'
                     }}
-                    onFocus={(e) => e.target.style.borderColor = isHospital ? '#1769FF' : '#00A6A6'}
+                    onFocus={(e) => e.target.style.borderColor = isHospital ? '#124676' : '#D2252F'}
                     onBlur={(e) => e.target.style.borderColor = '#CBD5E1'}
                   />
                 </div>
@@ -530,7 +530,7 @@ export default function Login() {
                       backgroundColor: '#FFFFFF',
                       transition: 'border-color 0.2s ease'
                     }}
-                    onFocus={(e) => e.target.style.borderColor = isHospital ? '#1769FF' : '#00A6A6'}
+                    onFocus={(e) => e.target.style.borderColor = isHospital ? '#124676' : '#D2252F'}
                     onBlur={(e) => e.target.style.borderColor = '#CBD5E1'}
                   />
                   <button
@@ -581,7 +581,7 @@ export default function Login() {
             <div style={{ marginTop: '28px', borderTop: '1px solid #E2E8F0', paddingTop: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: '800', color: '#152238', textTransform: 'uppercase' }}>
-                  <UserCheck size={14} color="#1769FF" />
+                  <UserCheck size={14} color="#124676" />
                   <span>One-Click Clinical Demo Personas</span>
                 </div>
                 <span style={{ fontSize: '11px', color: '#16A34A', fontWeight: '700' }}>
@@ -611,8 +611,8 @@ export default function Login() {
                         cursor: 'pointer'
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = isHospital ? '#EEF4FF' : '#E6F7F7';
-                        e.currentTarget.style.borderColor = isHospital ? '#BFDBFE' : '#A5E8E8';
+                        e.currentTarget.style.backgroundColor = isHospital ? '#EEF5FA' : '#FEF2F2';
+                        e.currentTarget.style.borderColor = isHospital ? '#B8D3E9' : '#FECACA';
                         e.currentTarget.style.transform = 'translateY(-1px)';
                       }}
                       onMouseLeave={(e) => {
@@ -628,7 +628,7 @@ export default function Login() {
                             style={{
                               fontSize: '10px',
                               fontWeight: '700',
-                              color: isHospital ? '#1769FF' : '#00A6A6',
+                              color: isHospital ? '#124676' : '#D2252F',
                               backgroundColor: '#FFFFFF',
                               padding: '1px 6px',
                               borderRadius: '4px',
@@ -643,7 +643,7 @@ export default function Login() {
                         </div>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: isHospital ? '#1769FF' : '#00A6A6', fontSize: '12px', fontWeight: '700' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: isHospital ? '#124676' : '#D2252F', fontSize: '12px', fontWeight: '700' }}>
                         <span>Login</span>
                         <ChevronRight size={14} />
                       </div>
@@ -655,7 +655,7 @@ export default function Login() {
             {/* Safety & Onboarding Notice */}
             <div style={{ marginTop: '18px', textAlign: 'center', fontSize: '12px', color: '#64748B', lineHeight: 1.5 }}>
               <span>Need to onboard a new hospital vertipad or blood bank? </span>
-              <Link to="/contact" style={{ color: '#1769FF', fontWeight: '700' }}>
+              <Link to="/contact" style={{ color: '#124676', fontWeight: '700' }}>
                 Contact Operations Desk &rarr;
               </Link>
             </div>

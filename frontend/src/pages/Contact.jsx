@@ -80,7 +80,7 @@ export default function Contact() {
       {/* Header */}
       <div style={{ backgroundColor: '#F5F8FC', borderBottom: '1px solid #E2E8F0', padding: '60px 0' }}>
         <div className="container-custom" style={{ textAlign: 'center', maxWidth: '780px' }}>
-          <span style={{ fontSize: '13px', fontWeight: '700', color: '#1769FF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             Collaboration &amp; Pilot Participation
           </span>
           <h1 style={{ fontSize: '42px', fontWeight: '800', color: '#152238', margin: '12px 0 16px 0', letterSpacing: '-1px' }}>
@@ -118,8 +118,8 @@ export default function Contact() {
                     width: '42px',
                     height: '42px',
                     borderRadius: '10px',
-                    backgroundColor: '#EEF4FF',
-                    color: '#1769FF',
+                    backgroundColor: '#EEF5FA',
+                    color: '#124676',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -142,8 +142,8 @@ export default function Contact() {
                     width: '42px',
                     height: '42px',
                     borderRadius: '10px',
-                    backgroundColor: '#E6F7F7',
-                    color: '#00A6A6',
+                    backgroundColor: '#FEF2F2',
+                    color: '#D2252F',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
