@@ -68,7 +68,7 @@ export default function Header() {
           }}
         >
           {/* Left: LifeDrone Official Logo */}
-          <Link to={isAuthenticated ? dashboardPath : '/'} style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
+          <Link to={isAuthenticated ? dashboardPath : '/'} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
             <img
               src="/images/lifedrone-logo.png"
               alt="LifeDrone - One Step to Get Faster Blood Delivery"
@@ -80,43 +80,6 @@ export default function Header() {
                 display: 'block'
               }}
             />
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span
-                style={{
-                  fontSize: '10px',
-                  fontWeight: '700',
-                  color: '#16A34A',
-                  backgroundColor: '#ECFDF5',
-                  border: '1px solid #A7F3D0',
-                  padding: '2px 6px',
-                  borderRadius: '999px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px'
-                }}
-              >
-                <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#16A34A' }} />
-                ONLINE
-              </span>
-
-              {isAuthenticated && (
-                <span
-                  style={{
-                    fontSize: '10px',
-                    fontWeight: '700',
-                    color: isHospital ? '#1769FF' : '#00A6A6',
-                    backgroundColor: isHospital ? '#EEF4FF' : '#E6F7F7',
-                    border: `1px solid ${isHospital ? '#BFDBFE' : '#A5E8E8'}`,
-                    padding: '2px 7px',
-                    borderRadius: '6px',
-                    letterSpacing: '0.03em'
-                  }}
-                >
-                  {isHospital ? 'HOSPITAL PORTAL' : 'BLOOD BANK PORTAL'}
-                </span>
-              )}
-            </div>
           </Link>
 
           {/* Right Navigation */}
