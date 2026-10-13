@@ -124,7 +124,7 @@ export default function Home() {
               }}
             >
               <Zap size={14} fill="#124676" />
-              <span>AI-Assisted Emergency Medical Drone Logistics</span>
+              <span>AI POWERED EMERGENCY BLOOD DELIVERY SYSTEM USING DRONE</span>
             </div>
 
             <h1
@@ -164,16 +164,6 @@ export default function Home() {
               <Link to="/how-it-works" className="btn-outline" style={{ padding: '13px 26px', fontSize: '15px' }}>
                 <span>Discover How It Works</span>
               </Link>
-            </div>
-
-            {/* Pilot indicator snippet */}
-            <div style={{ marginTop: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span className="pulse-indicator pulse-green" style={{ marginRight: '8px' }} />
-                <span style={{ fontSize: '13px', color: '#64748B', fontWeight: '500' }}>
-                  Active Pilot in <strong>Prakasam District</strong>, AP &bull; 5 Vertipads Configured
-                </span>
-              </div>
             </div>
           </div>
         </div>
