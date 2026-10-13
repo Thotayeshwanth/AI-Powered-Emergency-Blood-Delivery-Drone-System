@@ -43,17 +43,18 @@ export default function Header() {
           top: 0,
           zIndex: 50,
           backgroundColor: isScrolled 
-            ? (scrollDirection === 'up' ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.93)') 
-            : '#FFFFFF',
+            ? (scrollDirection === 'up' ? 'rgba(255, 255, 255, 0.88)' : 'rgba(255, 255, 255, 0.82)') 
+            : 'rgba(255, 255, 255, 0.72)',
           backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
           borderBottom: isScrolled
-            ? (scrollDirection === 'up' ? '1px solid #B8D3E9' : '1px solid #E2E8F0')
-            : '1px solid #E2E8F0',
+            ? (scrollDirection === 'up' ? '1px solid rgba(184, 211, 233, 0.7)' : '1px solid rgba(226, 232, 240, 0.7)')
+            : '1px solid rgba(226, 232, 240, 0.5)',
           boxShadow: !isScrolled
             ? 'none'
             : scrollDirection === 'up'
-              ? '0 16px 32px -6px rgba(18, 70, 118, 0.14), 0 4px 10px -2px rgba(18, 70, 118, 0.05)'
-              : '0 8px 20px -6px rgba(18, 70, 118, 0.08)',
+              ? '0 10px 25px -5px rgba(18, 70, 118, 0.10), 0 3px 8px -2px rgba(18, 70, 118, 0.04)'
+              : '0 4px 14px -4px rgba(18, 70, 118, 0.06)',
           transition: 'all 0.28s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >

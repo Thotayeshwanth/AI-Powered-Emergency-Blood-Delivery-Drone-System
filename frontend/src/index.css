@@ -439,22 +439,25 @@ input, select, textarea {
   justify-content: center;
   overflow: hidden;
   box-sizing: border-box;
+  margin-top: -76px;
 }
 
 @media (min-width: 1024px) {
   .hero-16-9-section {
     aspect-ratio: 16 / 9;
-    max-height: calc(100vh - 68px);
-    min-height: 500px;
-    padding: 24px 0 36px 0;
+    max-height: 100vh;
+    min-height: 540px;
+    padding: 86px 0 36px 0;
   }
 }
 
 @media (max-width: 1023px) {
   .hero-16-9-section {
-    min-height: 84vh;
-    padding: 60px 0 80px 0;
+    min-height: 88vh;
+    margin-top: -64px;
+    padding: 80px 0 70px 0;
   }
 }
+
 
 
