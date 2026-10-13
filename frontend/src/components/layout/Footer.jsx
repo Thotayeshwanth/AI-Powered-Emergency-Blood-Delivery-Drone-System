@@ -10,17 +10,13 @@ import {
   Wind, 
   Compass, 
   Activity, 
-  CheckCircle2, 
   Radio, 
-  Send,
   Droplet
 } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [currentTime, setCurrentTime] = useState('');
-  const [subscribedEmail, setSubscribedEmail] = useState('');
-  const [subscribedState, setSubscribedState] = useState(false);
   const [selectedBloodGroup, setSelectedBloodGroup] = useState('O-');
 
   useEffect(() => {
@@ -44,14 +40,6 @@ export default function Footer() {
     'AB-': { canGive: 'AB+, AB-', canReceive: 'AB-, A-, B-, O-', urgency: 'Universal Plasma Donor' }
   };
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (!subscribedEmail.trim()) return;
-    setSubscribedState(true);
-    setTimeout(() => {
-      setSubscribedEmail('');
-    }, 3000);
-  };
 
   return (
     <footer
@@ -142,45 +130,6 @@ export default function Footer() {
               <span>Every Second Matters. Every Drop Counts.</span>
             </div>
 
-            {/* Dynamic Newsletter & Alert Subscription */}
-            <div style={{ marginTop: '20px' }}>
-              <span style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: '#475569', marginBottom: '6px' }}>
-                Corridor Status &amp; Dispatch Bulletins
-              </span>
-              {subscribedState ? (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#16A34A', fontWeight: '600' }}>
-                  <CheckCircle2 size={15} />
-                  <span>Subscribed to LifeDrone Operations Feed</span>
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '6px' }}>
-                  <input
-                    type="email"
-                    required
-                    value={subscribedEmail}
-                    onChange={(e) => setSubscribedEmail(e.target.value)}
-                    placeholder="Enter hospital/official email"
-                    style={{
-                      flex: 1,
-                      padding: '8px 12px',
-                      borderRadius: '8px',
-                      border: '1px solid #CBD5E1',
-                      fontSize: '12px',
-                      backgroundColor: '#FFFFFF',
-                      outline: 'none'
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    className="btn-primary"
-                    style={{ padding: '8px 14px', fontSize: '12px', borderRadius: '8px' }}
-                    title="Subscribe"
-                  >
-                    <Send size={13} />
-                  </button>
-                </form>
-              )}
-            </div>
           </div>
 
           {/* Column 2: Quick Links */}
