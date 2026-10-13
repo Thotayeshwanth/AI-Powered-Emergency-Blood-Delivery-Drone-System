@@ -107,252 +107,72 @@ export default function Home() {
         </div>
 
         <div className="container-custom" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
-          <div className="hero-16-9-grid">
-            {/* Left Hero Text */}
-            <div>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: '#EEF5FA',
-                  border: '1px solid #B8D3E9',
-                  padding: '5px 12px',
-                  borderRadius: '9999px',
-                  fontSize: '12.5px',
-                  fontWeight: '700',
-                  color: '#124676',
-                  marginBottom: '12px'
-                }}
-              >
-                <Zap size={13} fill="#124676" />
-                <span>AI-Assisted Emergency Medical Drone Logistics</span>
-              </div>
-
-              <h1
-                style={{
-                  fontSize: 'clamp(28px, 3.2vw, 48px)',
-                  fontWeight: '800',
-                  lineHeight: '1.1',
-                  color: '#152238',
-                  letterSpacing: '-1.2px',
-                  marginBottom: '14px'
-                }}
-              >
-                FROM BLOOD BANK<br />
-                TO BEDSIDE<br />
-                <span style={{ color: '#D2252F' }}>IN A FLASH</span>
-              </h1>
-
-              <p
-                style={{
-                  fontSize: 'clamp(14px, 1.05vw, 16px)',
-                  lineHeight: '1.5',
-                  color: '#64748B',
-                  maxWidth: '520px',
-                  marginBottom: '20px'
-                }}
-              >
-                LifeDrone connects hospitals and blood banks through intelligent delivery coordination,
-                secure package handovers, and drone-assisted medical logistics.
-              </p>
-
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-                <Link to="/blood-access" className="btn-primary" style={{ padding: '11px 22px', fontSize: '14.5px' }}>
-                  <span>Request Blood</span>
-                  <ArrowRight size={17} />
-                </Link>
-
-                <Link to="/how-it-works" className="btn-outline" style={{ padding: '11px 22px', fontSize: '14.5px' }}>
-                  <span>Discover How It Works</span>
-                </Link>
-              </div>
-
-              {/* Pilot indicator snippet */}
-              <div style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span className="pulse-indicator pulse-green" style={{ marginRight: '7px' }} />
-                  <span style={{ fontSize: '12.5px', color: '#64748B', fontWeight: '500' }}>
-                    Active Pilot in <strong>Prakasam District</strong>, AP &bull; 5 Vertipads Configured
-                  </span>
-                </div>
-              </div>
+          <div style={{ maxWidth: '680px' }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: '#EEF5FA',
+                border: '1px solid #B8D3E9',
+                padding: '6px 14px',
+                borderRadius: '9999px',
+                fontSize: '13px',
+                fontWeight: '700',
+                color: '#124676',
+                marginBottom: '16px'
+              }}
+            >
+              <Zap size={14} fill="#124676" />
+              <span>AI-Assisted Emergency Medical Drone Logistics</span>
             </div>
 
-            {/* Right Hero Visual: Drone & Medical Transport Illustration */}
-            <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
-              <div
-                className="animate-float"
-                style={{
-                  width: '100%',
-                  maxWidth: '440px',
-                  background: 'rgba(255, 255, 255, 0.95)',
-                  backdropFilter: 'blur(16px)',
-                  borderRadius: '20px',
-                  border: '1px solid rgba(226, 232, 240, 0.9)',
-                  boxShadow: '0 20px 40px -10px rgba(18, 70, 118, 0.14)',
-                  padding: '20px',
-                  position: 'relative'
-                }}
-              >
-                {/* Visual Header: Traveling Drone with Blood Packet Animation */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      backgroundColor: '#F1F5F9',
-                      padding: '4px 10px',
-                      borderRadius: '10px',
-                      border: '1px solid #E2E8F0',
-                      overflow: 'hidden',
-                      position: 'relative',
-                      minWidth: '185px',
-                      height: '38px'
-                    }}
-                  >
-                    {/* Dotted Flight Track */}
-                    <div
-                      style={{
-                        position: 'absolute',
-                        left: '10px',
-                        right: '10px',
-                        top: '50%',
-                        height: '1px',
-                        borderTop: '2px dashed #8EB7DC',
-                        zIndex: 1
-                      }}
-                    />
+            <h1
+              style={{
+                fontSize: 'clamp(32px, 4.4vw, 56px)',
+                fontWeight: '800',
+                lineHeight: '1.1',
+                color: '#152238',
+                letterSpacing: '-1.5px',
+                marginBottom: '18px'
+              }}
+            >
+              FROM BLOOD BANK<br />
+              TO BEDSIDE<br />
+              <span style={{ color: '#D2252F' }}>IN A FLASH</span>
+            </h1>
 
-                    {/* Small Traveling Drone with Blood Packet */}
-                    <div
-                      className="animate-drone-patrol"
-                      style={{
-                        position: 'relative',
-                        zIndex: 2,
-                        display: 'inline-flex',
-                        flexDirection: 'column',
-                        alignItems: 'center'
-                      }}
-                    >
-                      {/* Mini Drone Body with Spinning Rotors */}
-                      <svg width="28" height="16" viewBox="0 0 32 18" fill="none">
-                        <ellipse className="rotor-active" cx="6" cy="3" rx="5" ry="1.2" fill="#64748B" />
-                        <ellipse className="rotor-active" cx="26" cy="3" rx="5" ry="1.2" fill="#64748B" />
-                        <path d="M6 4 L16 8 L26 4" stroke="#152238" strokeWidth="1.8" strokeLinecap="round" />
-                        <rect x="11" y="6" width="10" height="5" rx="1.5" fill="#124676" />
-                        <circle cx="16" cy="7" r="1.2" fill="#10B981" />
-                        <line x1="16" y1="11" x2="16" y2="15" stroke="#94A3B8" strokeWidth="1.2" />
-                      </svg>
+            <p
+              style={{
+                fontSize: 'clamp(15px, 1.2vw, 18px)',
+                lineHeight: '1.6',
+                color: '#475569',
+                maxWidth: '560px',
+                marginBottom: '28px'
+              }}
+            >
+              LifeDrone connects hospitals and blood banks through intelligent delivery coordination,
+              secure package handovers, and drone-assisted medical logistics.
+            </p>
 
-                      {/* Suspended Red Blood Packet */}
-                      <div
-                        style={{
-                          marginTop: '-3px',
-                          width: '10px',
-                          height: '12px',
-                          backgroundColor: '#DC2626',
-                          borderRadius: '2px 2px 3px 3px',
-                          border: '1px solid #991B1B',
-                          boxShadow: '0 2px 4px rgba(220, 38, 38, 0.4)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}
-                        title="Blood Packet in Transit"
-                      >
-                        <span style={{ color: '#FFFFFF', fontSize: '7.5px', fontWeight: '900', lineHeight: 1 }}>+</span>
-                      </div>
-                    </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px' }}>
+              <Link to="/blood-access" className="btn-primary" style={{ padding: '13px 26px', fontSize: '15px' }}>
+                <span>Request Blood</span>
+                <ArrowRight size={18} />
+              </Link>
 
-                    <div style={{ marginLeft: 'auto', zIndex: 2, fontSize: '11px', fontWeight: '700', color: '#0D375E', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <span className="pulse-indicator pulse-green" style={{ width: '6px', height: '6px' }} />
-                      <span>Blood Transit</span>
-                    </div>
-                  </div>
-                  <span className="badge badge-intransit" style={{ fontSize: '11px', padding: '3px 8px' }}>Cruising 65 km/h</span>
-                </div>
+              <Link to="/how-it-works" className="btn-outline" style={{ padding: '13px 26px', fontSize: '15px' }}>
+                <span>Discover How It Works</span>
+              </Link>
+            </div>
 
-                {/* Drone SVG Graphic */}
-                <div
-                  style={{
-                    height: '165px',
-                    backgroundColor: '#F8FAFC',
-                    borderRadius: '14px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    border: '1px dashed #CBD5E1',
-                    position: 'relative',
-                    overflow: 'hidden'
-                  }}
-                >
-                  {/* Visual aerial flight path line */}
-                  <svg
-                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                    viewBox="0 0 400 200"
-                    fill="none"
-                  >
-                    <path
-                      d="M 20 160 Q 200 40 380 140"
-                      stroke="#8EB7DC"
-                      strokeWidth="3"
-                      strokeDasharray="6 6"
-                    />
-                  </svg>
-
-                  {/* Drone SVG */}
-                  <div style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-                    <svg width="88" height="60" viewBox="0 0 100 70" fill="none">
-                      {/* Propellers */}
-                      <ellipse cx="20" cy="18" rx="16" ry="3" fill="#64748B" opacity="0.7" />
-                      <ellipse cx="80" cy="18" rx="16" ry="3" fill="#64748B" opacity="0.7" />
-                      {/* Drone Body */}
-                      <path d="M 20 22 L 50 35 L 80 22" stroke="#152238" strokeWidth="4" strokeLinecap="round" />
-                      <rect x="36" y="28" width="28" height="18" rx="4" fill="#124676" />
-                      {/* Medical Cold Container */}
-                      <rect x="40" y="46" width="20" height="16" rx="3" fill="#DC2626" />
-                      {/* Red cross on container */}
-                      <path d="M 50 50 v 8 M 46 54 h 8" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
-                    </svg>
-
-                    <div style={{ marginTop: '6px', fontSize: '12.5px', fontWeight: '700', color: '#152238' }}>
-                      LD-HEXA-01 Medical Lifter
-                    </div>
-                    <div style={{ fontSize: '11px', color: '#D2252F', fontWeight: '600' }}>
-                      Payload: 2 Units O+ Packed RBC &bull; Cold Box 3.8&deg;C
-                    </div>
-                  </div>
-                </div>
-
-                {/* Telemetry pill */}
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '10px',
-                    marginTop: '14px',
-                    backgroundColor: '#F5F8FC',
-                    padding: '10px',
-                    borderRadius: '10px',
-                    textAlign: 'center'
-                  }}
-                >
-                  <div>
-                    <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '600' }}>ETA</div>
-                    <div style={{ fontSize: '14px', fontWeight: '800', color: '#124676' }}>3.2 min</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '600' }}>Altitude</div>
-                    <div style={{ fontSize: '14px', fontWeight: '800', color: '#152238' }}>75 m</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '600' }}>Passkey</div>
-                    <div style={{ fontSize: '14px', fontWeight: '800', color: '#16A34A' }}>Secured</div>
-                  </div>
-                </div>
+            {/* Pilot indicator snippet */}
+            <div style={{ marginTop: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span className="pulse-indicator pulse-green" style={{ marginRight: '8px' }} />
+                <span style={{ fontSize: '13px', color: '#64748B', fontWeight: '500' }}>
+                  Active Pilot in <strong>Prakasam District</strong>, AP &bull; 5 Vertipads Configured
+                </span>
               </div>
             </div>
           </div>
