@@ -6,9 +6,12 @@ import {
   X, 
   Activity, 
   LogOut, 
-  ChevronRight,
-  LifeBuoy,
-  Sparkles
+  ChevronRight, 
+  Sparkles,
+  Building2,
+  ShieldCheck,
+  PlusCircle,
+  User
 } from 'lucide-react';
 import HelpSupportModal from '../common/HelpSupportModal';
 
@@ -36,6 +39,9 @@ export default function Header() {
     setMobileMenuOpen(false);
   };
 
+  const isHospital = user?.institutionType === 'HOSPITAL';
+  const dashboardPath = isHospital ? '/hospital/dashboard' : '/blood-bank/dashboard';
+
   return (
     <>
       <header
@@ -43,7 +49,7 @@ export default function Header() {
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.94)' : '#FFFFFF',
+          backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.95)' : '#FFFFFF',
           backdropFilter: 'blur(16px)',
           borderBottom: '1px solid #E2E8F0',
           boxShadow: isScrolled 
@@ -62,7 +68,7 @@ export default function Header() {
           }}
         >
           {/* Left: LifeDrone Brand Identity */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <Link to={isAuthenticated ? dashboardPath : '/'} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div
               style={{
                 width: '44px',
@@ -112,6 +118,22 @@ export default function Header() {
                   <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#16A34A' }} />
                   ONLINE
                 </span>
+
+                {isAuthenticated && (
+                  <span
+                    style={{
+                      fontSize: '11px',
+                      fontWeight: '700',
+                      color: isHospital ? '#1769FF' : '#00A6A6',
+                      backgroundColor: isHospital ? '#EEF4FF' : '#E6F7F7',
+                      border: `1px solid ${isHospital ? '#BFDBFE' : '#A5E8E8'}`,
+                      padding: '2px 8px',
+                      borderRadius: '6px'
+                    }}
+                  >
+                    {isHospital ? 'HOSPITAL PORTAL' : 'BLOOD BANK PORTAL'}
+                  </span>
+                )}
               </div>
               <span style={{ display: 'block', fontSize: '10px', fontWeight: '700', letterSpacing: '0.06em', color: '#00A6A6', textTransform: 'uppercase' }}>
                 Medical Aerial Logistics
@@ -119,166 +141,256 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Right: PRIMARY NAVIGATION & HELP BUTTON */}
+          {/* Right Navigation */}
           <nav style={{ display: 'none', gap: '10px', alignItems: 'center' }} className="desktop-nav">
-            <Link
-              to="/how-it-works"
-              style={{
-                padding: '9px 16px',
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontWeight: '600',
-                color: isActive('/how-it-works') ? '#1769FF' : '#334155',
-                backgroundColor: isActive('/how-it-works') ? '#EEF4FF' : 'transparent',
-                transition: 'all 0.2s ease',
-                border: '1px solid transparent'
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/how-it-works')) e.currentTarget.style.backgroundColor = '#F8FAFC';
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/how-it-works')) e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              How It Works
-            </Link>
-
-            <Link
-              to="/blood-access"
-              style={{
-                padding: '9px 16px',
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontWeight: '600',
-                color: isActive('/blood-access') ? '#1769FF' : '#334155',
-                backgroundColor: isActive('/blood-access') ? '#EEF4FF' : 'transparent',
-                transition: 'all 0.2s ease',
-                border: '1px solid transparent'
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/blood-access')) e.currentTarget.style.backgroundColor = '#F8FAFC';
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/blood-access')) e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              Raise Blood &amp; Donate Blood
-            </Link>
-
-            <Link
-              to="/contact"
-              style={{
-                padding: '9px 16px',
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontWeight: '600',
-                color: isActive('/contact') ? '#1769FF' : '#334155',
-                backgroundColor: isActive('/contact') ? '#EEF4FF' : 'transparent',
-                transition: 'all 0.2s ease',
-                border: '1px solid transparent'
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive('/contact')) e.currentTarget.style.backgroundColor = '#F8FAFC';
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive('/contact')) e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              Contact Us
-            </Link>
-
-            {/* Help Button triggering LifeDrone AI Chatbot or Human Support */}
-            <button
-              onClick={() => setHelpModalOpen(true)}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '7px',
-                padding: '8px 16px',
-                borderRadius: '999px',
-                fontSize: '13px',
-                fontWeight: '700',
-                color: '#1769FF',
-                backgroundColor: '#EEF4FF',
-                border: '1px solid #BFDBFE',
-                boxShadow: '0 2px 8px rgba(23, 105, 255, 0.1)',
-                transition: 'all 0.2s ease',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#DBEAFE';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(23, 105, 255, 0.2)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#EEF4FF';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(23, 105, 255, 0.1)';
-              }}
-            >
-              <Sparkles size={15} color="#1769FF" />
-              <span>Help</span>
-              <span 
-                style={{ 
-                  fontSize: '10px', 
-                  backgroundColor: '#1769FF', 
-                  color: '#FFFFFF', 
-                  padding: '1px 6px', 
-                  borderRadius: '999px',
-                  fontWeight: '700'
-                }}
-              >
-                AI
-              </span>
-            </button>
-
-            {/* Authenticated Dashboard shortcut if logged in */}
-            {isAuthenticated && (
+            {!isAuthenticated ? (
+              /* Public Navigation (Visible ONLY when not logged in) */
               <>
-                <div style={{ width: '1px', height: '22px', backgroundColor: '#E2E8F0', margin: '0 4px' }} />
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Link
-                    to={user?.institutionType === 'HOSPITAL' ? '/hospital/dashboard' : '/blood-bank/dashboard'}
-                    className="btn-primary"
-                    style={{ padding: '8px 14px', fontSize: '13px', borderRadius: '8px' }}
+                <Link
+                  to="/how-it-works"
+                  style={{
+                    padding: '9px 16px',
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: isActive('/how-it-works') ? '#1769FF' : '#334155',
+                    backgroundColor: isActive('/how-it-works') ? '#EEF4FF' : 'transparent',
+                    transition: 'all 0.2s ease',
+                    border: '1px solid transparent'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive('/how-it-works')) e.currentTarget.style.backgroundColor = '#F8FAFC';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive('/how-it-works')) e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  How It Works
+                </Link>
+
+                <Link
+                  to="/blood-access"
+                  style={{
+                    padding: '9px 16px',
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: isActive('/blood-access') ? '#1769FF' : '#334155',
+                    backgroundColor: isActive('/blood-access') ? '#EEF4FF' : 'transparent',
+                    transition: 'all 0.2s ease',
+                    border: '1px solid transparent'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive('/blood-access')) e.currentTarget.style.backgroundColor = '#F8FAFC';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive('/blood-access')) e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  Raise Blood &amp; Donate Blood
+                </Link>
+
+                <Link
+                  to="/contact"
+                  style={{
+                    padding: '9px 16px',
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: isActive('/contact') ? '#1769FF' : '#334155',
+                    backgroundColor: isActive('/contact') ? '#EEF4FF' : 'transparent',
+                    transition: 'all 0.2s ease',
+                    border: '1px solid transparent'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive('/contact')) e.currentTarget.style.backgroundColor = '#F8FAFC';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive('/contact')) e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  Contact Us
+                </Link>
+
+                {/* Help AI Button */}
+                <button
+                  onClick={() => setHelpModalOpen(true)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '7px',
+                    padding: '8px 16px',
+                    borderRadius: '999px',
+                    fontSize: '13px',
+                    fontWeight: '700',
+                    color: '#1769FF',
+                    backgroundColor: '#EEF4FF',
+                    border: '1px solid #BFDBFE',
+                    boxShadow: '0 2px 8px rgba(23, 105, 255, 0.1)',
+                    transition: 'all 0.2s ease',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#DBEAFE';
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(23, 105, 255, 0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#EEF4FF';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(23, 105, 255, 0.1)';
+                  }}
+                >
+                  <Sparkles size={15} color="#1769FF" />
+                  <span>Help</span>
+                  <span 
+                    style={{ 
+                      fontSize: '10px', 
+                      backgroundColor: '#1769FF', 
+                      color: '#FFFFFF', 
+                      padding: '1px 6px', 
+                      borderRadius: '999px',
+                      fontWeight: '700'
+                    }}
                   >
-                    <Activity size={15} />
-                    <span>Dashboard ({user?.role?.split('_')[0]})</span>
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="btn-ghost"
-                    title="Log Out"
-                    style={{ padding: '8px 10px', borderRadius: '8px' }}
-                  >
-                    <LogOut size={16} />
-                  </button>
-                </div>
+                    AI
+                  </span>
+                </button>
               </>
+            ) : (
+              /* Authenticated Navigation Suite (Visible ONLY when logged in) */
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                {/* User & Institution Tag */}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    backgroundColor: '#F8FAFC',
+                    border: '1px solid #E2E8F0',
+                    padding: '6px 14px',
+                    borderRadius: '10px'
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '8px',
+                      backgroundColor: isHospital ? '#EEF4FF' : '#E6F7F7',
+                      color: isHospital ? '#1769FF' : '#00A6A6',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    {isHospital ? <Building2 size={16} /> : <ShieldCheck size={16} />}
+                  </div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontSize: '13px', fontWeight: '700', color: '#152238', lineHeight: 1.2 }}>
+                      {user?.fullName || 'Authenticated User'}
+                    </div>
+                    <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '500' }}>
+                      {user?.role}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Direct Action: Request Blood (for Hospital) or Inventory (for Blood Bank) */}
+                {isHospital && (
+                  <Link
+                    to="/request-blood"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      fontSize: '13px',
+                      fontWeight: '600',
+                      backgroundColor: '#EEF4FF',
+                      color: '#1769FF',
+                      border: '1px solid #BFDBFE',
+                      transition: 'all 0.15s ease'
+                    }}
+                  >
+                    <PlusCircle size={15} />
+                    <span>New Request</span>
+                  </Link>
+                )}
+
+                {/* Dashboard Button */}
+                <Link
+                  to={dashboardPath}
+                  className="btn-primary"
+                  style={{
+                    padding: '9px 18px',
+                    fontSize: '13px',
+                    borderRadius: '8px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px'
+                  }}
+                >
+                  <Activity size={16} />
+                  <span>Dashboard</span>
+                </Link>
+
+                {/* Logout Button */}
+                <button
+                  onClick={handleLogout}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '8px 14px',
+                    borderRadius: '8px',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    color: '#DC2626',
+                    backgroundColor: '#FEF2F2',
+                    border: '1px solid #FECACA',
+                    transition: 'all 0.15s ease',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#FEE2E2';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#FEF2F2';
+                  }}
+                  title="Sign Out of Portal"
+                >
+                  <LogOut size={15} />
+                  <span>Sign Out</span>
+                </button>
+              </div>
             )}
           </nav>
 
-          {/* Mobile menu toggle */}
+          {/* Mobile Actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="mobile-actions">
-            <button
-              onClick={() => setHelpModalOpen(true)}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px',
-                padding: '6px 12px',
-                borderRadius: '999px',
-                fontSize: '12px',
-                fontWeight: '700',
-                color: '#1769FF',
-                backgroundColor: '#EEF4FF',
-                border: '1px solid #BFDBFE'
-              }}
-              className="mobile-help-btn"
-            >
-              <Sparkles size={14} />
-              <span>Help</span>
-            </button>
+            {!isAuthenticated && (
+              <button
+                onClick={() => setHelpModalOpen(true)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  padding: '6px 12px',
+                  borderRadius: '999px',
+                  fontSize: '12px',
+                  fontWeight: '700',
+                  color: '#1769FF',
+                  backgroundColor: '#EEF4FF',
+                  border: '1px solid #BFDBFE'
+                }}
+                className="mobile-help-btn"
+              >
+                <Sparkles size={14} />
+                <span>Help</span>
+              </button>
+            )}
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -311,105 +423,156 @@ export default function Header() {
               boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)'
             }}
           >
-            <Link
-              to="/how-it-works"
-              onClick={() => setMobileMenuOpen(false)}
-              style={{
-                padding: '12px 16px',
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#152238',
-                backgroundColor: isActive('/how-it-works') ? '#EEF4FF' : '#F8FAFC',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}
-            >
-              <span>How It Works</span>
-              <ChevronRight size={18} color="#64748B" />
-            </Link>
-
-            <Link
-              to="/blood-access"
-              onClick={() => setMobileMenuOpen(false)}
-              style={{
-                padding: '12px 16px',
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#152238',
-                backgroundColor: isActive('/blood-access') ? '#EEF4FF' : '#F8FAFC',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}
-            >
-              <span>Raise Blood &amp; Donate Blood</span>
-              <ChevronRight size={18} color="#64748B" />
-            </Link>
-
-            <Link
-              to="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              style={{
-                padding: '12px 16px',
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#152238',
-                backgroundColor: isActive('/contact') ? '#EEF4FF' : '#F8FAFC',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}
-            >
-              <span>Contact Us</span>
-              <ChevronRight size={18} color="#64748B" />
-            </Link>
-
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                setHelpModalOpen(true);
-              }}
-              style={{
-                padding: '12px 16px',
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontWeight: '700',
-                color: '#1769FF',
-                backgroundColor: '#EEF4FF',
-                border: '1px solid #BFDBFE',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Sparkles size={16} color="#1769FF" />
-                <span>Help: LifeDrone Chatbot &amp; Support</span>
-              </div>
-              <ChevronRight size={18} color="#1769FF" />
-            </button>
-
-            {isAuthenticated && (
-              <div style={{ marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {!isAuthenticated ? (
+              /* Public Mobile Menu */
+              <>
                 <Link
-                  to={user?.institutionType === 'HOSPITAL' ? '/hospital/dashboard' : '/blood-bank/dashboard'}
+                  to="/how-it-works"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#152238',
+                    backgroundColor: isActive('/how-it-works') ? '#EEF4FF' : '#F8FAFC',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}
+                >
+                  <span>How It Works</span>
+                  <ChevronRight size={18} color="#64748B" />
+                </Link>
+
+                <Link
+                  to="/blood-access"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#152238',
+                    backgroundColor: isActive('/blood-access') ? '#EEF4FF' : '#F8FAFC',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}
+                >
+                  <span>Raise Blood &amp; Donate Blood</span>
+                  <ChevronRight size={18} color="#64748B" />
+                </Link>
+
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#152238',
+                    backgroundColor: isActive('/contact') ? '#EEF4FF' : '#F8FAFC',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}
+                >
+                  <span>Contact Us</span>
+                  <ChevronRight size={18} color="#64748B" />
+                </Link>
+
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setHelpModalOpen(true);
+                  }}
+                  style={{
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    color: '#1769FF',
+                    backgroundColor: '#EEF4FF',
+                    border: '1px solid #BFDBFE',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Sparkles size={16} color="#1769FF" />
+                    <span>Help: LifeDrone Chatbot &amp; Support</span>
+                  </div>
+                  <ChevronRight size={18} color="#1769FF" />
+                </button>
+              </>
+            ) : (
+              /* Authenticated Mobile Menu */
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div
+                  style={{
+                    padding: '12px 16px',
+                    backgroundColor: '#F8FAFC',
+                    borderRadius: '8px',
+                    border: '1px solid #E2E8F0',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                  }}
+                >
+                  <User size={18} color="#1769FF" />
+                  <div>
+                    <div style={{ fontSize: '14px', fontWeight: '700', color: '#152238' }}>
+                      {user?.fullName}
+                    </div>
+                    <div style={{ fontSize: '12px', color: '#64748B' }}>
+                      {user?.role} &bull; {user?.institutionType}
+                    </div>
+                  </div>
+                </div>
+
+                <Link
+                  to={dashboardPath}
                   onClick={() => setMobileMenuOpen(false)}
                   className="btn-primary"
                   style={{ width: '100%', justifyContent: 'center' }}
                 >
-                  Go to Dashboard ({user?.role})
+                  Go to {isHospital ? 'Hospital' : 'Blood Bank'} Dashboard
                 </Link>
+
+                {isHospital && (
+                  <Link
+                    to="/request-blood"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="btn-outline"
+                    style={{ width: '100%', justifyContent: 'center', gap: '6px' }}
+                  >
+                    <PlusCircle size={16} />
+                    <span>Create New Blood Request</span>
+                  </Link>
+                )}
+
                 <button
                   onClick={handleLogout}
-                  className="btn-outline"
-                  style={{ width: '100%', justifyContent: 'center', color: '#DC2626', borderColor: '#FECACA' }}
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    borderRadius: '8px',
+                    color: '#DC2626',
+                    backgroundColor: '#FEF2F2',
+                    border: '1px solid #FECACA',
+                    fontWeight: '700',
+                    fontSize: '14px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px'
+                  }}
                 >
                   <LogOut size={16} />
-                  <span>Log Out</span>
+                  <span>Sign Out</span>
                 </button>
               </div>
             )}
