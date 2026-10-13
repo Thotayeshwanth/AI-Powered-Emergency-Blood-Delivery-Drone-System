@@ -118,28 +118,18 @@ export default function Footer() {
         >
           {/* Column 1: Brand & Dynamic Mission */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <div
+            <div style={{ marginBottom: '18px' }}>
+              <img
+                src="/images/lifedrone-logo.png"
+                alt="LifeDrone - One Step to Get Faster Blood Delivery"
                 style={{
-                  width: '38px',
-                  height: '38px',
-                  borderRadius: '10px',
-                  background: 'linear-gradient(135deg, #1769FF 0%, #0052cc 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#FFFFFF',
-                  boxShadow: '0 4px 12px rgba(23, 105, 255, 0.25)'
+                  height: '46px',
+                  width: 'auto',
+                  maxWidth: '240px',
+                  objectFit: 'contain',
+                  display: 'block'
                 }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4" />
-                  <circle cx="12" cy="12" r="3" fill="#00A6A6" />
-                </svg>
-              </div>
-              <span style={{ fontSize: '20px', fontWeight: '800', color: '#152238' }}>
-                Life<span style={{ color: '#1769FF' }}>Drone</span>
-              </span>
+              />
             </div>
 
             <p style={{ fontSize: '14px', color: '#64748B', lineHeight: '1.6', marginBottom: '16px' }}>

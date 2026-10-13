@@ -67,77 +67,55 @@ export default function Header() {
             height: '76px' 
           }}
         >
-          {/* Left: LifeDrone Brand Identity */}
-          <Link to={isAuthenticated ? dashboardPath : '/'} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div
+          {/* Left: LifeDrone Official Logo */}
+          <Link to={isAuthenticated ? dashboardPath : '/'} style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
+            <img
+              src="/images/lifedrone-logo.png"
+              alt="LifeDrone - One Step to Get Faster Blood Delivery"
               style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '12px',
-                background: 'linear-gradient(135deg, #1769FF 0%, #0052cc 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 6px 16px rgba(23, 105, 255, 0.28)',
-                color: '#FFFFFF',
-                position: 'relative'
+                height: '46px',
+                width: 'auto',
+                maxWidth: '240px',
+                objectFit: 'contain',
+                display: 'block'
               }}
-            >
-              {/* Drone / Medical Wing Icon */}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2v4" />
-                <path d="M12 18v4" />
-                <path d="M4.93 4.93l2.83 2.83" />
-                <path d="M16.24 16.24l2.83 2.83" />
-                <path d="M2 12h4" />
-                <path d="M18 12h4" />
-                <path d="M4.93 19.07l2.83-2.83" />
-                <path d="M16.24 7.76l2.83-2.83" />
-                <circle cx="12" cy="12" r="3" fill="#00A6A6" />
-              </svg>
-            </div>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '22px', fontWeight: '800', letterSpacing: '-0.5px', color: '#152238' }}>
-                  Life<span style={{ color: '#1769FF' }}>Drone</span>
-                </span>
+            />
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span
+                style={{
+                  fontSize: '10px',
+                  fontWeight: '700',
+                  color: '#16A34A',
+                  backgroundColor: '#ECFDF5',
+                  border: '1px solid #A7F3D0',
+                  padding: '2px 6px',
+                  borderRadius: '999px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
+              >
+                <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#16A34A' }} />
+                ONLINE
+              </span>
+
+              {isAuthenticated && (
                 <span
                   style={{
                     fontSize: '10px',
                     fontWeight: '700',
-                    color: '#16A34A',
-                    backgroundColor: '#ECFDF5',
-                    border: '1px solid #A7F3D0',
-                    padding: '2px 6px',
-                    borderRadius: '999px',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '4px'
+                    color: isHospital ? '#1769FF' : '#00A6A6',
+                    backgroundColor: isHospital ? '#EEF4FF' : '#E6F7F7',
+                    border: `1px solid ${isHospital ? '#BFDBFE' : '#A5E8E8'}`,
+                    padding: '2px 7px',
+                    borderRadius: '6px',
+                    letterSpacing: '0.03em'
                   }}
                 >
-                  <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#16A34A' }} />
-                  ONLINE
+                  {isHospital ? 'HOSPITAL PORTAL' : 'BLOOD BANK PORTAL'}
                 </span>
-
-                {isAuthenticated && (
-                  <span
-                    style={{
-                      fontSize: '11px',
-                      fontWeight: '700',
-                      color: isHospital ? '#1769FF' : '#00A6A6',
-                      backgroundColor: isHospital ? '#EEF4FF' : '#E6F7F7',
-                      border: `1px solid ${isHospital ? '#BFDBFE' : '#A5E8E8'}`,
-                      padding: '2px 8px',
-                      borderRadius: '6px'
-                    }}
-                  >
-                    {isHospital ? 'HOSPITAL PORTAL' : 'BLOOD BANK PORTAL'}
-                  </span>
-                )}
-              </div>
-              <span style={{ display: 'block', fontSize: '10px', fontWeight: '700', letterSpacing: '0.06em', color: '#00A6A6', textTransform: 'uppercase' }}>
-                Medical Aerial Logistics
-              </span>
+              )}
             </div>
           </Link>
 

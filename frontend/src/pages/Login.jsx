@@ -161,6 +161,20 @@ export default function Login() {
       >
         {/* Left Side: Brand Visual & Operational Pillars */}
         <div style={{ padding: '20px' }}>
+          <div style={{ marginBottom: '20px' }}>
+            <img
+              src="/images/lifedrone-logo.png"
+              alt="LifeDrone - One Step to Get Faster Blood Delivery"
+              style={{
+                height: '52px',
+                width: 'auto',
+                maxWidth: '270px',
+                objectFit: 'contain',
+                display: 'block'
+              }}
+            />
+          </div>
+
           <div
             style={{
               display: 'inline-flex',
