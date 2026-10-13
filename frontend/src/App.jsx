@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+import ScrollToTopButton from './components/common/ScrollToTopButton';
 
 import Home from './pages/Home';
 import HowItWorks from './pages/HowItWorks';
@@ -108,6 +109,7 @@ export default function App() {
           </Routes>
         </main>
         <Footer />
+        <ScrollToTopButton />
       </BrowserRouter>
     </AuthProvider>
   );

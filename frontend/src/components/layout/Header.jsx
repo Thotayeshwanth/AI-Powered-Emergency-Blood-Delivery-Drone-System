@@ -14,22 +14,15 @@ import {
   User
 } from 'lucide-react';
 import HelpSupportModal from '../common/HelpSupportModal';
+import { useScrollEffects } from '../../hooks/useScrollEffects';
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { isCompact, isScrolled, scrollProgress, scrollDirection } = useScrollEffects();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const isActive = (path) => location.pathname === path;
 
@@ -49,22 +42,36 @@ export default function Header() {
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.95)' : '#FFFFFF',
+          backgroundColor: isScrolled 
+            ? (scrollDirection === 'up' ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.93)') 
+            : '#FFFFFF',
           backdropFilter: 'blur(16px)',
-          borderBottom: '1px solid #E2E8F0',
-          boxShadow: isScrolled 
-            ? '0 10px 30px -10px rgba(21, 34, 56, 0.08), 0 2px 4px -2px rgba(21, 34, 56, 0.04)' 
-            : '0 2px 10px -2px rgba(21, 34, 56, 0.03)',
-          transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+          borderBottom: isScrolled
+            ? (scrollDirection === 'up' ? '1px solid #B8D3E9' : '1px solid #E2E8F0')
+            : '1px solid #E2E8F0',
+          boxShadow: !isScrolled
+            ? 'none'
+            : scrollDirection === 'up'
+              ? '0 16px 32px -6px rgba(18, 70, 118, 0.14), 0 4px 10px -2px rgba(18, 70, 118, 0.05)'
+              : '0 8px 20px -6px rgba(18, 70, 118, 0.08)',
+          transition: 'all 0.28s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
+        {/* Responsive Hairline Scroll Progress Bar (Top of Header) */}
+        <div 
+          className="scroll-progress-line" 
+          style={{ width: `${scrollProgress}%` }} 
+          aria-hidden="true"
+        />
+
         <div 
           className="container-custom" 
           style={{ 
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'space-between', 
-            height: '76px' 
+            height: isCompact ? '64px' : '76px',
+            transition: 'height 0.28s cubic-bezier(0.16, 1, 0.3, 1)'
           }}
         >
           {/* Left: LifeDrone Official Logo */}
@@ -73,11 +80,12 @@ export default function Header() {
               src="/images/lifedrone-logo.png"
               alt="LifeDrone - One Step to Get Faster Blood Delivery"
               style={{
-                height: '46px',
+                height: isCompact ? '40px' : '46px',
                 width: 'auto',
                 maxWidth: '240px',
                 objectFit: 'contain',
-                display: 'block'
+                display: 'block',
+                transition: 'height 0.28s cubic-bezier(0.16, 1, 0.3, 1)'
               }}
             />
           </Link>

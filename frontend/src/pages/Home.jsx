@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { publicAPI } from '../services/api';
 import TrackingMap from '../components/tracking/TrackingMap';
+import { useScrollEffects, useScrollReveal } from '../hooks/useScrollEffects';
 import {
   Search,
   Route,
@@ -16,10 +17,13 @@ import {
   Plane,
   Clock,
   ChevronRight,
+  ChevronDown,
   Layers
 } from 'lucide-react';
 
 export default function Home() {
+  useScrollReveal();
+  const { scrollY } = useScrollEffects();
   const [metrics, setMetrics] = useState({
     hospitalsCount: 5,
     bloodBanksCount: 4,
@@ -340,6 +344,29 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* Scroll Down Responsive Indicator (fades on scroll down, returns on scroll up) */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '4px',
+              marginTop: '40px',
+              opacity: scrollY > 60 ? 0 : 0.85,
+              transform: scrollY > 60 ? 'translateY(12px)' : 'translateY(0)',
+              transition: 'opacity 0.35s ease, transform 0.35s ease',
+              pointerEvents: 'none'
+            }}
+          >
+            <span style={{ fontSize: '11px', fontWeight: '700', color: '#124676', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+              Scroll To Explore
+            </span>
+            <div className="animate-bounce">
+              <ChevronDown size={18} color="#D2252F" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -348,7 +375,7 @@ export default function Home() {
           ==================================================== */}
       <section style={{ padding: '90px 0', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
         <div className="container-custom">
-          <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto 60px auto' }}>
+          <div className="scroll-reveal" style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto 60px auto' }}>
             <span style={{ fontSize: '13px', fontWeight: '700', color: '#D2252F', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               The Critical Window
             </span>
@@ -375,7 +402,7 @@ export default function Home() {
             }}
           >
             {/* Card 1 */}
-            <div className="card-light card-hover" style={{ padding: '32px' }}>
+            <div className="card-sharp-hover scroll-reveal scroll-delay-1" style={{ padding: '32px' }}>
               <div
                 style={{
                   width: '52px',
@@ -401,7 +428,7 @@ export default function Home() {
             </div>
 
             {/* Card 2 */}
-            <div className="card-light card-hover" style={{ padding: '32px' }}>
+            <div className="card-sharp-hover scroll-reveal scroll-delay-2" style={{ padding: '32px' }}>
               <div
                 style={{
                   width: '52px',
@@ -427,7 +454,7 @@ export default function Home() {
             </div>
 
             {/* Card 3 */}
-            <div className="card-light card-hover" style={{ padding: '32px' }}>
+            <div className="card-sharp-hover scroll-reveal scroll-delay-3" style={{ padding: '32px' }}>
               <div
                 style={{
                   width: '52px',
@@ -460,7 +487,7 @@ export default function Home() {
           ==================================================== */}
       <section style={{ padding: '90px 0', backgroundColor: '#F5F8FC' }}>
         <div className="container-custom">
-          <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 60px auto' }}>
+          <div className="scroll-reveal" style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 60px auto' }}>
             <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               End-to-End Workflow
             </span>
@@ -523,7 +550,7 @@ export default function Home() {
               return (
                 <div
                   key={item.step}
-                  className="card-sharp-hover"
+                  className={`card-sharp-hover scroll-reveal scroll-delay-${(index % 3) + 1}`}
                   style={{
                     padding: '24px 28px',
                     display: 'grid',
@@ -563,6 +590,7 @@ export default function Home() {
           </div>
 
           <div
+            className="scroll-reveal"
             style={{
               marginTop: '36px',
               textAlign: 'center',
@@ -584,7 +612,7 @@ export default function Home() {
           ==================================================== */}
       <section style={{ padding: '90px 0', backgroundColor: '#FFFFFF' }}>
         <div className="container-custom">
-          <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 60px auto' }}>
+          <div className="scroll-reveal" style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 60px auto' }}>
             <span style={{ fontSize: '13px', fontWeight: '700', color: '#D2252F', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               System Capabilities
             </span>
@@ -634,10 +662,14 @@ export default function Home() {
                 title: '6. Delivery Status Tracking',
                 desc: 'Visual OpenStreetMap console displaying flight paths, distance remaining, drone coordinates, battery, and arrival ETA.'
               }
-            ].map((sol) => {
+            ].map((sol, index) => {
               const Icon = sol.icon;
               return (
-                <div key={sol.title} className="card-sharp-hover" style={{ padding: '30px' }}>
+                <div 
+                  key={sol.title} 
+                  className={`card-sharp-hover scroll-reveal scroll-delay-${(index % 3) + 1}`} 
+                  style={{ padding: '30px' }}
+                >
                   <div
                     style={{
                       width: '48px',
@@ -679,7 +711,7 @@ export default function Home() {
               alignItems: 'center'
             }}
           >
-            <div>
+            <div className="scroll-reveal">
               <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 Operations Center Preview
               </span>
@@ -712,7 +744,7 @@ export default function Home() {
             </div>
 
             {/* Interactive Operations Console Map */}
-            <div>
+            <div className="scroll-reveal scroll-delay-2">
               <TrackingMap delivery={demoDelivery} height="460px" zoom={14} />
             </div>
           </div>
@@ -724,7 +756,7 @@ export default function Home() {
           ==================================================== */}
       <section style={{ padding: '80px 0', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
         <div className="container-custom">
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div className="scroll-reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span style={{ fontSize: '12px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               Network Footprint
             </span>
@@ -746,7 +778,7 @@ export default function Home() {
               margin: '0 auto'
             }}
           >
-            <div className="card-sharp-hover" style={{ padding: '32px' }}>
+            <div className="card-sharp-hover scroll-reveal scroll-delay-1" style={{ padding: '32px' }}>
               <div style={{ fontSize: '46px', fontWeight: '800', color: '#124676', lineHeight: '1' }}>
                 {metrics.hospitalsCount}
               </div>
@@ -758,7 +790,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="card-sharp-hover" style={{ padding: '32px' }}>
+            <div className="card-sharp-hover scroll-reveal scroll-delay-2" style={{ padding: '32px' }}>
               <div style={{ fontSize: '46px', fontWeight: '800', color: '#D2252F', lineHeight: '1' }}>
                 {metrics.bloodBanksCount}
               </div>
@@ -784,7 +816,7 @@ export default function Home() {
           textAlign: 'center'
         }}
       >
-        <div className="container-custom" style={{ maxWidth: '780px' }}>
+        <div className="container-custom scroll-reveal" style={{ maxWidth: '780px' }}>
           <h2 style={{ fontSize: 'clamp(32px, 4.5vw, 46px)', fontWeight: '800', color: '#FFFFFF', marginBottom: '18px', letterSpacing: '-0.8px' }}>
             Help Build a Faster Medical Delivery Network
           </h2>

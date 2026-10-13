@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useScrollReveal } from '../hooks/useScrollEffects';
 import { 
   AlertCircle, 
   ExternalLink, 
@@ -17,6 +18,7 @@ import {
 } from 'lucide-react';
 
 export default function HowItWorks() {
+  useScrollReveal();
   const references = [
     {
       title: 'Design and Optimization of Medical Drone Delivery Networks for Emergency Logistics',
@@ -86,6 +88,7 @@ export default function HowItWorks() {
           
           {/* Exact Problem Statement Box */}
           <div
+            className="scroll-reveal"
             style={{
               backgroundColor: '#FEF2F2',
               border: '2px solid #FCA5A5',
@@ -156,8 +159,12 @@ export default function HowItWorks() {
                 title: 'Accountable and Secure Handovers',
                 desc: 'Critical medical cargo requires unbroken chain-of-custody verification to prevent package mix-ups and unverified deliveries.'
               }
-            ].map((item) => (
-              <div key={item.title} className="card-light" style={{ padding: '24px' }}>
+            ].map((item, idx) => (
+              <div 
+                key={item.title} 
+                className={`card-sharp-hover scroll-reveal scroll-delay-${(idx % 3) + 1}`} 
+                style={{ padding: '24px' }}
+              >
                 <h3 style={{ fontSize: '17px', fontWeight: '700', color: '#152238', marginBottom: '8px' }}>
                   {item.title}
                 </h3>
@@ -170,6 +177,7 @@ export default function HowItWorks() {
 
           {/* Academic References */}
           <div
+            className="scroll-reveal"
             style={{
               backgroundColor: '#F8FAFC',
               border: '1px solid #E2E8F0',
@@ -351,10 +359,14 @@ export default function HowItWorks() {
               marginBottom: '40px'
             }}
           >
-            {techStack.map((tech) => {
+            {techStack.map((tech, idx) => {
               const Icon = tech.icon;
               return (
-                <div key={tech.name} className="card-light" style={{ padding: '24px' }}>
+                <div 
+                  key={tech.name} 
+                  className={`card-sharp-hover scroll-reveal scroll-delay-${(idx % 3) + 1}`} 
+                  style={{ padding: '24px' }}
+                >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                     <div
                       style={{
