@@ -252,31 +252,6 @@ export default function TrackingMap({
     <div style={{ position: 'relative', width: '100%', height, borderRadius: '16px', overflow: 'hidden', border: '1px solid #E2E8F0', boxShadow: 'var(--shadow-md)' }}>
       <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
 
-      {/* Top Left: Demonstration Banner */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '12px',
-          left: '12px',
-          zIndex: 400,
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(8px)',
-          padding: '6px 12px',
-          borderRadius: '8px',
-          fontSize: '11px',
-          fontWeight: '700',
-          letterSpacing: '0.04em',
-          color: '#0D375E',
-          border: '1px solid #B8D3E9',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px'
-        }}
-      >
-        <span className="pulse-indicator pulse-blue" />
-        <span>SIMULATED DRONE TRACKING &bull; DEMO MODE</span>
-      </div>
 
       {/* Top Right: OpenStreetMap Layer Controls & External OSM Link */}
       <div
@@ -387,40 +362,7 @@ export default function TrackingMap({
         </span>
       </div>
 
-      {/* Telemetry quick strip (Bottom Right) */}
-      {delivery && (
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '12px',
-            right: '12px',
-            zIndex: 400,
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(8px)',
-            padding: '10px 16px',
-            borderRadius: '10px',
-            fontSize: '12px',
-            color: '#152238',
-            border: '1px solid #E2E8F0',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-            display: 'flex',
-            gap: '16px'
-          }}
-        >
-          <div>
-            <div style={{ color: '#64748B', fontSize: '10px', fontWeight: '600', textTransform: 'uppercase' }}>ETA</div>
-            <div style={{ fontWeight: '700', fontSize: '14px', color: '#124676' }}>{delivery.eta_minutes ?? 0} min</div>
-          </div>
-          <div>
-            <div style={{ color: '#64748B', fontSize: '10px', fontWeight: '600', textTransform: 'uppercase' }}>Speed</div>
-            <div style={{ fontWeight: '700', fontSize: '14px' }}>{delivery.speed_kmh || 65} km/h</div>
-          </div>
-          <div>
-            <div style={{ color: '#64748B', fontSize: '10px', fontWeight: '600', textTransform: 'uppercase' }}>Battery</div>
-            <div style={{ fontWeight: '700', fontSize: '14px', color: '#16A34A' }}>{delivery.battery_pct || 94}%</div>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
