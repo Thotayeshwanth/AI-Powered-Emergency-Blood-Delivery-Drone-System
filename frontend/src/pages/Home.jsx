@@ -18,7 +18,8 @@ import {
   Clock,
   ChevronRight,
   ChevronDown,
-  Layers
+  Layers,
+  Activity
 } from 'lucide-react';
 
 export default function Home() {
@@ -196,23 +197,159 @@ export default function Home() {
           ==================================================== */}
       <section style={{ padding: '90px 0', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
         <div className="container-custom">
-          <div className="scroll-reveal" style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto 60px auto' }}>
-            <span style={{ fontSize: '13px', fontWeight: '700', color: '#D2252F', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              The Critical Window
-            </span>
-            <h2 style={{ fontSize: '38px', fontWeight: '800', color: '#152238', margin: '12px 0 20px 0', letterSpacing: '-0.8px' }}>
-              When Every Minute Matters
-            </h2>
-            <p style={{ fontSize: '16px', color: '#64748B', lineHeight: '1.7', marginBottom: '16px' }}>
-              Critical medical deliveries can be delayed by traffic, distance, difficult terrain,
-              and coordination gaps. Hospitals need a dependable way to identify blood availability
-              and coordinate secure, time-sensitive transportation.
-            </p>
-            <p style={{ fontSize: '16px', color: '#152238', lineHeight: '1.7', fontWeight: '500' }}>
-              LifeDrone provides a digital workflow that connects hospitals with blood banks,
-              manages requests, coordinates dispatch, calculates suitable routes, and keeps authorized
-              recipients informed about delivery progress.
-            </p>
+          {/* Visual 2-Column Split: Simplified Problem/Solution + High-Res Medical Drone Image */}
+          <div
+            className="scroll-reveal"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '48px',
+              alignItems: 'center',
+              marginBottom: '64px'
+            }}
+          >
+            {/* Left: Simplified & Impactful Text */}
+            <div>
+              <span
+                style={{
+                  fontSize: '13px',
+                  fontWeight: '700',
+                  color: '#D2252F',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  display: 'inline-block',
+                  backgroundColor: '#FEF2F2',
+                  padding: '4px 12px',
+                  borderRadius: '9999px',
+                  marginBottom: '12px'
+                }}
+              >
+                The Critical Window
+              </span>
+
+              <h2
+                style={{
+                  fontSize: 'clamp(28px, 3.2vw, 42px)',
+                  fontWeight: '800',
+                  color: '#152238',
+                  lineHeight: '1.2',
+                  letterSpacing: '-0.8px',
+                  marginBottom: '16px'
+                }}
+              >
+                When Every Minute Matters
+              </h2>
+
+              <p style={{ fontSize: '17px', color: '#64748B', lineHeight: '1.6', marginBottom: '14px' }}>
+                Road traffic and long distances cause dangerous delays when patients need emergency blood.
+              </p>
+
+              <p style={{ fontSize: '17px', color: '#152238', lineHeight: '1.6', fontWeight: '600', marginBottom: '24px' }}>
+                LifeDrone flies blood directly from blood banks to hospitals in minutes—bypassing city traffic with smart, autonomous drones.
+              </p>
+
+              {/* Quick Highlight Pills */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '6px 12px',
+                    backgroundColor: '#F1F5F9',
+                    borderRadius: '8px',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    color: '#124676'
+                  }}
+                >
+                  <Zap size={14} color="#D2252F" />
+                  <span>Minutes, Not Hours</span>
+                </div>
+
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '6px 12px',
+                    backgroundColor: '#F1F5F9',
+                    borderRadius: '8px',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    color: '#124676'
+                  }}
+                >
+                  <Activity size={14} color="#124676" />
+                  <span>2°C–6°C Cold Chain Protected</span>
+                </div>
+
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '6px 12px',
+                    backgroundColor: '#F1F5F9',
+                    borderRadius: '8px',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    color: '#124676'
+                  }}
+                >
+                  <ShieldCheck size={14} color="#16A34A" />
+                  <span>Secure PIN Handover</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Realistic Medical Drone Flight Image */}
+            <div style={{ position: 'relative' }}>
+              <div
+                style={{
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  boxShadow: '0 20px 40px -10px rgba(18, 70, 118, 0.16)',
+                  border: '1px solid #E2E8F0',
+                  position: 'relative'
+                }}
+              >
+                <img
+                  src="/images/critical-window-drone.jpg"
+                  alt="Autonomous medical delivery drone transporting emergency blood over city to hospital rooftop vertipad"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    aspectRatio: '16 / 10',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+
+                {/* Floating Image Status Badge */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '14px',
+                    left: '14px',
+                    background: 'rgba(255, 255, 255, 0.94)',
+                    backdropFilter: 'blur(8px)',
+                    padding: '6px 14px',
+                    borderRadius: '9999px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    border: '1px solid rgba(226, 232, 240, 0.9)',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)'
+                  }}
+                >
+                  <span className="pulse-indicator pulse-green" style={{ width: '7px', height: '7px' }} />
+                  <span style={{ fontSize: '12px', fontWeight: '700', color: '#124676' }}>
+                    Zero Road Traffic &bull; Direct Hospital Helipad Transit
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div
