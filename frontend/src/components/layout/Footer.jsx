@@ -1,33 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Mail, 
   Phone, 
   MapPin, 
-  ShieldCheck, 
   Heart, 
-  Clock, 
-  Wind, 
-  Compass, 
-  Activity, 
-  Radio, 
   Droplet
 } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const [currentTime, setCurrentTime] = useState('');
   const [selectedBloodGroup, setSelectedBloodGroup] = useState('O-');
-
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      setCurrentTime(now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false }) + ' IST');
-    };
-    updateClock();
-    const timer = setInterval(updateClock, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   const bloodCompatibilities = {
     'O-': { canGive: 'Everyone (Universal RBC Donor)', canReceive: 'O- only', urgency: 'Highest Emergency Reserve' },
@@ -40,60 +23,17 @@ export default function Footer() {
     'AB-': { canGive: 'AB+, AB-', canReceive: 'AB-, A-, B-, O-', urgency: 'Universal Plasma Donor' }
   };
 
-
   return (
     <footer
       style={{
         backgroundColor: '#F8FAFC',
         borderTop: '1px solid #E2E8F0',
-        padding: '60px 0 28px 0',
+        padding: '54px 0 28px 0',
         marginTop: 'auto',
         position: 'relative',
         overflow: 'hidden'
       }}
     >
-      {/* Top Dynamic Telemetry & Status Ribbon */}
-      <div
-        style={{
-          backgroundColor: '#FFFFFF',
-          borderBottom: '1px solid #E2E8F0',
-          marginTop: '-60px',
-          marginBottom: '50px',
-          padding: '12px 0'
-        }}
-      >
-        <div className="container-custom" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
-          {/* Live Flight Readiness Indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span className="pulse-indicator pulse-green" />
-            <span style={{ fontSize: '13px', fontWeight: '700', color: '#152238', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Radio size={14} color="#16A34A" />
-              <span>Corridor Telemetry: <strong>All Corridors Active</strong></span>
-            </span>
-            <span style={{ color: '#CBD5E1' }}>&bull;</span>
-            <span style={{ fontSize: '12px', color: '#64748B' }}>
-              A* Pathfinding Engine Online
-            </span>
-          </div>
-
-          {/* Dynamic Weather & Time Widget */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '18px', fontSize: '12px', color: '#475569' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Wind size={14} color="#124676" />
-              <span>Prakasam Wind: <strong>11 km/h ESE</strong></span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Compass size={14} color="#D2252F" />
-              <span>Flight Condition: <strong style={{ color: '#16A34A' }}>VFR Clear</strong></span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#F1F5F9', padding: '3px 8px', borderRadius: '6px', fontWeight: '700', color: '#1E293B' }}>
-              <Clock size={13} color="#64748B" />
-              <span>{currentTime || '14:30:00 IST'}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container-custom">
         {/* Main 4-Column Grid */}
         <div
