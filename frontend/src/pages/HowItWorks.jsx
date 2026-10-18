@@ -5,16 +5,7 @@ import {
   AlertCircle, 
   ExternalLink, 
   CheckCircle2, 
-  ArrowDown, 
-  Cpu, 
-  Database, 
-  Server, 
-  Mail, 
-  Map, 
-  Lock, 
-  Compass,
-  FileText,
-  Activity
+  ArrowDown 
 } from 'lucide-react';
 
 export default function HowItWorks() {
@@ -50,15 +41,6 @@ export default function HowItWorks() {
     { title: 'Delivery Completed', desc: 'Passkey atomically consumed, custody verified, completion email generated.' }
   ];
 
-  const techStack = [
-    { name: 'React & Vite', icon: Activity, desc: 'Responsive single-page application with modern light-theme component system.' },
-    { name: 'Node.js & Express.js', icon: Server, desc: 'RESTful API architecture with transactional processing and rate-limited endpoints.' },
-    { name: 'MySQL Relational Database', icon: Database, desc: 'ACID-compliant persistent storage with foreign keys, indexes, and audit trails.' },
-    { name: 'SMTP Email via Nodemailer', icon: Mail, desc: 'Automated HTML notifications for order status and 5-minute flight progress.' },
-    { name: 'A* Pathfinding Algorithm', icon: Compass, desc: 'Deterministic aerial graph search with Haversine distance admissible heuristic.' },
-    { name: 'JWT & Bcrypt Security', icon: Lock, desc: 'Role-based authorization and cryptographic passkey salt-and-hash verification.' },
-    { name: 'Leaflet & OpenStreetMap', icon: Map, desc: 'Interactive geographic visualization of vertipads, routes, and drone positions.' }
-  ];
 
   return (
     <div style={{ backgroundColor: '#FFFFFF', paddingBottom: '90px' }}>
@@ -374,75 +356,7 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        {/* ====================================================
-            SECTION C: TECHNOLOGY OVERVIEW
-            ==================================================== */}
-        <section>
-          <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            Implementation Stack
-          </span>
-          <h2 style={{ fontSize: '34px', fontWeight: '800', color: '#152238', margin: '10px 0 20px 0' }}>
-            Technology Overview
-          </h2>
-          <p style={{ fontSize: '16px', color: '#64748B', lineHeight: '1.6', marginBottom: '32px' }}>
-            Engineered with a clean separation of concerns, transactional safety, and non-blocking asynchronous event processing:
-          </p>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '20px',
-              marginBottom: '40px'
-            }}
-          >
-            {techStack.map((tech, idx) => {
-              const Icon = tech.icon;
-              return (
-                <div 
-                  key={tech.name} 
-                  className={`card-sharp-hover scroll-reveal scroll-delay-${(idx % 3) + 1}`} 
-                  style={{ padding: '24px' }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                    <div
-                      style={{
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: '10px',
-                        backgroundColor: '#EEF5FA',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#124676'
-                      }}
-                    >
-                      <Icon size={20} />
-                    </div>
-                    <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#152238' }}>{tech.name}</h3>
-                  </div>
-                  <p style={{ fontSize: '13px', color: '#64748B', lineHeight: '1.5' }}>
-                    {tech.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div
-            style={{
-              backgroundColor: '#EFF6FF',
-              border: '1px solid #B8D3E9',
-              borderRadius: '12px',
-              padding: '20px',
-              fontSize: '14px',
-              color: '#0D375E',
-              lineHeight: '1.6'
-            }}
-          >
-            <strong>Engineering Integrity Note:</strong> For this MVP, deterministic A* route planning and rule-based workflow automation are utilized. The code structure is designed with clean service abstraction layers so that predictive AI modules (e.g., blood stock shortage forecasting and meteorological flight disruption modeling) can be plugged in without refactoring core APIs.
-          </div>
-        </section>
 
       </div>
     </div>
