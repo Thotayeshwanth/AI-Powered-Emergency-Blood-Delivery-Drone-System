@@ -72,9 +72,47 @@ export default function HowItWorks() {
           <h1 style={{ fontSize: '42px', fontWeight: '800', color: '#152238', margin: '10px 0 16px 0', letterSpacing: '-1px' }}>
             How LifeDrone Works
           </h1>
-          <p style={{ fontSize: '17px', color: '#64748B', maxWidth: '720px' }}>
-            AI-Powered Emergency Blood Delivery Drone System
-          </p>
+
+          {/* Highlighted Project Title Badge */}
+          <div
+            style={{
+              display: 'inline-flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              gap: '12px',
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #CBD5E1',
+              borderRadius: '12px',
+              padding: '10px 18px',
+              boxShadow: '0 4px 16px rgba(18, 70, 118, 0.08)',
+              marginTop: '4px'
+            }}
+          >
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '800',
+                color: '#FFFFFF',
+                backgroundColor: '#124676',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em'
+              }}
+            >
+              Project Title
+            </span>
+            <span
+              style={{
+                fontSize: '18px',
+                fontWeight: '700',
+                color: '#152238',
+                letterSpacing: '-0.3px'
+              }}
+            >
+              AI-Powered Emergency Blood Delivery Drone System
+            </span>
+          </div>
         </div>
       </div>
 
