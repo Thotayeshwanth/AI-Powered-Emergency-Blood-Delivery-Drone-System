@@ -5,7 +5,8 @@ import {
   AlertCircle, 
   ExternalLink, 
   CheckCircle2, 
-  ArrowDown 
+  ArrowDown,
+  FileText
 } from 'lucide-react';
 
 export default function HowItWorks() {
