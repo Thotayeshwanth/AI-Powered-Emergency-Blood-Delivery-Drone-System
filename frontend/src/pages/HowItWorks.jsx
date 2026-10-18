@@ -73,8 +73,7 @@ export default function HowItWorks() {
             How LifeDrone Works
           </h1>
           <p style={{ fontSize: '17px', color: '#64748B', maxWidth: '720px' }}>
-            A rigorous engineering breakdown of our autonomous emergency medical delivery workflow,
-            scientific foundations, and technical architecture.
+            AI-Powered Emergency Blood Delivery Drone System
           </p>
         </div>
       </div>
