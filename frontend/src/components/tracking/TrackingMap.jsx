@@ -8,19 +8,19 @@ const TILE_PROVIDERS = {
     id: 'standard',
     name: 'OSM Standard',
     url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
+    attribution: ''
   },
   light: {
     id: 'light',
     name: 'OSM Clean Light',
     url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
+    attribution: ''
   },
   topo: {
     id: 'topo',
     name: 'OpenTopoMap',
     url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-    attribution: 'Map: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Style: <a href="https://opentopomap.org">OpenTopoMap</a>'
+    attribution: ''
   }
 };
 
@@ -109,7 +109,8 @@ export default function TrackingMap({
         zoom: zoom,
         zoomControl: interactive,
         dragging: interactive,
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        attributionControl: false
       });
 
       // Default OpenStreetMap Standard Layer
@@ -246,14 +247,23 @@ export default function TrackingMap({
     return () => {
       // Keep map reference intact across minor props changes
     };
-  }, [delivery?.id, delivery?.current_lat, delivery?.current_lng, waypoints.length, osmAddress]);
+  }, [
+    delivery?.id, 
+    delivery?.current_lat, 
+    delivery?.current_lng, 
+    delivery?.distance_km, 
+    delivery?.eta_minutes, 
+    delivery?.origin_name, 
+    delivery?.destination_name, 
+    JSON.stringify(waypoints), 
+    osmAddress
+  ]);
 
   return (
     <div style={{ position: 'relative', width: '100%', height, borderRadius: '16px', overflow: 'hidden', border: '1px solid #E2E8F0', boxShadow: 'var(--shadow-md)' }}>
       <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
 
-
-      {/* Top Right: OpenStreetMap Layer Controls & External OSM Link */}
+      {/* Top Right: OpenStreetMap External OSM Link */}
       <div
         style={{
           position: 'absolute',
@@ -266,45 +276,6 @@ export default function TrackingMap({
           gap: '6px'
         }}
       >
-        {/* Layer Switcher Pill */}
-        <div
-          style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.96)',
-            backdropFilter: 'blur(8px)',
-            padding: '4px',
-            borderRadius: '10px',
-            border: '1px solid #CBD5E1',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '3px'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', padding: '0 6px', color: '#124676', gap: '4px' }}>
-            <Layers size={13} />
-            <span style={{ fontSize: '10px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Tiles</span>
-          </div>
-          {Object.values(TILE_PROVIDERS).map((p) => (
-            <button
-              key={p.id}
-              onClick={() => setActiveLayer(p.id)}
-              style={{
-                border: 'none',
-                background: activeLayer === p.id ? '#124676' : 'transparent',
-                color: activeLayer === p.id ? '#FFFFFF' : '#475569',
-                padding: '4px 8px',
-                borderRadius: '6px',
-                fontSize: '11px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-              title={`Switch map layer to ${p.name}`}
-            >
-              {p.name}
-            </button>
-          ))}
-        </div>
 
         {/* OpenStreetMap Direct Coordinates View Link */}
         <a

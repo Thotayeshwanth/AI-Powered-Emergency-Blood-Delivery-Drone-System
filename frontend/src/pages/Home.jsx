@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { publicAPI } from '../services/api';
 import TrackingMap from '../components/tracking/TrackingMap';
@@ -19,8 +19,312 @@ import {
   ChevronRight,
   ChevronDown,
   Layers,
-  Activity
+  Activity,
+  Send,
+  RotateCcw,
+  MapPin,
+  Compass,
+  AlertCircle
 } from 'lucide-react';
+
+// ====================================================
+// PRAKASAM DISTRICT INFRASTRUCTURE DATA & A* ROUTING GRAPH
+// ====================================================
+export const PRAKASAM_BLOOD_BANKS = [
+  {
+    id: 1,
+    name: 'Indian Red Cross Society Blood Centre',
+    location: 'Lawyerpet, Ongole',
+    town: 'Ongole',
+    code: 'VERT-BB-RC',
+    lat: 15.5030,
+    lng: 80.0450,
+    license: 'AP-PRAKASAM-BB-041',
+    status: 'ACTIVE_24X7'
+  },
+  {
+    id: 2,
+    name: 'RIMS Model Blood Bank',
+    location: 'Collectorate Rd, RIMS Campus, Ongole',
+    town: 'Ongole',
+    code: 'VERT-BB-RIMS',
+    lat: 15.5060,
+    lng: 80.0510,
+    license: 'AP-PRAKASAM-BB-019',
+    status: 'ACTIVE_24X7'
+  },
+  {
+    id: 3,
+    name: 'Rotary Club Central Blood Bank',
+    location: 'Gandhi Road, Chirala',
+    town: 'Chirala',
+    code: 'VERT-BB-CHIRALA',
+    lat: 15.8200,
+    lng: 80.3500,
+    license: 'AP-PRAKASAM-BB-088',
+    status: 'ACTIVE_24X7'
+  },
+  {
+    id: 4,
+    name: 'Markapur Regional Blood Storage & Centre',
+    location: 'NGO Colony, Markapur',
+    town: 'Markapur',
+    code: 'VERT-BB-MARKAPUR',
+    lat: 15.7330,
+    lng: 79.2680,
+    license: 'AP-PRAKASAM-BB-102',
+    status: 'ACTIVE_24X7'
+  }
+];
+
+export const PRAKASAM_HOSPITALS = [
+  {
+    id: 1,
+    name: 'RIMS Government General Hospital',
+    location: 'Collectorate Road, Ongole',
+    town: 'Ongole',
+    code: 'VERT-HOSP-RIMS',
+    lat: 15.5057,
+    lng: 80.0499,
+    emergencyDept: 'Apex Trauma & Emergency Unit',
+    vertipadStatus: 'OPERATIONAL'
+  },
+  {
+    id: 2,
+    name: 'KIMS Hospital & Research Centre',
+    location: 'NH-16 Bypass Road, Ongole',
+    town: 'Ongole',
+    code: 'VERT-HOSP-KIMS',
+    lat: 15.5186,
+    lng: 80.0355,
+    emergencyDept: 'ICU & Emergency Wing',
+    vertipadStatus: 'OPERATIONAL'
+  },
+  {
+    id: 3,
+    name: 'Area Hospital Chirala',
+    location: 'Near Clock Tower, Chirala',
+    town: 'Chirala',
+    code: 'VERT-HOSP-CHIRALA',
+    lat: 15.8246,
+    lng: 80.3522,
+    emergencyDept: 'Casualty & Trauma Care',
+    vertipadStatus: 'OPERATIONAL'
+  },
+  {
+    id: 4,
+    name: 'Area Hospital Markapur',
+    location: 'Station Road, Markapur',
+    town: 'Markapur',
+    code: 'VERT-HOSP-MARKAPUR',
+    lat: 15.7350,
+    lng: 79.2700,
+    emergencyDept: 'Emergency Resuscitation Unit',
+    vertipadStatus: 'OPERATIONAL'
+  },
+  {
+    id: 5,
+    name: 'Area Hospital Kandukur',
+    location: 'Pamur Road, Kandukur',
+    town: 'Kandukur',
+    code: 'VERT-HOSP-KANDUKUR',
+    lat: 15.2167,
+    lng: 79.9042,
+    emergencyDept: 'Emergency & Maternity Ward',
+    vertipadStatus: 'OPERATIONAL'
+  }
+];
+
+// Route Nodes in Prakasam Flight Corridors
+const ROUTE_NODES_MAP = {
+  'VERT-BB-RC': { code: 'VERT-BB-RC', name: 'Red Cross Ongole Vertiport', lat: 15.5030, lng: 80.0450 },
+  'VERT-HOSP-RIMS': { code: 'VERT-HOSP-RIMS', name: 'RIMS Hospital Helipad/Vertipad', lat: 15.5057, lng: 80.0499 },
+  'VERT-HOSP-KIMS': { code: 'VERT-HOSP-KIMS', name: 'KIMS Hospital Vertiport', lat: 15.5186, lng: 80.0355 },
+  'VERT-BB-RIMS': { code: 'VERT-BB-RIMS', name: 'RIMS Blood Bank Pad', lat: 15.5060, lng: 80.0510 },
+  'WP-MED-CORR-1': { code: 'WP-MED-CORR-1', name: 'Central Medical Skyway Node Alpha', lat: 15.5100, lng: 80.0420 },
+  'WP-ONG-NORTH': { code: 'WP-ONG-NORTH', name: 'Ongole North Aerial Waypoint', lat: 15.5350, lng: 80.0600 },
+  'WP-CHIRALA-ENTRY': { code: 'WP-CHIRALA-ENTRY', name: 'Chirala Approach Waypoint', lat: 15.8050, lng: 80.3300 },
+  'VERT-HOSP-CHIRALA': { code: 'VERT-HOSP-CHIRALA', name: 'Area Hospital Chirala Drone Deck', lat: 15.8246, lng: 80.3522 },
+  'VERT-BB-CHIRALA': { code: 'VERT-BB-CHIRALA', name: 'Chirala Rotary Blood Bank Pad', lat: 15.8200, lng: 80.3500 },
+  'WP-MARKAPUR-ENTRY': { code: 'WP-MARKAPUR-ENTRY', name: 'Markapur Eastern Skyway', lat: 15.7200, lng: 79.3100 },
+  'VERT-HOSP-MARKAPUR': { code: 'VERT-HOSP-MARKAPUR', name: 'Area Hospital Markapur Vertiport', lat: 15.7350, lng: 79.2700 },
+  'VERT-BB-MARKAPUR': { code: 'VERT-BB-MARKAPUR', name: 'Markapur Regional Blood Bank Pad', lat: 15.7330, lng: 79.2680 },
+  'VERT-HOSP-KANDUKUR': { code: 'VERT-HOSP-KANDUKUR', name: 'Area Hospital Kandukur Vertipad', lat: 15.2167, lng: 79.9042 }
+};
+
+// Route Edges / Airspace Corridors with distances in km
+const ROUTE_EDGES_LIST = [
+  { from: 'VERT-BB-RC', to: 'WP-MED-CORR-1', distance: 0.85, corridor: 'Ongole Inner Medical Link 1' },
+  { from: 'WP-MED-CORR-1', to: 'VERT-BB-RC', distance: 0.85, corridor: 'Ongole Inner Medical Link 1' },
+  { from: 'WP-MED-CORR-1', to: 'VERT-HOSP-RIMS', distance: 1.05, corridor: 'RIMS Emergency Aerial Inbound' },
+  { from: 'VERT-HOSP-RIMS', to: 'WP-MED-CORR-1', distance: 1.05, corridor: 'RIMS Emergency Aerial Outbound' },
+  { from: 'VERT-BB-RC', to: 'VERT-HOSP-RIMS', distance: 1.25, corridor: 'Ongole Medical Trunk Link' },
+  { from: 'VERT-HOSP-RIMS', to: 'VERT-BB-RC', distance: 1.25, corridor: 'Ongole Medical Trunk Link' },
+  { from: 'WP-MED-CORR-1', to: 'VERT-HOSP-KIMS', distance: 1.95, corridor: 'KIMS Inbound Medical Corridor' },
+  { from: 'VERT-HOSP-KIMS', to: 'WP-MED-CORR-1', distance: 1.95, corridor: 'KIMS Outbound Medical Corridor' },
+  { from: 'VERT-BB-RC', to: 'VERT-HOSP-KIMS', distance: 2.30, corridor: 'Red Cross to KIMS Direct Corridor' },
+  { from: 'VERT-HOSP-KIMS', to: 'VERT-BB-RC', distance: 2.30, corridor: 'Red Cross to KIMS Direct Corridor' },
+  { from: 'VERT-BB-RIMS', to: 'VERT-HOSP-RIMS', distance: 0.20, corridor: 'RIMS Campus Internal Drone Shuttle' },
+  { from: 'VERT-HOSP-RIMS', to: 'VERT-BB-RIMS', distance: 0.20, corridor: 'RIMS Campus Internal Drone Shuttle' },
+  { from: 'VERT-BB-RIMS', to: 'WP-MED-CORR-1', distance: 1.10, corridor: 'RIMS Blood Bank Skyway Link' },
+  { from: 'WP-MED-CORR-1', to: 'VERT-BB-RIMS', distance: 1.10, corridor: 'RIMS Blood Bank Skyway Link' },
+  { from: 'VERT-HOSP-RIMS', to: 'WP-ONG-NORTH', distance: 3.45, corridor: 'Ongole Coastal-East Outbound Corridor' },
+  { from: 'WP-ONG-NORTH', to: 'VERT-HOSP-RIMS', distance: 3.45, corridor: 'Ongole Coastal-East Inbound Corridor' },
+  { from: 'WP-ONG-NORTH', to: 'WP-CHIRALA-ENTRY', distance: 42.10, corridor: 'Ongole-Chirala Coastal Medical Skyway' },
+  { from: 'WP-CHIRALA-ENTRY', to: 'WP-ONG-NORTH', distance: 42.10, corridor: 'Ongole-Chirala Coastal Medical Skyway' },
+  { from: 'WP-CHIRALA-ENTRY', to: 'VERT-HOSP-CHIRALA', distance: 3.10, corridor: 'Chirala Vertiport Final Approach' },
+  { from: 'VERT-HOSP-CHIRALA', to: 'WP-CHIRALA-ENTRY', distance: 3.10, corridor: 'Chirala Vertiport Final Approach' },
+  { from: 'VERT-BB-CHIRALA', to: 'VERT-HOSP-CHIRALA', distance: 0.70, corridor: 'Chirala Blood Bank to Area Hospital Direct' },
+  { from: 'VERT-HOSP-CHIRALA', to: 'VERT-BB-CHIRALA', distance: 0.70, corridor: 'Chirala Area Hospital to Blood Bank Direct' },
+  { from: 'WP-CHIRALA-ENTRY', to: 'VERT-BB-CHIRALA', distance: 2.80, corridor: 'Chirala Rotary Blood Bank Approach' },
+  { from: 'VERT-BB-CHIRALA', to: 'WP-CHIRALA-ENTRY', distance: 2.80, corridor: 'Chirala Rotary Blood Bank Approach' },
+  { from: 'WP-MED-CORR-1', to: 'WP-MARKAPUR-ENTRY', distance: 88.50, corridor: 'Nallamala Medical Aerial Trunk Line' },
+  { from: 'WP-MARKAPUR-ENTRY', to: 'WP-MED-CORR-1', distance: 88.50, corridor: 'Nallamala Medical Aerial Trunk Line' },
+  { from: 'WP-MARKAPUR-ENTRY', to: 'VERT-HOSP-MARKAPUR', distance: 4.50, corridor: 'Markapur Area Hospital Final Approach' },
+  { from: 'VERT-HOSP-MARKAPUR', to: 'WP-MARKAPUR-ENTRY', distance: 4.50, corridor: 'Markapur Area Hospital Final Approach' },
+  { from: 'VERT-BB-MARKAPUR', to: 'VERT-HOSP-MARKAPUR', distance: 0.40, corridor: 'Markapur Regional Drone Shuttle' },
+  { from: 'VERT-HOSP-MARKAPUR', to: 'VERT-BB-MARKAPUR', distance: 0.40, corridor: 'Markapur Regional Drone Shuttle' },
+  { from: 'WP-MARKAPUR-ENTRY', to: 'VERT-BB-MARKAPUR', distance: 4.20, corridor: 'Markapur Blood Bank Approach' },
+  { from: 'VERT-BB-MARKAPUR', to: 'WP-MARKAPUR-ENTRY', distance: 4.20, corridor: 'Markapur Blood Bank Approach' },
+  { from: 'VERT-BB-RC', to: 'VERT-HOSP-KANDUKUR', distance: 35.80, corridor: 'Ongole-Kandukur Highway Airway' },
+  { from: 'VERT-HOSP-KANDUKUR', to: 'VERT-BB-RC', distance: 35.80, corridor: 'Ongole-Kandukur Highway Airway' },
+  { from: 'WP-ONG-NORTH', to: 'VERT-HOSP-KIMS', distance: 3.20, corridor: 'KIMS North Connector Link' },
+  { from: 'VERT-HOSP-KIMS', to: 'WP-ONG-NORTH', distance: 3.20, corridor: 'KIMS North Connector Link' }
+];
+
+// Haversine distance heuristic
+function haversineDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // km
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+// A* Shortest Pathfinding Algorithm for Prakasam Drone Corridors
+function findAStarShortestPath(startCode, endCode) {
+  const nodes = ROUTE_NODES_MAP;
+  const edges = ROUTE_EDGES_LIST;
+
+  const startNode = nodes[startCode];
+  const endNode = nodes[endCode];
+
+  if (!startNode || !endNode) {
+    return null;
+  }
+
+  if (startCode === endCode) {
+    return {
+      distanceKm: 0.20,
+      flightMinutes: 1.5,
+      flightMinutesFormatted: '1 min 30 secs',
+      corridorName: 'On-Site Vertipad Transfer Corridor',
+      waypoints: [startNode, endNode]
+    };
+  }
+
+  const openSet = new Set([startCode]);
+  const cameFrom = new Map();
+  const corridorUsed = new Map();
+
+  const gScore = {};
+  const fScore = {};
+
+  Object.keys(nodes).forEach((k) => {
+    gScore[k] = Infinity;
+    fScore[k] = Infinity;
+  });
+
+  gScore[startCode] = 0;
+  fScore[startCode] = haversineDistance(startNode.lat, startNode.lng, endNode.lat, endNode.lng);
+
+  while (openSet.size > 0) {
+    let current = null;
+    let lowestF = Infinity;
+    for (const code of openSet) {
+      if (fScore[code] < lowestF) {
+        lowestF = fScore[code];
+        current = code;
+      }
+    }
+
+    if (current === endCode) {
+      const pathCodes = [current];
+      while (cameFrom.has(current)) {
+        current = cameFrom.get(current);
+        pathCodes.unshift(current);
+      }
+      const waypoints = pathCodes.map((c) => nodes[c]);
+      const totalDist = parseFloat(gScore[endCode].toFixed(2));
+      // Standard cruising speed: 65 km/h + 2 min vertical ascent/descent buffer
+      const rawMinutes = (totalDist / 65) * 60 + (totalDist < 1 ? 1 : 2);
+      const flightMinutes = parseFloat(rawMinutes.toFixed(1));
+      const totalSecs = Math.round(flightMinutes * 60);
+      const mins = Math.floor(totalSecs / 60);
+      const secs = totalSecs % 60;
+      const flightMinutesFormatted = `${mins} min${mins !== 1 ? 's' : ''}${secs > 0 ? ` ${secs} sec${secs !== 1 ? 's' : ''}` : ''}`;
+      const lastCorridor = corridorUsed.get(endCode) || 'Prakasam A* Emergency Skyway';
+
+      return {
+        distanceKm: totalDist,
+        flightMinutes,
+        flightMinutesFormatted,
+        corridorName: lastCorridor,
+        waypoints
+      };
+    }
+
+    openSet.delete(current);
+
+    const neighbors = edges.filter((e) => e.from === current);
+    for (const edge of neighbors) {
+      const neighbor = edge.to;
+      const tentativeG = gScore[current] + edge.distance;
+      if (tentativeG < gScore[neighbor]) {
+        cameFrom.set(neighbor, current);
+        corridorUsed.set(neighbor, edge.corridor);
+        gScore[neighbor] = tentativeG;
+        const h = haversineDistance(nodes[neighbor].lat, nodes[neighbor].lng, endNode.lat, endNode.lng);
+        fScore[neighbor] = tentativeG + h;
+        openSet.add(neighbor);
+      }
+    }
+  }
+
+  // Fallback to direct corridor arc if discrete graph doesn't bridge distant cluster
+  const directDist = parseFloat(haversineDistance(startNode.lat, startNode.lng, endNode.lat, endNode.lng).toFixed(2));
+  const rawMinutes = (directDist / 65) * 60 + 2;
+  const flightMinutes = parseFloat(rawMinutes.toFixed(1));
+  const totalSecs = Math.round(flightMinutes * 60);
+  const mins = Math.floor(totalSecs / 60);
+  const secs = totalSecs % 60;
+  const flightMinutesFormatted = `${mins} min${mins !== 1 ? 's' : ''}${secs > 0 ? ` ${secs} sec${secs !== 1 ? 's' : ''}` : ''}`;
+  const midLat = (startNode.lat + endNode.lat) / 2 + 0.005;
+  const midLng = (startNode.lng + endNode.lng) / 2;
+
+  return {
+    distanceKm: directDist,
+    flightMinutes,
+    flightMinutesFormatted,
+    corridorName: `${startNode.name.split(' ')[0]} - ${endNode.name.split(' ')[0]} Direct Skyway`,
+    waypoints: [
+      startNode,
+      {
+        code: 'WP-INTERMEDIATE-ARC',
+        name: 'Inter-District Air Corridor Node',
+        lat: midLat,
+        lng: midLng
+      },
+      endNode
+    ]
+  };
+}
 
 export default function Home() {
   useScrollReveal();
@@ -33,23 +337,110 @@ export default function Home() {
     availableUnits: 94
   });
 
-  // Sample demonstration delivery for interactive operations center visual
-  const demoDelivery = {
-    id: 1,
-    drone_identifier: 'LD-HEXA-01 (Apex Lifter)',
-    delivery_status: 'IN_TRANSIT',
-    eta_minutes: 3,
-    distance_km: 1.25,
-    current_lat: 15.5075,
-    current_lng: 80.0460,
-    speed_kmh: 62.5,
-    battery_pct: 96,
-    waypoints: [
-      { code: 'VERT-BB-RC', name: 'Red Cross Ongole Vertiport', lat: 15.5030, lng: 80.0450 },
-      { code: 'WP-MED-CORR-1', name: 'Central Medical Skyway Node Alpha', lat: 15.5100, lng: 80.0420 },
-      { code: 'VERT-HOSP-RIMS', name: 'RIMS Hospital Helipad/Vertipad', lat: 15.5057, lng: 80.0499 }
-    ]
+  // State for interactive A* pathfinding and dispatch simulation in Operations Center
+  const [nowTime, setNowTime] = useState(new Date());
+  const [selectedBloodBankId, setSelectedBloodBankId] = useState(1);
+  const [selectedHospitalId, setSelectedHospitalId] = useState(1);
+  const [isDispatched, setIsDispatched] = useState(false);
+  const [dispatchLockedTime, setDispatchLockedTime] = useState(null);
+
+  // Live ticking clock (updates every 1 second)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setNowTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const selectedBloodBank = useMemo(() => {
+    return PRAKASAM_BLOOD_BANKS.find((b) => b.id === Number(selectedBloodBankId)) || PRAKASAM_BLOOD_BANKS[0];
+  }, [selectedBloodBankId]);
+
+  const selectedHospital = useMemo(() => {
+    return PRAKASAM_HOSPITALS.find((h) => h.id === Number(selectedHospitalId)) || PRAKASAM_HOSPITALS[0];
+  }, [selectedHospitalId]);
+
+  // Compute shortest path via A* Algorithm
+  const routePlan = useMemo(() => {
+    return findAStarShortestPath(selectedBloodBank.code, selectedHospital.code);
+  }, [selectedBloodBank.code, selectedHospital.code]);
+
+  // Formatted dispatch departure and exact touchdown arrival timestamps
+  const effectiveDepartureDate = isDispatched && dispatchLockedTime ? dispatchLockedTime : nowTime;
+  const departureTimeStr = effectiveDepartureDate.toLocaleTimeString('en-IN', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  }) + ' IST';
+
+  const flightSecs = Math.round((routePlan?.flightMinutes || 3.2) * 60);
+  const estimatedArrivalDate = new Date(effectiveDepartureDate.getTime() + flightSecs * 1000);
+  const exactArrivalTimeStr = estimatedArrivalDate.toLocaleTimeString('en-IN', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  }) + ' IST';
+
+  // Toggle drone dispatch simulation
+  const handleToggleDispatch = () => {
+    if (!isDispatched) {
+      setDispatchLockedTime(new Date());
+      setIsDispatched(true);
+    } else {
+      setIsDispatched(false);
+      setDispatchLockedTime(null);
+    }
   };
+
+  // Reset dispatch if origin or destination changes
+  const handleBloodBankChange = (e) => {
+    setSelectedBloodBankId(Number(e.target.value));
+    setIsDispatched(false);
+    setDispatchLockedTime(null);
+  };
+
+  const handleHospitalChange = (e) => {
+    setSelectedHospitalId(Number(e.target.value));
+    setIsDispatched(false);
+    setDispatchLockedTime(null);
+  };
+
+  // Dynamic delivery object passed to TrackingMap
+  const activeDelivery = useMemo(() => {
+    const waypoints = routePlan?.waypoints || [];
+    let lat = selectedBloodBank.lat;
+    let lng = selectedBloodBank.lng;
+
+    if (waypoints.length > 0) {
+      if (isDispatched && waypoints.length >= 2) {
+        // Place drone midway along corridor to reflect in-transit flight
+        const p1 = waypoints[0];
+        const p2 = waypoints[1];
+        lat = p1.lat + (p2.lat - p1.lat) * 0.48;
+        lng = p1.lng + (p2.lng - p1.lng) * 0.48;
+      } else {
+        lat = waypoints[0].lat;
+        lng = waypoints[0].lng;
+      }
+    }
+
+    return {
+      id: `${selectedBloodBank.id}-${selectedHospital.id}-${isDispatched ? 'disp' : 'idle'}`,
+      drone_identifier: 'LD-HEXA-01 (Apex Lifter)',
+      delivery_status: isDispatched ? 'IN_TRANSIT' : 'READY_ON_VERTIPORT',
+      eta_minutes: Math.ceil(routePlan?.flightMinutes || 3.2),
+      distance_km: routePlan?.distanceKm || 1.25,
+      speed_kmh: 65,
+      battery_pct: 97,
+      origin_name: selectedBloodBank.name,
+      destination_name: selectedHospital.name,
+      current_lat: lat,
+      current_lng: lng,
+      waypoints: waypoints
+    };
+  }, [routePlan, selectedBloodBank, selectedHospital, isDispatched]);
 
   useEffect(() => {
     publicAPI.getMetrics()
@@ -664,16 +1055,16 @@ export default function Home() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
               gap: '40px',
-              alignItems: 'center'
+              alignItems: 'start'
             }}
           >
             <div className="scroll-reveal">
               <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 Operations Center Preview
               </span>
-              <h2 style={{ fontSize: '38px', fontWeight: '800', color: '#152238', margin: '12px 0 20px 0', letterSpacing: '-0.8px' }}>
+              <h2 style={{ fontSize: '38px', fontWeight: '800', color: '#152238', margin: '12px 0 16px 0', letterSpacing: '-0.8px' }}>
                 Intelligence Behind Every Delivery
               </h2>
               <p style={{ fontSize: '16px', color: '#64748B', lineHeight: '1.7', marginBottom: '24px' }}>
@@ -681,29 +1072,442 @@ export default function Home() {
                 and secure verification to coordinate medical deliveries.
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '32px' }}>
-                {[
-                  'Origin Vertiport: Red Cross Blood Bank Ongole',
-                  'Destination: RIMS Government General Hospital',
-                  'Planned A* Corridor: Ongole Medical Trunk Link (1.25 km)',
-                  'Estimated Flight Duration: 3.2 minutes @ 65 km/h'
-                ].map((item, idx) => (
-                  <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '15px', color: '#152238' }}>
-                    <CheckCircle2 size={18} color="#16A34A" />
-                    <span>{item}</span>
+              {/* Prakasam District Infrastructure Metrics: Hospitals & Blood Banks */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                  gap: '14px',
+                  marginBottom: '24px'
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #E2E8F0',
+                    borderLeft: '4px solid #124676',
+                    borderRadius: '12px',
+                    padding: '16px',
+                    boxShadow: '0 2px 8px rgba(18, 70, 118, 0.05)'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+                    <div
+                      style={{
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '8px',
+                        backgroundColor: '#EEF5FA',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#124676'
+                      }}
+                    >
+                      <Building2 size={18} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '11px', fontWeight: '700', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        Hospitals in Prakasam
+                      </div>
+                      <div style={{ fontSize: '20px', fontWeight: '800', color: '#124676' }}>
+                        5 Certified Hospitals
+                      </div>
+                    </div>
                   </div>
-                ))}
+                  <p style={{ fontSize: '12px', color: '#64748B', margin: 0, lineHeight: '1.45' }}>
+                    RIMS Ongole, KIMS Ongole, Chirala, Markapur & Kandukur equipped with certified receiving vertipads.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #E2E8F0',
+                    borderLeft: '4px solid #D2252F',
+                    borderRadius: '12px',
+                    padding: '16px',
+                    boxShadow: '0 2px 8px rgba(210, 37, 47, 0.05)'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+                    <div
+                      style={{
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '8px',
+                        backgroundColor: '#FDF2F2',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#D2252F'
+                      }}
+                    >
+                      <Activity size={18} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '11px', fontWeight: '700', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        Actively Working Blood Banks
+                      </div>
+                      <div style={{ fontSize: '20px', fontWeight: '800', color: '#D2252F' }}>
+                        4 Active Blood Banks
+                      </div>
+                    </div>
+                  </div>
+                  <p style={{ fontSize: '12px', color: '#64748B', margin: 0, lineHeight: '1.45' }}>
+                    Indian Red Cross, RIMS Model Bank, Chirala Rotary & Markapur Storage with 24/7 cold storage custody.
+                  </p>
+                </div>
               </div>
 
-              <Link to="/blood-access" className="btn-primary">
+              {/* A* Flight Path & Dispatch Estimator Form */}
+              <div
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #CBD5E1',
+                  borderRadius: '16px',
+                  padding: '22px',
+                  boxShadow: '0 4px 20px rgba(18, 70, 118, 0.08)',
+                  marginBottom: '26px'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px' }}>
+                  <div
+                    style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '10px',
+                      backgroundColor: '#EEF5FA',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#124676'
+                    }}
+                  >
+                    <Route size={20} />
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#152238', margin: 0 }}>
+                      A* Algorithm Shortest Path & Dispatch Estimator
+                    </h3>
+                    <p style={{ fontSize: '12px', color: '#64748B', margin: '2px 0 0 0' }}>
+                      Select a Blood Bank and Hospital to find the shortest corridor and exact dispatch timeline.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Dropdowns */}
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+                    gap: '14px',
+                    marginBottom: '18px'
+                  }}
+                >
+                  {/* Origin: Blood Bank */}
+                  <div>
+                    <label
+                      htmlFor="select-blood-bank"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        fontSize: '11.5px',
+                        fontWeight: '700',
+                        color: '#124676',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.04em',
+                        marginBottom: '6px'
+                      }}
+                    >
+                      <Activity size={13} color="#D2252F" />
+                      <span>Select Blood Bank (Origin)</span>
+                    </label>
+                    <select
+                      id="select-blood-bank"
+                      value={selectedBloodBankId}
+                      onChange={handleBloodBankChange}
+                      style={{
+                        width: '100%',
+                        padding: '9px 12px',
+                        borderRadius: '8px',
+                        border: '1.5px solid #CBD5E1',
+                        fontSize: '13px',
+                        color: '#1E293B',
+                        fontWeight: '600',
+                        backgroundColor: '#F8FAFC',
+                        outline: 'none',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {PRAKASAM_BLOOD_BANKS.map((bb) => (
+                        <option key={bb.id} value={bb.id}>
+                          {bb.name} ({bb.town})
+                        </option>
+                      ))}
+                    </select>
+                    <div style={{ fontSize: '11px', color: '#64748B', marginTop: '4px' }}>
+                      Vertiport: <strong>{selectedBloodBank.code}</strong> &bull; {selectedBloodBank.location}
+                    </div>
+                  </div>
+
+                  {/* Destination: Hospital */}
+                  <div>
+                    <label
+                      htmlFor="select-hospital"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        fontSize: '11.5px',
+                        fontWeight: '700',
+                        color: '#124676',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.04em',
+                        marginBottom: '6px'
+                      }}
+                    >
+                      <Building2 size={13} color="#124676" />
+                      <span>Select Hospital (Destination)</span>
+                    </label>
+                    <select
+                      id="select-hospital"
+                      value={selectedHospitalId}
+                      onChange={handleHospitalChange}
+                      style={{
+                        width: '100%',
+                        padding: '9px 12px',
+                        borderRadius: '8px',
+                        border: '1.5px solid #CBD5E1',
+                        fontSize: '13px',
+                        color: '#1E293B',
+                        fontWeight: '600',
+                        backgroundColor: '#F8FAFC',
+                        outline: 'none',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {PRAKASAM_HOSPITALS.map((hosp) => (
+                        <option key={hosp.id} value={hosp.id}>
+                          {hosp.name} ({hosp.town})
+                        </option>
+                      ))}
+                    </select>
+                    <div style={{ fontSize: '11px', color: '#64748B', marginTop: '4px' }}>
+                      Vertipad: <strong>{selectedHospital.code}</strong> &bull; {selectedHospital.location}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Telemetry Metrics Grid */}
+                <div
+                  style={{
+                    backgroundColor: '#F8FAFC',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '12px',
+                    padding: '14px',
+                    marginBottom: '16px'
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      marginBottom: '10px',
+                      flexWrap: 'wrap',
+                      gap: '8px'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: '700', color: '#124676' }}>
+                      <Zap size={14} color="#F59E0B" />
+                      <span>Planned A* Corridor:</span>
+                      <span style={{ color: '#0F172A', fontWeight: '800' }}>{routePlan?.corridorName}</span>
+                    </div>
+                    <div style={{ fontSize: '11px', backgroundColor: '#EEF5FA', color: '#124676', padding: '3px 8px', borderRadius: '4px', fontWeight: '700' }}>
+                      Cruising at 65 km/h
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+                      gap: '10px'
+                    }}
+                  >
+                    <div style={{ backgroundColor: '#FFFFFF', padding: '10px 12px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                      <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '600', textTransform: 'uppercase' }}>
+                        Shortest Distance
+                      </div>
+                      <div style={{ fontSize: '17px', fontWeight: '800', color: '#124676', marginTop: '2px' }}>
+                        {routePlan?.distanceKm} km
+                      </div>
+                    </div>
+
+                    <div style={{ backgroundColor: '#FFFFFF', padding: '10px 12px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                      <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '600', textTransform: 'uppercase' }}>
+                        Drone Speed
+                      </div>
+                      <div style={{ fontSize: '17px', fontWeight: '800', color: '#152238', marginTop: '2px' }}>
+                        65 km/h
+                      </div>
+                    </div>
+
+                    <div style={{ backgroundColor: '#FFFFFF', padding: '10px 12px', borderRadius: '8px', border: '1.5px solid #FCA5A5' }}>
+                      <div style={{ fontSize: '10.5px', color: '#DC2626', fontWeight: '700', textTransform: 'uppercase' }}>
+                        Exact Estimated Time
+                      </div>
+                      <div style={{ fontSize: '17px', fontWeight: '800', color: '#D2252F', marginTop: '2px' }}>
+                        {routePlan?.flightMinutesFormatted}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dispatch Telemetry & Exact Dispatched Time Note */}
+                <div
+                  style={{
+                    padding: '14px',
+                    borderRadius: '12px',
+                    backgroundColor: isDispatched ? '#F0FDF4' : '#EFF6FF',
+                    border: isDispatched ? '1.5px solid #86EFAC' : '1.5px solid #BFDBFE'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Clock size={15} color={isDispatched ? '#16A34A' : '#1D4ED8'} />
+                      <span style={{ fontSize: '12.5px', fontWeight: '800', color: isDispatched ? '#166534' : '#1E40AF' }}>
+                        {isDispatched ? 'Active Mission: Drone Dispatched' : 'Live Dispatch Schedule'}
+                      </span>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: '10.5px',
+                        fontWeight: '700',
+                        padding: '2px 8px',
+                        borderRadius: '20px',
+                        backgroundColor: isDispatched ? '#DCFCE7' : '#DBEAFE',
+                        color: isDispatched ? '#15803D' : '#1D4ED8'
+                      }}
+                    >
+                      {isDispatched ? '🟢 IN TRANSIT (AIRBORNE)' : 'READY ON VERTIPORT'}
+                    </span>
+                  </div>
+
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
+                      gap: '10px',
+                      marginBottom: '10px',
+                      padding: '10px 12px',
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '8px',
+                      border: '1px solid #E2E8F0'
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>
+                        {isDispatched ? 'Exact Dispatched Time' : 'Current Dispatch Window'}
+                      </div>
+                      <div style={{ fontSize: '14.5px', fontWeight: '800', color: '#1E293B', marginTop: '2px' }}>
+                        {departureTimeStr}
+                      </div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>
+                        Exact Estimated Touchdown
+                      </div>
+                      <div style={{ fontSize: '14.5px', fontWeight: '800', color: '#D2252F', marginTop: '2px' }}>
+                        {exactArrivalTimeStr}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Prominent Exact Estimated Time Note */}
+                  <div
+                    style={{
+                      fontSize: '12.5px',
+                      color: isDispatched ? '#14532D' : '#1E3A8A',
+                      lineHeight: '1.55',
+                      backgroundColor: isDispatched ? '#DCFCE7' : '#FFFFFF',
+                      padding: '10px 12px',
+                      borderRadius: '8px',
+                      borderLeft: isDispatched ? '4px solid #16A34A' : '4px solid #2563EB',
+                      border: isDispatched ? 'none' : '1px solid #DBEAFE'
+                    }}
+                  >
+                    <strong>📌 Dispatch Note:</strong>{' '}
+                    {isDispatched ? (
+                      <>
+                        Emergency drone <strong>LD-HEXA-01</strong> was dispatched at{' '}
+                        <strong>{departureTimeStr}</strong> from <strong>{selectedBloodBank.name}</strong>. Cruising along the{' '}
+                        <strong>{routePlan?.corridorName}</strong>, the exact estimated arrival at{' '}
+                        <strong>{selectedHospital.name}</strong> vertipad is{' '}
+                        <strong>{exactArrivalTimeStr}</strong> (Flight duration:{' '}
+                        <strong>{routePlan?.flightMinutesFormatted}</strong> @ 65 km/h).
+                      </>
+                    ) : (
+                      <>
+                        When the drone is dispatched at <strong>{departureTimeStr}</strong> from{' '}
+                        <strong>{selectedBloodBank.name}</strong>, the exact estimated arrival at{' '}
+                        <strong>{selectedHospital.name}</strong> vertipad is{' '}
+                        <strong>{exactArrivalTimeStr}</strong> via the shortest A* path (Distance:{' '}
+                        <strong>{routePlan?.distanceKm} km</strong>, Flight duration:{' '}
+                        <strong>{routePlan?.flightMinutesFormatted}</strong> @ 65 km/h).
+                      </>
+                    )}
+                  </div>
+
+                  <div style={{ marginTop: '12px' }}>
+                    <button
+                      type="button"
+                      onClick={handleToggleDispatch}
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        padding: '10px 16px',
+                        borderRadius: '8px',
+                        backgroundColor: isDispatched ? '#DC2626' : '#124676',
+                        color: '#FFFFFF',
+                        fontWeight: '700',
+                        fontSize: '13px',
+                        border: 'none',
+                        cursor: 'pointer',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      {isDispatched ? (
+                        <>
+                          <RotateCcw size={15} />
+                          <span>Reset Flight Simulation</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={15} />
+                          <span>Simulate Drone Dispatch Now</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <Link to="/blood-access" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                 <span>Access Live Operations Portal</span>
                 <ChevronRight size={18} />
               </Link>
             </div>
 
             {/* Interactive Operations Console Map */}
-            <div className="scroll-reveal scroll-delay-2">
-              <TrackingMap delivery={demoDelivery} height="460px" zoom={14} />
+            <div className="scroll-reveal scroll-delay-2" style={{ position: 'sticky', top: '100px' }}>
+              <TrackingMap delivery={activeDelivery} height="520px" zoom={13} />
             </div>
           </div>
         </div>
