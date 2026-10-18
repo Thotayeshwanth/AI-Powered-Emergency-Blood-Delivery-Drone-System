@@ -75,25 +75,8 @@ export default function Contact() {
   };
 
   return (
-    <div style={{ backgroundColor: '#FFFFFF', paddingBottom: '90px' }}>
-      
-      {/* Header */}
-      <div style={{ backgroundColor: '#F5F8FC', borderBottom: '1px solid #E2E8F0', padding: '60px 0' }}>
-        <div className="container-custom" style={{ textAlign: 'center', maxWidth: '780px' }}>
-          <span style={{ fontSize: '13px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            Collaboration &amp; Pilot Participation
-          </span>
-          <h1 style={{ fontSize: '42px', fontWeight: '800', color: '#152238', margin: '12px 0 16px 0', letterSpacing: '-1px' }}>
-            Let's Make Critical Deliveries Faster
-          </h1>
-          <p style={{ fontSize: '17px', color: '#64748B', lineHeight: '1.6' }}>
-            LifeDrone is exploring smarter ways to coordinate blood availability, secure medical logistics,
-            and drone-assisted delivery between hospitals and blood banks.
-          </p>
-        </div>
-      </div>
-
-      <div className="container-custom" style={{ marginTop: '60px' }}>
+    <div style={{ backgroundColor: '#FFFFFF', padding: '60px 0 90px 0' }}>
+      <div className="container-custom">
         <div
           style={{
             display: 'grid',
