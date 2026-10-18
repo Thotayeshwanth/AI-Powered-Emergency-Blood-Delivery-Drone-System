@@ -337,12 +337,10 @@ export default function Home() {
     availableUnits: 94
   });
 
-  // State for interactive A* pathfinding and dispatch simulation in Operations Center
+  // State for interactive A* pathfinding in Operations Center
   const [nowTime, setNowTime] = useState(new Date());
   const [selectedBloodBankId, setSelectedBloodBankId] = useState(1);
   const [selectedHospitalId, setSelectedHospitalId] = useState(1);
-  const [isDispatched, setIsDispatched] = useState(false);
-  const [dispatchLockedTime, setDispatchLockedTime] = useState(null);
 
   // Live ticking clock (updates every 1 second)
   useEffect(() => {
@@ -366,8 +364,7 @@ export default function Home() {
   }, [selectedBloodBank.code, selectedHospital.code]);
 
   // Formatted dispatch departure and exact touchdown arrival timestamps
-  const effectiveDepartureDate = isDispatched && dispatchLockedTime ? dispatchLockedTime : nowTime;
-  const departureTimeStr = effectiveDepartureDate.toLocaleTimeString('en-IN', {
+  const departureTimeStr = nowTime.toLocaleTimeString('en-IN', {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
@@ -375,7 +372,7 @@ export default function Home() {
   }) + ' IST';
 
   const flightSecs = Math.round((routePlan?.flightMinutes || 3.2) * 60);
-  const estimatedArrivalDate = new Date(effectiveDepartureDate.getTime() + flightSecs * 1000);
+  const estimatedArrivalDate = new Date(nowTime.getTime() + flightSecs * 1000);
   const exactArrivalTimeStr = estimatedArrivalDate.toLocaleTimeString('en-IN', {
     hour: '2-digit',
     minute: '2-digit',
@@ -383,28 +380,12 @@ export default function Home() {
     hour12: true
   }) + ' IST';
 
-  // Toggle drone dispatch simulation
-  const handleToggleDispatch = () => {
-    if (!isDispatched) {
-      setDispatchLockedTime(new Date());
-      setIsDispatched(true);
-    } else {
-      setIsDispatched(false);
-      setDispatchLockedTime(null);
-    }
-  };
-
-  // Reset dispatch if origin or destination changes
   const handleBloodBankChange = (e) => {
     setSelectedBloodBankId(Number(e.target.value));
-    setIsDispatched(false);
-    setDispatchLockedTime(null);
   };
 
   const handleHospitalChange = (e) => {
     setSelectedHospitalId(Number(e.target.value));
-    setIsDispatched(false);
-    setDispatchLockedTime(null);
   };
 
   // Dynamic delivery object passed to TrackingMap
@@ -413,23 +394,21 @@ export default function Home() {
     let lat = selectedBloodBank.lat;
     let lng = selectedBloodBank.lng;
 
-    if (waypoints.length > 0) {
-      if (isDispatched && waypoints.length >= 2) {
-        // Place drone midway along corridor to reflect in-transit flight
-        const p1 = waypoints[0];
-        const p2 = waypoints[1];
-        lat = p1.lat + (p2.lat - p1.lat) * 0.48;
-        lng = p1.lng + (p2.lng - p1.lng) * 0.48;
-      } else {
-        lat = waypoints[0].lat;
-        lng = waypoints[0].lng;
-      }
+    if (waypoints.length >= 2) {
+      // Place drone along corridor to show flight path in action
+      const p1 = waypoints[0];
+      const p2 = waypoints[1];
+      lat = p1.lat + (p2.lat - p1.lat) * 0.48;
+      lng = p1.lng + (p2.lng - p1.lng) * 0.48;
+    } else if (waypoints.length > 0) {
+      lat = waypoints[0].lat;
+      lng = waypoints[0].lng;
     }
 
     return {
-      id: `${selectedBloodBank.id}-${selectedHospital.id}-${isDispatched ? 'disp' : 'idle'}`,
+      id: `${selectedBloodBank.id}-${selectedHospital.id}`,
       drone_identifier: 'LD-HEXA-01 (Apex Lifter)',
-      delivery_status: isDispatched ? 'IN_TRANSIT' : 'READY_ON_VERTIPORT',
+      delivery_status: 'IN_TRANSIT',
       eta_minutes: Math.ceil(routePlan?.flightMinutes || 3.2),
       distance_km: routePlan?.distanceKm || 1.25,
       speed_kmh: 65,
@@ -440,7 +419,7 @@ export default function Home() {
       current_lng: lng,
       waypoints: waypoints
     };
-  }, [routePlan, selectedBloodBank, selectedHospital, isDispatched]);
+  }, [routePlan, selectedBloodBank, selectedHospital]);
 
   useEffect(() => {
     publicAPI.getMetrics()
@@ -1369,30 +1348,30 @@ export default function Home() {
                 {/* Dispatch Telemetry & Exact Dispatched Time Note */}
                 <div
                   style={{
-                    padding: '14px',
+                    padding: '16px',
                     borderRadius: '12px',
-                    backgroundColor: isDispatched ? '#F0FDF4' : '#EFF6FF',
-                    border: isDispatched ? '1.5px solid #86EFAC' : '1.5px solid #BFDBFE'
+                    backgroundColor: '#EFF6FF',
+                    border: '1.5px solid #BFDBFE'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <Clock size={15} color={isDispatched ? '#16A34A' : '#1D4ED8'} />
-                      <span style={{ fontSize: '12.5px', fontWeight: '800', color: isDispatched ? '#166534' : '#1E40AF' }}>
-                        {isDispatched ? 'Active Mission: Drone Dispatched' : 'Live Dispatch Schedule'}
+                      <Clock size={15} color="#1D4ED8" />
+                      <span style={{ fontSize: '13px', fontWeight: '800', color: '#1E40AF' }}>
+                        Live Dispatch Schedule & ETA
                       </span>
                     </div>
                     <span
                       style={{
                         fontSize: '10.5px',
                         fontWeight: '700',
-                        padding: '2px 8px',
+                        padding: '3px 8px',
                         borderRadius: '20px',
-                        backgroundColor: isDispatched ? '#DCFCE7' : '#DBEAFE',
-                        color: isDispatched ? '#15803D' : '#1D4ED8'
+                        backgroundColor: '#DBEAFE',
+                        color: '#1D4ED8'
                       }}
                     >
-                      {isDispatched ? '🟢 IN TRANSIT (AIRBORNE)' : 'READY ON VERTIPORT'}
+                      A* OPTIMIZED CORRIDOR
                     </span>
                   </div>
 
@@ -1410,7 +1389,7 @@ export default function Home() {
                   >
                     <div>
                       <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>
-                        {isDispatched ? 'Exact Dispatched Time' : 'Current Dispatch Window'}
+                        Current Dispatch Window (Takeoff)
                       </div>
                       <div style={{ fontSize: '14.5px', fontWeight: '800', color: '#1E293B', marginTop: '2px' }}>
                         {departureTimeStr}
@@ -1418,7 +1397,7 @@ export default function Home() {
                     </div>
                     <div>
                       <div style={{ fontSize: '10.5px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>
-                        Exact Estimated Touchdown
+                        Exact Estimated Touchdown (Arrival)
                       </div>
                       <div style={{ fontSize: '14.5px', fontWeight: '800', color: '#D2252F', marginTop: '2px' }}>
                         {exactArrivalTimeStr}
@@ -1430,71 +1409,21 @@ export default function Home() {
                   <div
                     style={{
                       fontSize: '12.5px',
-                      color: isDispatched ? '#14532D' : '#1E3A8A',
+                      color: '#1E3A8A',
                       lineHeight: '1.55',
-                      backgroundColor: isDispatched ? '#DCFCE7' : '#FFFFFF',
-                      padding: '10px 12px',
+                      backgroundColor: '#FFFFFF',
+                      padding: '12px 14px',
                       borderRadius: '8px',
-                      borderLeft: isDispatched ? '4px solid #16A34A' : '4px solid #2563EB',
-                      border: isDispatched ? 'none' : '1px solid #DBEAFE'
+                      borderLeft: '4px solid #2563EB',
+                      border: '1px solid #DBEAFE'
                     }}
                   >
-                    <strong>📌 Dispatch Note:</strong>{' '}
-                    {isDispatched ? (
-                      <>
-                        Emergency drone <strong>LD-HEXA-01</strong> was dispatched at{' '}
-                        <strong>{departureTimeStr}</strong> from <strong>{selectedBloodBank.name}</strong>. Cruising along the{' '}
-                        <strong>{routePlan?.corridorName}</strong>, the exact estimated arrival at{' '}
-                        <strong>{selectedHospital.name}</strong> vertipad is{' '}
-                        <strong>{exactArrivalTimeStr}</strong> (Flight duration:{' '}
-                        <strong>{routePlan?.flightMinutesFormatted}</strong> @ 65 km/h).
-                      </>
-                    ) : (
-                      <>
-                        When the drone is dispatched at <strong>{departureTimeStr}</strong> from{' '}
-                        <strong>{selectedBloodBank.name}</strong>, the exact estimated arrival at{' '}
-                        <strong>{selectedHospital.name}</strong> vertipad is{' '}
-                        <strong>{exactArrivalTimeStr}</strong> via the shortest A* path (Distance:{' '}
-                        <strong>{routePlan?.distanceKm} km</strong>, Flight duration:{' '}
-                        <strong>{routePlan?.flightMinutesFormatted}</strong> @ 65 km/h).
-                      </>
-                    )}
-                  </div>
-
-                  <div style={{ marginTop: '12px' }}>
-                    <button
-                      type="button"
-                      onClick={handleToggleDispatch}
-                      style={{
-                        width: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '8px',
-                        padding: '10px 16px',
-                        borderRadius: '8px',
-                        backgroundColor: isDispatched ? '#DC2626' : '#124676',
-                        color: '#FFFFFF',
-                        fontWeight: '700',
-                        fontSize: '13px',
-                        border: 'none',
-                        cursor: 'pointer',
-                        boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-                        transition: 'all 0.2s ease'
-                      }}
-                    >
-                      {isDispatched ? (
-                        <>
-                          <RotateCcw size={15} />
-                          <span>Reset Flight Simulation</span>
-                        </>
-                      ) : (
-                        <>
-                          <Send size={15} />
-                          <span>Simulate Drone Dispatch Now</span>
-                        </>
-                      )}
-                    </button>
+                    <strong>📌 Dispatch Note:</strong> When the medical drone is dispatched at{' '}
+                    <strong>{departureTimeStr}</strong> from <strong>{selectedBloodBank.name}</strong>, the exact estimated arrival at{' '}
+                    <strong>{selectedHospital.name}</strong> vertipad is{' '}
+                    <strong>{exactArrivalTimeStr}</strong> via the shortest A* path (Distance:{' '}
+                    <strong>{routePlan?.distanceKm} km</strong>, Flight duration:{' '}
+                    <strong>{routePlan?.flightMinutesFormatted}</strong> @ 65 km/h).
                   </div>
                 </div>
               </div>
