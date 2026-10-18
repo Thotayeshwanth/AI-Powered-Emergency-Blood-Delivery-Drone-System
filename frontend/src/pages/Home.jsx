@@ -1442,59 +1442,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ====================================================
-          SECTION 6: IMPACT METRICS
-          ==================================================== */}
-      <section style={{ padding: '80px 0', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
-        <div className="container-custom">
-          <div className="scroll-reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <span style={{ fontSize: '12px', fontWeight: '700', color: '#124676', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Network Footprint
-            </span>
-            <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#152238', marginTop: '8px' }}>
-              Prakasam District Pilot Metrics
-            </h2>
-            <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>
-              Database-backed live records &bull; Demonstration Pilot Scope
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '28px',
-              textAlign: 'center',
-              maxWidth: '800px',
-              margin: '0 auto'
-            }}
-          >
-            <div className="card-sharp-hover scroll-reveal scroll-delay-1" style={{ padding: '32px' }}>
-              <div style={{ fontSize: '46px', fontWeight: '800', color: '#124676', lineHeight: '1' }}>
-                {metrics.hospitalsCount}
-              </div>
-              <div style={{ fontSize: '17px', fontWeight: '700', color: '#152238', marginTop: '12px' }}>
-                Participating Hospitals
-              </div>
-              <div style={{ fontSize: '13px', color: '#64748B', marginTop: '6px' }}>
-                Prakasam District Regional Medical Centers
-              </div>
-            </div>
-
-            <div className="card-sharp-hover scroll-reveal scroll-delay-2" style={{ padding: '32px' }}>
-              <div style={{ fontSize: '46px', fontWeight: '800', color: '#D2252F', lineHeight: '1' }}>
-                {metrics.bloodBanksCount}
-              </div>
-              <div style={{ fontSize: '17px', fontWeight: '700', color: '#152238', marginTop: '12px' }}>
-                Participating Blood Banks
-              </div>
-              <div style={{ fontSize: '13px', color: '#64748B', marginTop: '6px' }}>
-                Licensed Blood Storage &amp; Vertipad Hubs
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ====================================================
           SECTION 7: FINAL CALL TO ACTION
