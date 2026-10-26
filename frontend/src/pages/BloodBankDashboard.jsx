@@ -603,7 +603,7 @@ export default function BloodBankDashboard() {
 
         {/* TAB 3: PACKAGE PREP & DISPATCH QUEUE */}
         {activeTab === 'PREPARATION' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '24px' }}>
             {/* Accepted queue waiting for preparation */}
             <div className="card-light" style={{ padding: '24px' }}>
               <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#152238', marginBottom: '16px' }}>
@@ -709,7 +709,7 @@ export default function BloodBankDashboard() {
             </div>
 
             <form onSubmit={handleAddInventory} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '14px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: '#152238', marginBottom: '4px' }}>
                     Blood Group *
@@ -743,7 +743,7 @@ export default function BloodBankDashboard() {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '14px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: '#152238', marginBottom: '4px' }}>
                     Quantity (Units) *
@@ -772,7 +772,7 @@ export default function BloodBankDashboard() {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '14px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: '#152238', marginBottom: '4px' }}>
                     Collection Date *
@@ -1085,7 +1085,7 @@ export default function BloodBankDashboard() {
                       <span className="badge badge-ready">Corridors Locked</span>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', backgroundColor: '#F8FAFC', padding: '14px', borderRadius: '10px', marginBottom: '16px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))', gap: '12px', backgroundColor: '#F8FAFC', padding: '14px', borderRadius: '10px', marginBottom: '16px' }}>
                       <div>
                         <div style={{ fontSize: '11px', color: '#64748B' }}>Calculated Distance</div>
                         <div style={{ fontSize: '18px', fontWeight: '800', color: '#152238' }}>

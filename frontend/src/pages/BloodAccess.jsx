@@ -51,9 +51,9 @@ export default function BloodAccess() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             gap: '32px',
-            marginBottom: '80px'
+            marginBottom: '60px'
           }}
         >
           {/* CARD 1: HOSPITAL ACCESS */}

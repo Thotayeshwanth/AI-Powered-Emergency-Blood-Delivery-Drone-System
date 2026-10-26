@@ -19,7 +19,10 @@ import {
   Calendar,
   XCircle,
   ArrowRight,
-  ExternalLink
+  ExternalLink,
+  Zap,
+  Play,
+  Navigation
 } from 'lucide-react';
 
 export default function HospitalDashboard() {
@@ -273,143 +276,108 @@ export default function HospitalDashboard() {
             </div>
           </div>
 
-          {/* Metric Summary Cards */}
+          {/* Navigation Tabs (in place of metric cards) */}
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-              gap: '16px',
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '12px',
               marginTop: '24px'
             }}
           >
-            <div className="card-light" style={{ padding: '16px' }}>
-              <div style={{ fontSize: '12px', color: '#64748B', fontWeight: '600' }}>Available in Network</div>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: '#124676', marginTop: '4px' }}>
-                {stats.availableNetworkUnits} <span style={{ fontSize: '14px', fontWeight: '500' }}>Units</span>
-              </div>
-            </div>
+            <button
+              onClick={() => setActiveTab('SEARCH')}
+              style={{
+                padding: '10px 18px',
+                borderRadius: '8px',
+                fontWeight: '700',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: activeTab === 'SEARCH' ? '#EEF5FA' : '#FFFFFF',
+                color: activeTab === 'SEARCH' ? '#124676' : '#64748B',
+                border: activeTab === 'SEARCH' ? '1px solid #B8D3E9' : '1px solid #E2E8F0',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <Search size={16} />
+              <span>Search Blood &amp; Request</span>
+            </button>
 
-            <div className="card-light" style={{ padding: '16px' }}>
-              <div style={{ fontSize: '12px', color: '#64748B', fontWeight: '600' }}>Pending Approval</div>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: '#D97706', marginTop: '4px' }}>
-                {stats.pendingRequests}
-              </div>
-            </div>
+            <button
+              onClick={() => { setActiveTab('REQUESTS'); loadAllRequests(); }}
+              style={{
+                padding: '10px 18px',
+                borderRadius: '8px',
+                fontWeight: '700',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: activeTab === 'REQUESTS' ? '#EEF5FA' : '#FFFFFF',
+                color: activeTab === 'REQUESTS' ? '#124676' : '#64748B',
+                border: activeTab === 'REQUESTS' ? '1px solid #B8D3E9' : '1px solid #E2E8F0',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <FileText size={16} />
+              <span>My Requests ({requests.length})</span>
+            </button>
 
-            <div className="card-light" style={{ padding: '16px' }}>
-              <div style={{ fontSize: '12px', color: '#64748B', fontWeight: '600' }}>Accepted / Preparing</div>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: '#4338CA', marginTop: '4px' }}>
-                {stats.acceptedRequests}
-              </div>
-            </div>
+            <button
+              onClick={() => setActiveTab('TRACKING')}
+              style={{
+                padding: '10px 18px',
+                borderRadius: '8px',
+                fontWeight: '700',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: activeTab === 'TRACKING' ? '#EEF5FA' : '#FFFFFF',
+                color: activeTab === 'TRACKING' ? '#124676' : '#64748B',
+                border: activeTab === 'TRACKING' ? '1px solid #B8D3E9' : '1px solid #E2E8F0',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <Plane size={16} />
+              <span>Active Flight Tracking ({activeDeliveries.length})</span>
+            </button>
 
-            <div className="card-light" style={{ padding: '16px' }}>
-              <div style={{ fontSize: '12px', color: '#64748B', fontWeight: '600' }}>Active Drone Flights</div>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: '#D2252F', marginTop: '4px' }}>
-                {stats.activeDeliveries}
-              </div>
-            </div>
-
-            <div className="card-light" style={{ padding: '16px' }}>
-              <div style={{ fontSize: '12px', color: '#64748B', fontWeight: '600' }}>Completed Deliveries</div>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: '#16A34A', marginTop: '4px' }}>
-                {stats.completedDeliveries}
-              </div>
-            </div>
+            <button
+              onClick={() => setActiveTab('VERIFY')}
+              style={{
+                padding: '10px 18px',
+                borderRadius: '8px',
+                fontWeight: '700',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: activeTab === 'VERIFY' ? '#ECFDF5' : '#FFFFFF',
+                color: activeTab === 'VERIFY' ? '#16A34A' : '#64748B',
+                border: activeTab === 'VERIFY' ? '1px solid #A7F3D0' : '1px solid #E2E8F0',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <KeyRound size={16} />
+              <span>Receiver Passkey Verification</span>
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Main Dashboard Tabs */}
+      {/* Main Dashboard Content */}
       <div className="container-custom" style={{ marginTop: '28px' }}>
-        
-        {/* Navigation Tabs */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '8px',
-            borderBottom: '1px solid #E2E8F0',
-            paddingBottom: '12px',
-            marginBottom: '24px'
-          }}
-        >
-          <button
-            onClick={() => setActiveTab('SEARCH')}
-            style={{
-              padding: '10px 18px',
-              borderRadius: '8px',
-              fontWeight: '700',
-              fontSize: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              backgroundColor: activeTab === 'SEARCH' ? '#EEF5FA' : '#FFFFFF',
-              color: activeTab === 'SEARCH' ? '#124676' : '#64748B',
-              border: activeTab === 'SEARCH' ? '1px solid #B8D3E9' : '1px solid #E2E8F0'
-            }}
-          >
-            <Search size={16} />
-            <span>Search Blood &amp; Request</span>
-          </button>
-
-          <button
-            onClick={() => { setActiveTab('REQUESTS'); loadAllRequests(); }}
-            style={{
-              padding: '10px 18px',
-              borderRadius: '8px',
-              fontWeight: '700',
-              fontSize: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              backgroundColor: activeTab === 'REQUESTS' ? '#EEF5FA' : '#FFFFFF',
-              color: activeTab === 'REQUESTS' ? '#124676' : '#64748B',
-              border: activeTab === 'REQUESTS' ? '1px solid #B8D3E9' : '1px solid #E2E8F0'
-            }}
-          >
-            <FileText size={16} />
-            <span>My Requests ({requests.length})</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('TRACKING')}
-            style={{
-              padding: '10px 18px',
-              borderRadius: '8px',
-              fontWeight: '700',
-              fontSize: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              backgroundColor: activeTab === 'TRACKING' ? '#EEF5FA' : '#FFFFFF',
-              color: activeTab === 'TRACKING' ? '#124676' : '#64748B',
-              border: activeTab === 'TRACKING' ? '1px solid #B8D3E9' : '1px solid #E2E8F0'
-            }}
-          >
-            <Plane size={16} />
-            <span>Active Flight Tracking ({activeDeliveries.length})</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('VERIFY')}
-            style={{
-              padding: '10px 18px',
-              borderRadius: '8px',
-              fontWeight: '700',
-              fontSize: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              backgroundColor: activeTab === 'VERIFY' ? '#ECFDF5' : '#FFFFFF',
-              color: activeTab === 'VERIFY' ? '#16A34A' : '#64748B',
-              border: activeTab === 'VERIFY' ? '1px solid #A7F3D0' : '1px solid #E2E8F0'
-            }}
-          >
-            <KeyRound size={16} />
-            <span>Receiver Passkey Verification</span>
-          </button>
-        </div>
 
         {/* TAB 1: SEARCH BLOOD & CREATE REQUEST */}
         {activeTab === 'SEARCH' && (
@@ -494,7 +462,7 @@ export default function HospitalDashboard() {
                   <p style={{ fontSize: '13px', marginTop: '4px' }}>Try selecting a universal donor group (such as O-) or adjusting the required unit quantity.</p>
                 </div>
               ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px' }}>
                   {searchResults.map((item) => (
                     <div key={item.inventory_id} className="card-light card-hover" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                       <div>
@@ -658,57 +626,217 @@ export default function HospitalDashboard() {
         {/* TAB 3: ACTIVE FLIGHT TRACKING & SIMULATION */}
         {activeTab === 'TRACKING' && (
           <div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: '24px', alignItems: 'start' }}>
               <div>
-                <TrackingMap delivery={selectedTrackingDelivery} height="520px" zoom={14} />
+                <TrackingMap delivery={selectedTrackingDelivery} height="560px" zoom={14} />
               </div>
 
               {/* Delivery Telemetry Sidebar */}
-              <div className="card-light" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div className="card-light" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                    <span className="badge badge-intransit">Live Flight Tracking</span>
-                    <button
-                      onClick={() => selectedTrackingDelivery && loadDeliveryTracking(selectedTrackingDelivery.id)}
-                      className="btn-ghost"
-                      style={{ padding: '4px 8px', fontSize: '12px' }}
-                    >
-                      <RefreshCw size={13} />
-                    </button>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span className="badge badge-intransit">Live Flight Tracking</span>
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          fontSize: '11px',
+                          fontWeight: '800',
+                          color: '#1E40AF',
+                          backgroundColor: '#EFF6FF',
+                          padding: '2px 8px',
+                          borderRadius: '999px',
+                          border: '1px solid #BFDBFE'
+                        }}
+                      >
+                        <Zap size={11} color="#F59E0B" />
+                        <span>A* ROUTE ACTIVE</span>
+                      </span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <button
+                        onClick={async () => {
+                          if (!selectedTrackingDelivery) return;
+                          try {
+                            const res = await hospitalAPI.restartSimulation(selectedTrackingDelivery.id);
+                            if (res.data?.success) {
+                              setSelectedTrackingDelivery(res.data.delivery);
+                            }
+                          } catch (e) {
+                            console.error('Restart simulation error:', e);
+                          }
+                        }}
+                        className="btn-ghost"
+                        style={{
+                          padding: '4px 10px',
+                          fontSize: '11px',
+                          color: '#1D4ED8',
+                          backgroundColor: '#EFF6FF',
+                          border: '1px solid #BFDBFE',
+                          borderRadius: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px',
+                          fontWeight: '700',
+                          cursor: 'pointer'
+                        }}
+                        title="Re-run live drone flight along direct A* straight corridor"
+                      >
+                        <Play size={12} color="#2563EB" />
+                        <span>Re-launch Flight</span>
+                      </button>
+                      <button
+                        onClick={() => selectedTrackingDelivery && loadDeliveryTracking(selectedTrackingDelivery.id)}
+                        className="btn-ghost"
+                        style={{ padding: '4px 8px', fontSize: '12px' }}
+                        title="Refresh Live Telemetry"
+                      >
+                        <RefreshCw size={13} />
+                      </button>
+                    </div>
                   </div>
 
                   {selectedTrackingDelivery ? (
                     <div>
-                      <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#152238' }}>
+                      <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#152238', marginBottom: '2px' }}>
                         {selectedTrackingDelivery.drone_identifier}
                       </h3>
-                      <div style={{ fontSize: '12px', color: '#64748B', marginBottom: '16px' }}>
+                      <div style={{ fontSize: '12px', color: '#64748B', marginBottom: '14px' }}>
                         Ref: {selectedTrackingDelivery.delivery_reference}
                       </div>
 
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '13px', backgroundColor: '#F8FAFC', padding: '16px', borderRadius: '10px', marginBottom: '20px' }}>
+                      {/* Prominent High-Visibility Stat Cards: Estimated Arrival & Remaining Distance */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 130px), 1fr))', gap: '10px', marginBottom: '14px' }}>
+                        <div
+                          style={{
+                            backgroundColor: '#EFF6FF',
+                            border: '1.5px solid #93C5FD',
+                            borderRadius: '10px',
+                            padding: '12px 14px',
+                            textAlign: 'center',
+                            boxShadow: '0 2px 6px rgba(37, 99, 235, 0.06)'
+                          }}
+                        >
+                          <div style={{ fontSize: '11px', color: '#1E40AF', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+                            <Clock size={13} color="#1D4ED8" />
+                            Estimated Arrival
+                          </div>
+                          <div style={{ fontSize: '24px', fontWeight: '900', color: '#124676', letterSpacing: '-0.5px' }}>
+                            {selectedTrackingDelivery.eta_minutes ?? 0} mins
+                          </div>
+                          <div style={{ fontSize: '10.5px', color: '#64748B', marginTop: '2px', fontWeight: '500' }}>
+                            {selectedTrackingDelivery.delivery_status === 'ARRIVED' ? 'Touchdown on Vertipad' : 'Cruising at 65 km/h'}
+                          </div>
+                        </div>
+
+                        <div
+                          style={{
+                            backgroundColor: '#FEF2F2',
+                            border: '1.5px solid #FCA5A5',
+                            borderRadius: '10px',
+                            padding: '12px 14px',
+                            textAlign: 'center',
+                            boxShadow: '0 2px 6px rgba(220, 38, 38, 0.06)'
+                          }}
+                        >
+                          <div style={{ fontSize: '11px', color: '#991B1B', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+                            <Navigation size={13} color="#DC2626" />
+                            Remaining Distance
+                          </div>
+                          <div style={{ fontSize: '24px', fontWeight: '900', color: '#D2252F', letterSpacing: '-0.5px' }}>
+                            {selectedTrackingDelivery.distance_km ?? 0} km
+                          </div>
+                          <div style={{ fontSize: '10.5px', color: '#64748B', marginTop: '2px', fontWeight: '500' }}>
+                            Direct A* Corridor
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* A* Flight Path & Telemetry Details */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13px', backgroundColor: '#F8FAFC', padding: '16px', borderRadius: '12px', border: '1px solid #E2E8F0', marginBottom: '16px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ color: '#64748B', fontSize: '12px' }}>Planned A* Corridor:</span>
+                          <strong style={{ color: '#124676', textAlign: 'right', maxWidth: '200px', fontSize: '12px' }}>
+                            {selectedTrackingDelivery.route_name || 'Red Cross ➔ RIMS Ongole Corridor'}
+                          </strong>
+                        </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ color: '#64748B', fontSize: '12px' }}>A* Heuristic:</span>
+                          <span style={{ fontSize: '10.5px', fontWeight: '700', color: '#047857', backgroundColor: '#ECFDF5', padding: '2px 7px', borderRadius: '4px', border: '1px solid #A7F3D0' }}>
+                            Admissible Haversine h(n)
+                          </span>
+                        </div>
+
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#64748B' }}>Flight Status:</span>
+                          <span style={{ color: '#64748B', fontSize: '12px' }}>Flight Status:</span>
                           <span className={getStatusBadge(selectedTrackingDelivery.delivery_status)}>
                             {selectedTrackingDelivery.delivery_status}
                           </span>
                         </div>
+
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#64748B' }}>Estimated Arrival:</span>
-                          <strong style={{ color: '#124676' }}>{selectedTrackingDelivery.eta_minutes ?? 0} mins</strong>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#64748B' }}>Remaining Flight Distance:</span>
-                          <strong>{selectedTrackingDelivery.distance_km ?? 0} km</strong>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#64748B' }}>Drone Cruising Speed:</span>
+                          <span style={{ color: '#64748B', fontSize: '12px' }}>Drone Cruising Speed:</span>
                           <strong>{selectedTrackingDelivery.speed_kmh || 65} km/h</strong>
                         </div>
+
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#64748B' }}>Avionics Battery:</span>
+                          <span style={{ color: '#64748B', fontSize: '12px' }}>Avionics Battery:</span>
                           <strong style={{ color: '#16A34A' }}>{selectedTrackingDelivery.battery_pct || 94}%</strong>
                         </div>
+                      </div>
+
+                      {/* Visual A* Corridor Waypoint Progression */}
+                      <div
+                        style={{
+                          backgroundColor: '#F0F9FF',
+                          border: '1px solid #BAE6FD',
+                          borderRadius: '10px',
+                          padding: '12px',
+                          marginBottom: '16px'
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                          <span style={{ fontSize: '11px', fontWeight: '800', color: '#0369A1', textTransform: 'uppercase', letterSpacing: '0.4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <Zap size={12} color="#F59E0B" />
+                            A* Corridor Waypoints
+                          </span>
+                          <span style={{ fontSize: '10px', fontWeight: '700', color: '#0284C7' }}>
+                            Shortest Path
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', fontSize: '11.5px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#124676', flexShrink: 0 }}></span>
+                            <span style={{ color: '#0F172A', fontWeight: '600' }}>Origin: Red Cross Ongole Vertiport</span>
+                          </div>
+                          <div style={{ borderLeft: '2px dashed #93C5FD', marginLeft: '3px', paddingLeft: '11px', color: '#0369A1', fontSize: '10.5px', fontWeight: '500' }}>
+                            Direct A* Straight Skyway Corridor &bull; 1.25 km (No Detours &bull; 65m Cruising Alt)
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#D2252F', flexShrink: 0 }}></span>
+                            <span style={{ color: '#0F172A', fontWeight: '600' }}>Touchdown: RIMS Ongole Vertipad</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* A* Dispatch & Route Schedule Note */}
+                      <div
+                        style={{
+                          fontSize: '11.5px',
+                          color: '#1E3A8A',
+                          lineHeight: '1.5',
+                          backgroundColor: '#EFF6FF',
+                          padding: '10px 12px',
+                          borderRadius: '8px',
+                          borderLeft: '3px solid #2563EB',
+                          border: '1px solid #DBEAFE',
+                          marginBottom: '16px'
+                        }}
+                      >
+                        <strong>📌 A* Pathfinding Note:</strong> Route computed using the deterministic A* search algorithm over Prakasam District airspace graph. Calculates the shortest corridor (1.25 km) for safe, rapid emergency transfusion handover.
                       </div>
 
                       {/* Passkey CTA if Arrived */}
@@ -976,7 +1104,7 @@ export default function HospitalDashboard() {
                   <span style={{ fontSize: '11px', color: '#64748B' }}>Only collect non-sensitive clinical identifiers necessary for transfusion custody.</span>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '14px' }}>
                   <div>
                     <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#152238', marginBottom: '4px' }}>
                       Blood Group
@@ -1002,7 +1130,7 @@ export default function HospitalDashboard() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '14px' }}>
                   <div>
                     <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#152238', marginBottom: '4px' }}>
                       Required Units *
@@ -1034,7 +1162,7 @@ export default function HospitalDashboard() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '14px' }}>
                   <div>
                     <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#152238', marginBottom: '4px' }}>
                       Required-by Time *

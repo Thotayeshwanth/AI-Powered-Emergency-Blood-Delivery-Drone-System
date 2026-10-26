@@ -459,5 +459,234 @@ input, select, textarea {
   }
 }
 
+/* ====================================================
+   SARVAM-INSPIRED LUXURY FOOTER STYLES
+   ==================================================== */
+.sarvam-footer-cta {
+  position: relative;
+  background: linear-gradient(180deg, #181d33 0%, #0e1222 100%);
+  border-radius: 28px;
+  overflow: hidden;
+  padding: 56px 36px 52px 36px;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 56px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px -12px rgba(14, 18, 34, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
 
+.sarvam-footer-link {
+  color: #64748B;
+  font-size: 13.5px;
+  line-height: 1.6;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sarvam-footer-link:hover {
+  color: #124676;
+  transform: translateX(3px);
+}
+
+.sarvam-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  color: #475569;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.sarvam-social-btn:hover {
+  background-color: #124676;
+  color: #FFFFFF;
+  border-color: #124676;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(18, 70, 118, 0.25);
+}
+
+.sarvam-trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.sarvam-trust-badge:hover {
+  border-color: #CBD5E1;
+  background: #F8FAFC;
+  transform: translateY(-1px);
+}
+
+.sarvam-giant-wordmark {
+  user-select: none;
+  pointer-events: none;
+  text-align: center;
+  overflow: hidden;
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+  font-weight: 900;
+  font-size: clamp(68px, 16vw, 230px);
+  text-transform: lowercase;
+  background: linear-gradient(180deg, rgba(18, 70, 118, 0.12) 0%, rgba(18, 70, 118, 0.01) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 28px;
+  margin-bottom: -16px;
+}
+
+@keyframes pulse-emerald {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15);
+  }
+}
+
+.pulse-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 10px #10B981;
+  animation: pulse-emerald 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+/* ====================================================
+   COMPREHENSIVE APPLICATION-WIDE MOBILE RESPONSIVENESS
+   ==================================================== */
+.tracking-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+}
+
+@media (max-width: 991px) {
+  .tracking-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Prevent horizontal viewport spill */
+  html, body, #root {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative;
+  }
+
+  /* Compact container padding on mobile devices */
+  .container-custom {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Responsive card padding */
+  .card-light, .card-sharp {
+    padding: 20px 16px !important;
+    border-radius: 14px !important;
+  }
+
+  /* Table responsive wrapper with touch momentum */
+  .table-responsive, [style*="overflowX: auto"], [style*="overflow-x: auto"] {
+    -webkit-overflow-scrolling: touch;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Fluid typography */
+  h1 {
+    font-size: clamp(24px, 6.5vw, 34px) !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: clamp(20px, 5.2vw, 28px) !important;
+    line-height: 1.25 !important;
+  }
+
+  h3 {
+    font-size: clamp(17px, 4.4vw, 22px) !important;
+  }
+
+  /* Mobile footer adjustments */
+  .sarvam-footer-cta {
+    padding: 38px 20px 32px 20px !important;
+    border-radius: 20px !important;
+    margin-bottom: 36px !important;
+  }
+
+  .sarvam-footer-cta h2 {
+    font-size: 24px !important;
+  }
+
+  .sarvam-giant-wordmark {
+    font-size: clamp(48px, 15vw, 110px) !important;
+    margin-top: 18px !important;
+    margin-bottom: -10px !important;
+  }
+
+  .footer-main-layout {
+    gap: 32px !important;
+  }
+
+  /* Tracking map badges stacking on mobile */
+  .tracking-map-a-star-badge {
+    left: 8px !important;
+    top: 8px !important;
+    font-size: 10px !important;
+    padding: 4px 8px !important;
+  }
+
+  .tracking-map-osm-badge {
+    bottom: auto !important;
+    top: 42px !important;
+    left: 8px !important;
+    max-width: calc(100% - 16px) !important;
+    font-size: 10px !important;
+    padding: 4px 8px !important;
+  }
+
+  .tracking-map-hud-badge {
+    bottom: 8px !important;
+    right: 8px !important;
+    left: 8px !important;
+    width: auto !important;
+    min-width: unset !important;
+    padding: 8px 12px !important;
+  }
+
+  /* Form inputs & buttons touch targets */
+  button, .btn-primary, .btn-secondary, .btn-outline {
+    min-height: 42px;
+  }
+
+  input, select, textarea {
+    font-size: 16px !important; /* Prevents auto-zoom on iOS Safari */
+  }
+
+  /* Support modal mobile sizing */
+  .support-modal-card {
+    max-width: 95vw !important;
+    max-height: 92vh !important;
+    border-radius: 16px !important;
+  }
+}
 

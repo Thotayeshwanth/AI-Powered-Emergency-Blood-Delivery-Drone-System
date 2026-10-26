@@ -16,7 +16,7 @@ export function handleValidationErrors(req, res, next) {
 }
 
 export const validateLogin = [
-  body('email').isEmail().normalizeEmail().withMessage('Valid email is required.'),
+  body('email').trim().isEmail().normalizeEmail({ gmail_remove_dots: false }).withMessage('Valid email is required.'),
   body('password').notEmpty().withMessage('Password cannot be empty.'),
   handleValidationErrors
 ];

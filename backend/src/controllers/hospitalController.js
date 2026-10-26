@@ -1,6 +1,6 @@
 import { query, withTransaction } from '../config/database.js';
 import { generateReferenceCode, verifyPasskeyHash } from '../utils/cryptoUtils.js';
-import { updateDeliverySimulation } from '../services/simulationService.js';
+import { updateDeliverySimulation, restartDeliverySimulation } from '../services/simulationService.js';
 import { sendRequestSubmittedEmail, sendDeliveryCompletedEmail } from '../services/emailService.js';
 import { haversineDistanceKm } from '../services/routePlanningService.js';
 
@@ -395,6 +395,23 @@ export async function getDeliveryTracking(req, res) {
       delivery: trackingData,
       events,
       disclaimer: 'SIMULATED DRONE TRACKING — DEMONSTRATION MODE'
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+}
+
+export async function restartDeliverySimulationController(req, res) {
+  try {
+    const { id } = req.params;
+    const trackingData = await restartDeliverySimulation(id);
+    if (!trackingData) {
+      return res.status(404).json({ success: false, message: 'Delivery record not found.' });
+    }
+    return res.json({
+      success: true,
+      message: 'Flight simulation restarted successfully. Drone is now in flight along the corridor.',
+      delivery: trackingData
     });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message });

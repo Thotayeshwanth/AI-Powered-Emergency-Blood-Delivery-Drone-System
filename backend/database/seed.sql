@@ -118,15 +118,14 @@ UPDATE blood_inventory SET available_quantity = available_quantity - 1, reserved
 
 -- 9. DELIVERY ROUTE FOR DEMO DISPATCH
 INSERT INTO delivery_routes (id, blood_bank_id, hospital_id, route_name, total_distance_km, estimated_flight_minutes, waypoints_json) VALUES
-(1, 1, 1, 'Red Cross Ongole -> RIMS Ongole Direct Corridor', 1.25, 3, '[
+(1, 1, 1, 'Red Cross Ongole -> RIMS Ongole Direct A* Skyway (Straight Flight Path)', 1.25, 3, '[
   {"code": "VERT-BB-RC", "name": "Red Cross Ongole Vertiport", "lat": 15.5030, "lng": 80.0450, "altitude": 45},
-  {"code": "WP-MED-CORR-1", "name": "Central Medical Skyway Node Alpha", "lat": 15.5100, "lng": 80.0420, "altitude": 80},
   {"code": "VERT-HOSP-RIMS", "name": "RIMS Hospital Helipad/Vertipad", "lat": 15.5057, "lng": 80.0499, "altitude": 50}
 ]');
 
 -- 10. DEMO DELIVERY
 INSERT INTO deliveries (id, delivery_reference, blood_request_id, origin_blood_bank_id, destination_hospital_id, route_id, drone_identifier, dispatch_time, delivery_status, eta_minutes, distance_km, current_lat, current_lng, current_step_index, tracking_mode) VALUES
-(1, 'DEL-202610-001', 1, 1, 1, 1, 'LD-HEXA-01 (Apex Lifter)', DATE_SUB(NOW(), INTERVAL 8 MINUTE), 'IN_TRANSIT', 3, 1.25, 15.5075, 80.0460, 1, 'SIMULATED');
+(1, 'DEL-202610-001', 1, 1, 1, 1, 'LD-HEXA-01 (Apex Lifter)', DATE_SUB(NOW(), INTERVAL 45 SECOND), 'IN_TRANSIT', 2, 0.95, 15.5038, 80.0465, 1, 'SIMULATED');
 
 -- 11. PASSKEY FOR DEMO DELIVERY 1 (Demo Plaintext Passkey: 749281)
 -- SHA-256 hash of "749281" + salt "demo_salt_lifedrone_2026": 
@@ -138,7 +137,7 @@ INSERT INTO delivery_passkeys (id, delivery_id, passkey_hash, passkey_salt, expi
 -- 12. INITIAL DELIVERY EVENTS
 INSERT INTO delivery_events (delivery_id, event_type, latitude, longitude, altitude_meters, speed_kmh, battery_pct, status, remarks) VALUES
 (1, 'DISPATCHED', 15.5030, 80.0450, 45, 0.00, 99, 'Dispatched', 'Flight pre-checks cleared. Medical cold box locked at 3.8°C.'),
-(1, 'STATUS_UPDATE', 15.5075, 80.0460, 78, 62.50, 96, 'In Transit', 'Cruising at corridor altitude. GPS fix lock 18 satellites.');
+(1, 'STATUS_UPDATE', 15.50435, 80.04745, 78, 62.50, 96, 'In Transit', 'Cruising at corridor altitude. GPS fix lock 18 satellites.');
 
 -- 13. AUDIT LOGS INITIAL RECORD
 INSERT INTO audit_logs (actor_id, actor_role, action, entity_type, entity_id, metadata_json) VALUES

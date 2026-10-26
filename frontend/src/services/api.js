@@ -41,6 +41,9 @@ api.interceptors.response.use(
 
 export const authAPI = {
   login: (credentials) => api.post('/auth/login', credentials),
+  registerHospital: (data) => api.post('/auth/register-hospital', data),
+  registerBloodBank: (data) => api.post('/auth/register-blood-bank', data),
+  geocode: (q) => api.get('/auth/geocode', { params: { q } }),
   getMe: () => api.get('/auth/me'),
   logout: () => api.post('/auth/logout'),
   getDemoAccounts: () => api.get('/auth/demo-accounts')
@@ -54,6 +57,7 @@ export const hospitalAPI = {
   getRequestDetails: (id) => api.get(`/hospital/requests/${id}`),
   cancelRequest: (id, data) => api.post(`/hospital/requests/${id}/cancel`, data),
   getDeliveryTracking: (id) => api.get(`/hospital/deliveries/${id}/tracking`),
+  restartSimulation: (id) => api.post(`/hospital/deliveries/${id}/restart-simulation`),
   verifyPasskey: (id, passkey) => api.post(`/hospital/deliveries/${id}/verify-passkey`, { passkey })
 };
 

@@ -269,22 +269,24 @@ export default function Header() {
                   </Link>
                 )}
 
-                {/* Dashboard Button */}
-                <Link
-                  to={dashboardPath}
-                  className="btn-primary"
-                  style={{
-                    padding: '9px 18px',
-                    fontSize: '13px',
-                    borderRadius: '8px',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <Activity size={16} />
-                  <span>Dashboard</span>
-                </Link>
+                {/* Dashboard Button (Removed in hospital login & portal as requested) */}
+                {!isHospital && !location.pathname.includes('/hospital') && !location.pathname.includes('/login') && (
+                  <Link
+                    to={dashboardPath}
+                    className="btn-primary"
+                    style={{
+                      padding: '9px 18px',
+                      fontSize: '13px',
+                      borderRadius: '8px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    <Activity size={16} />
+                    <span>Dashboard</span>
+                  </Link>
+                )}
 
                 {/* Logout Button */}
                 <button
@@ -457,6 +459,60 @@ export default function Header() {
                   </div>
                   <ChevronRight size={18} color="#124676" />
                 </button>
+
+                {/* Direct Portal Access on Mobile */}
+                <div style={{ marginTop: '6px', paddingTop: '10px', borderTop: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ fontSize: '11px', fontWeight: '800', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.08em', padding: '0 4px' }}>
+                    Access Operational Portals
+                  </div>
+                  <Link
+                    to="/hospital/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    style={{
+                      padding: '12px 16px',
+                      borderRadius: '10px',
+                      backgroundColor: '#124676',
+                      color: '#FFFFFF',
+                      fontSize: '14px',
+                      fontWeight: '700',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      textDecoration: 'none',
+                      boxShadow: '0 4px 12px rgba(18, 70, 118, 0.2)'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Building2 size={17} />
+                      <span>Hospital Access Portal</span>
+                    </div>
+                    <ChevronRight size={18} />
+                  </Link>
+
+                  <Link
+                    to="/blood-bank/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    style={{
+                      padding: '12px 16px',
+                      borderRadius: '10px',
+                      backgroundColor: '#FFFFFF',
+                      color: '#D2252F',
+                      border: '1.5px solid #FCA5A5',
+                      fontSize: '14px',
+                      fontWeight: '700',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      textDecoration: 'none'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <ShieldCheck size={17} />
+                      <span>Blood Bank Portal</span>
+                    </div>
+                    <ChevronRight size={18} />
+                  </Link>
+                </div>
               </>
             ) : (
               /* Authenticated Mobile Menu */
@@ -483,14 +539,16 @@ export default function Header() {
                   </div>
                 </div>
 
-                <Link
-                  to={dashboardPath}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="btn-primary"
-                  style={{ width: '100%', justifyContent: 'center' }}
-                >
-                  Go to {isHospital ? 'Hospital' : 'Blood Bank'} Dashboard
-                </Link>
+                {!isHospital && !location.pathname.includes('/hospital') && !location.pathname.includes('/login') && (
+                  <Link
+                    to={dashboardPath}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="btn-primary"
+                    style={{ width: '100%', justifyContent: 'center' }}
+                  >
+                    Go to Blood Bank Dashboard
+                  </Link>
+                )}
 
                 {isHospital && (
                   <Link

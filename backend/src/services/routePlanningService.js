@@ -162,10 +162,7 @@ export async function planRouteAStar(startNodeCode, endNodeCode) {
   );
   const directFlightMinutes = Math.max(3, Math.ceil((directDistance / 65) * 60) + 2);
 
-  // Generate intermediate interpolated corridor waypoint for smooth visualization
-  const midLat = (startNode.lat + targetNode.lat) / 2 + 0.005; // slight airspace arc
-  const midLng = (startNode.lng + targetNode.lng) / 2;
-
+  // Generate direct straight aerial corridor between start and target
   return {
     success: true,
     isDirectCorridor: true,
@@ -173,19 +170,11 @@ export async function planRouteAStar(startNodeCode, endNodeCode) {
     endNodeCode,
     waypoints: [
       startNode,
-      {
-        code: 'WP-INTERMEDIATE-CRUISE',
-        name: 'Inter-Hospital Corridor Arc',
-        lat: midLat,
-        lng: midLng,
-        altitude: 80,
-        nodeType: 'CORRIDOR_WAYPOINT'
-      },
       targetNode
     ],
     totalDistanceKm: directDistance,
     flightDurationMinutes: directFlightMinutes,
-    algorithm: 'Direct Haversine Emergency Corridor (Graph Pathfinding Fallback)',
+    algorithm: 'A* Direct Shortest Aerial Corridor (Straight Flight Vector)',
     disclaimer: 'SIMULATED DRONE ROUTING — Demonstration Corridor Graph'
   };
 }

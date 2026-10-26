@@ -326,7 +326,7 @@ export default function RequestBlood() {
                     />
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '16px' }}>
                     <div>
                       <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#152238', marginBottom: '4px' }}>
                         Clinical Urgency Level *

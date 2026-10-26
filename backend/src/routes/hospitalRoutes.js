@@ -8,6 +8,7 @@ import {
   getRequestDetails,
   cancelBloodRequest,
   getDeliveryTracking,
+  restartDeliverySimulationController,
   verifyDeliveryPasskey
 } from '../controllers/hospitalController.js';
 import { authenticateToken } from '../middleware/auth.js';
@@ -32,6 +33,7 @@ router.get('/requests/:id', getRequestDetails);
 router.post('/requests/:id/cancel', authorizeRoles('HOSPITAL_ADMIN'), cancelBloodRequest);
 
 router.get('/deliveries/:id/tracking', getDeliveryTracking);
+router.post('/deliveries/:id/restart-simulation', restartDeliverySimulationController);
 router.post(
   '/deliveries/:id/verify-passkey',
   authorizeRoles('HOSPITAL_RECEIVER', 'HOSPITAL_ADMIN'),

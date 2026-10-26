@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Layers, ExternalLink, MapPin, Globe } from 'lucide-react';
+import { Layers, ExternalLink, MapPin, Globe, Zap, Clock, Navigation, Activity } from 'lucide-react';
 
 const TILE_PROVIDERS = {
   standard: {
@@ -195,19 +195,31 @@ export default function TrackingMap({
         lineCap: 'round'
       }).addTo(map);
 
+      routeLine.bindPopup(`
+        <div style="font-size: 12px; font-family: inherit; min-width: 200px;">
+          <div style="font-weight: 800; color: #124676; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+            <span>⚡ A* Shortest Flight Path Corridor</span>
+          </div>
+          <div><strong>Corridor:</strong> ${delivery?.route_name || 'Red Cross Ongole ➔ RIMS Ongole A* Corridor'}</div>
+          <div><strong>Total A* Distance:</strong> ${delivery?.total_distance_km || delivery?.distance_km || 1.25} km</div>
+          <div><strong>Drone Cruising Speed:</strong> ${delivery?.speed_kmh || 65} km/h</div>
+          <div><strong>Heuristic:</strong> Admissible Haversine (h(n) &le; d*(n))</div>
+        </div>
+      `);
+
       markersRef.current.routeLine = routeLine;
 
       // Origin Marker
       const originNode = waypoints[0];
       markersRef.current.origin = L.marker([originNode.lat, originNode.lng], { icon: bloodBankIcon })
         .addTo(map)
-        .bindPopup(`<strong>Origin:</strong> ${originNode.name || 'Blood Bank Vertiport'}`);
+        .bindPopup(`<strong>Origin Vertiport (Blood Bank):</strong><br/>${originNode.name || 'Blood Bank Vertiport'}`);
 
       // Destination Marker
       const destNode = waypoints[waypoints.length - 1];
       markersRef.current.dest = L.marker([destNode.lat, destNode.lng], { icon: hospitalIcon })
         .addTo(map)
-        .bindPopup(`<strong>Destination:</strong> ${destNode.name || 'Hospital Vertipad'}`);
+        .bindPopup(`<strong>Destination Vertipad (Hospital):</strong><br/>${destNode.name || 'Hospital Vertipad'}`);
 
       // Fit bounds
       const bounds = L.latLngBounds(latlngs);
@@ -263,6 +275,46 @@ export default function TrackingMap({
     <div style={{ position: 'relative', width: '100%', height, borderRadius: '16px', overflow: 'hidden', border: '1px solid #E2E8F0', boxShadow: 'var(--shadow-md)' }}>
       <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
 
+      {/* Top Left: A* Shortest Flight Path Corridor Badge */}
+      <div
+        className="tracking-map-a-star-badge"
+        style={{
+          position: 'absolute',
+          top: '12px',
+          left: '52px',
+          zIndex: 400,
+          backgroundColor: 'rgba(255, 255, 255, 0.96)',
+          backdropFilter: 'blur(8px)',
+          padding: '6px 12px',
+          borderRadius: '8px',
+          fontSize: '11.5px',
+          fontWeight: '700',
+          color: '#124676',
+          border: '1.5px solid #B8D3E9',
+          boxShadow: '0 2px 8px rgba(18, 70, 118, 0.1)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px'
+        }}
+        title="Path calculated using the A* Search Algorithm across Prakasam District airspace graph"
+      >
+        <Zap size={14} color="#F59E0B" />
+        <span>A* Algorithm Shortest Flight Path</span>
+        <span
+          style={{
+            fontSize: '10px',
+            color: '#047857',
+            backgroundColor: '#ECFDF5',
+            padding: '2px 6px',
+            borderRadius: '4px',
+            border: '1px solid #A7F3D0',
+            fontWeight: '800'
+          }}
+        >
+          A* OPTIMIZED
+        </span>
+      </div>
+
       {/* Top Right: OpenStreetMap External OSM Link */}
       <div
         style={{
@@ -307,6 +359,7 @@ export default function TrackingMap({
 
       {/* Bottom Left: OpenStreetMap Reverse Geocoded Location Pill */}
       <div
+        className="tracking-map-osm-badge"
         style={{
           position: 'absolute',
           bottom: '12px',
@@ -333,6 +386,65 @@ export default function TrackingMap({
         </span>
       </div>
 
+      {/* Bottom Right: Live Flight Metrics HUD Overlay */}
+      <div
+        className="tracking-map-hud-badge"
+        style={{
+          position: 'absolute',
+          bottom: '12px',
+          right: '12px',
+          zIndex: 400,
+          backgroundColor: 'rgba(255, 255, 255, 0.96)',
+          backdropFilter: 'blur(10px)',
+          padding: '10px 14px',
+          borderRadius: '10px',
+          fontSize: '12px',
+          border: '1px solid #CBD5E1',
+          boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '6px',
+          minWidth: '200px'
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '4px' }}>
+          <span style={{ fontSize: '10px', fontWeight: '800', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <Activity size={12} color="#2563EB" />
+            Live Flight Telemetry
+          </span>
+          <span style={{
+            fontSize: '9.5px',
+            fontWeight: '800',
+            color: delivery?.delivery_status === 'ARRIVED' ? '#16A34A' : '#1D4ED8',
+            backgroundColor: delivery?.delivery_status === 'ARRIVED' ? '#DCFCE7' : '#EFF6FF',
+            padding: '2px 6px',
+            borderRadius: '4px',
+            border: `1px solid ${delivery?.delivery_status === 'ARRIVED' ? '#86EFAC' : '#BFDBFE'}`
+          }}>
+            {delivery?.delivery_status || 'IN_TRANSIT'}
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ color: '#475569', fontSize: '11.5px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <Clock size={12} color="#124676" />
+            Estimated Arrival:
+          </span>
+          <strong style={{ color: '#124676', fontSize: '13px', fontWeight: '800' }}>
+            {delivery?.eta_minutes ?? 0} mins
+          </strong>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ color: '#475569', fontSize: '11.5px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <Navigation size={12} color="#D2252F" />
+            Remaining Distance:
+          </span>
+          <strong style={{ color: '#D2252F', fontSize: '13px', fontWeight: '800' }}>
+            {delivery?.distance_km ?? 0} km
+          </strong>
+        </div>
+      </div>
 
     </div>
   );

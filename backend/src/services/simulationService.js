@@ -9,7 +9,7 @@ import { sendArrivalAlertEmail } from './emailService.js';
 export async function updateDeliverySimulation(deliveryId) {
   const deliveries = await query(
     `SELECT d.*, 
-            r.waypoints_json, r.total_distance_km, r.estimated_flight_minutes,
+            r.route_name, r.waypoints_json, r.total_distance_km, r.estimated_flight_minutes,
             h.name as hospital_name, h.latitude as hosp_lat, h.longitude as hosp_lng,
             u.email as receiver_email, u.full_name as receiver_name
      FROM deliveries d
@@ -24,11 +24,6 @@ export async function updateDeliverySimulation(deliveryId) {
   if (deliveries.length === 0) return null;
   const delivery = deliveries[0];
 
-  // If already delivered or cancelled, no simulation movement needed
-  if (['DELIVERED', 'CANCELLED', 'FAILED'].includes(delivery.delivery_status)) {
-    return delivery;
-  }
-
   // Parse waypoints
   let waypoints = [];
   try {
@@ -37,6 +32,13 @@ export async function updateDeliverySimulation(deliveryId) {
       : (delivery.waypoints_json || []);
   } catch (e) {
     waypoints = [];
+  }
+  delivery.waypoints = waypoints;
+  delivery.route_name = delivery.route_name || 'Ongole Medical Skyway Trunk Corridor (A* Optimized)';
+
+  // If already delivered or cancelled, no simulation movement needed
+  if (['DELIVERED', 'CANCELLED', 'FAILED'].includes(delivery.delivery_status)) {
+    return delivery;
   }
 
   if (waypoints.length < 2) {
@@ -146,4 +148,53 @@ export async function updateDeliverySimulation(deliveryId) {
     waypoints,
     simulation_label: 'SIMULATED DRONE TRACKING — DEMONSTRATION MODE'
   };
+}
+
+/**
+ * Resets the demo flight simulation so the drone flies anew from origin to destination
+ */
+export async function restartDeliverySimulation(deliveryId) {
+  const deliveries = await query(
+    `SELECT d.*, r.waypoints_json, r.total_distance_km, r.estimated_flight_minutes
+     FROM deliveries d
+     LEFT JOIN delivery_routes r ON d.route_id = r.id
+     WHERE d.id = ?`,
+    [deliveryId]
+  );
+  if (deliveries.length === 0) return null;
+  const delivery = deliveries[0];
+
+  let waypoints = [];
+  try {
+    waypoints = typeof delivery.waypoints_json === 'string'
+      ? JSON.parse(delivery.waypoints_json)
+      : (delivery.waypoints_json || []);
+  } catch (e) {
+    waypoints = [];
+  }
+
+  const startPoint = waypoints[0] || { lat: 15.5030, lng: 80.0450 };
+  const totalDistance = delivery.total_distance_km || 1.25;
+  const flightMinutes = delivery.estimated_flight_minutes || 3;
+
+  await query(
+    `UPDATE deliveries
+     SET dispatch_time = NOW(),
+         current_lat = ?,
+         current_lng = ?,
+         current_step_index = 0,
+         eta_minutes = ?,
+         distance_km = ?,
+         delivery_status = 'IN_TRANSIT',
+         arrival_time = NULL
+     WHERE id = ?`,
+    [startPoint.lat, startPoint.lng, flightMinutes, totalDistance, deliveryId]
+  );
+
+  await query(
+    `UPDATE blood_requests SET status = 'IN_TRANSIT' WHERE id = ?`,
+    [delivery.blood_request_id]
+  );
+
+  return updateDeliverySimulation(deliveryId);
 }

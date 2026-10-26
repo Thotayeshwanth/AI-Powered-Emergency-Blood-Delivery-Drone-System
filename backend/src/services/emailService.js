@@ -282,3 +282,76 @@ export async function sendContactEmails({ fullName, email, organizationName, org
   );
   await sendEmail({ to: projectEmail, subject: `[LifeDrone Contact] ${subject} - ${organizationName}`, templateName: 'CONTACT_ADMIN_ALERT', html: adminHtml });
 }
+
+// 9. Facility Registration Under Review Notification
+export async function sendRegistrationReviewEmail({
+  email,
+  institutionType,
+  institutionName,
+  certificateOrLicense,
+  ownerName,
+  doctorName,
+  address,
+  latitude,
+  longitude,
+  contactPhone,
+  category
+}) {
+  const facilityLabel = institutionType === 'HOSPITAL' ? 'Hospital' : 'Blood Bank';
+  const certLabel = institutionType === 'HOSPITAL' ? 'CMS Certification Number' : 'Blood Bank License Number';
+
+  const html = createEmailShell(
+    'Registration Under Review',
+    `
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="badge" style="background: #FEF3C7; color: #D97706; font-size: 13px; padding: 6px 14px;">
+          Application Under Clinical Review
+        </span>
+      </div>
+
+      <h2 style="margin-top: 8px; color: ${TEXT_DARK}; font-size: 22px; text-align: center;">
+        Your Application Is Under Review
+      </h2>
+
+      <p style="font-size: 15px; color: #334155; line-height: 1.6; text-align: center; margin-bottom: 24px;">
+        Thank you for submitting your facility registration for <strong>${institutionName}</strong> to join the LifeDrone Autonomous Emergency Medical Aerial Network.
+      </p>
+
+      <div style="background: #F0FDF4; border-left: 4px solid #16A34A; padding: 14px 18px; border-radius: 6px; margin-bottom: 24px;">
+        <p style="margin: 0; font-size: 15px; font-weight: 600; color: #166534;">
+          Your application is under review. It will be approved soon. Thank you!
+        </p>
+      </div>
+
+      <div class="card">
+        <div style="font-size: 13px; font-weight: 700; color: #124676; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px;">
+          Registered Facility &amp; Authorization Specifications
+        </div>
+        <table>
+          <tr><td class="label">Facility Type:</td><td class="value">${facilityLabel}</td></tr>
+          <tr><td class="label">Facility Name:</td><td class="value">${institutionName}</td></tr>
+          <tr><td class="label">${certLabel}:</td><td class="value" style="font-family: monospace; font-weight: 700;">${certificateOrLicense}</td></tr>
+          ${category ? `<tr><td class="label">Classification:</td><td class="value">${category}</td></tr>` : ''}
+          <tr><td class="label">Authorized Owner:</td><td class="value">${ownerName}</td></tr>
+          <tr><td class="label">Supervising Doctor / CMO:</td><td class="value">${doctorName}</td></tr>
+          <tr><td class="label">Contact Email:</td><td class="value">${email}</td></tr>
+          <tr><td class="label">Mobile Number:</td><td class="value">${contactPhone}</td></tr>
+          <tr><td class="label">Designated Address:</td><td class="value">${address}</td></tr>
+          <tr><td class="label">Exact Vertipad Coordinates:</td><td class="value" style="font-family: monospace; color: #124676;">Lat: ${Number(latitude).toFixed(6)}, Long: ${Number(longitude).toFixed(6)}</td></tr>
+        </table>
+      </div>
+
+      <p style="font-size: 13px; color: #64748B; line-height: 1.6;">
+        Our clinical operations desk and civil aviation corridor safety committee will verify your credentials and authorize vertipad coordinates. You will receive an operational activation confirmation once your access pass is unlocked.
+      </p>
+    `
+  );
+
+  return sendEmail({
+    to: email,
+    subject: `[LifeDrone] Application Under Review: ${institutionName} Registration Received`,
+    templateName: 'FACILITY_REGISTRATION_UNDER_REVIEW',
+    html
+  });
+}
+

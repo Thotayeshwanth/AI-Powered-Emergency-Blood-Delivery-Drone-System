@@ -158,7 +158,7 @@ export default function RequestDetails() {
           )}
 
           {/* Details Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px', borderTop: '1px solid #E2E8F0', paddingTop: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '24px', borderTop: '1px solid #E2E8F0', paddingTop: '24px' }}>
             {/* Column 1: Medical Payload */}
             <div>
               <h3 style={{ fontSize: '14px', fontWeight: '700', color: '#64748B', textTransform: 'uppercase', marginBottom: '12px' }}>

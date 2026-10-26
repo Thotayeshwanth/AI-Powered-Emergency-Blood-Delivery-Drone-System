@@ -572,7 +572,7 @@ export default function Home() {
             className="scroll-reveal"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '48px',
               alignItems: 'center',
               marginBottom: '64px'
@@ -1034,7 +1034,7 @@ export default function Home() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
               gap: '40px',
               alignItems: 'start'
             }}
@@ -1442,69 +1442,6 @@ export default function Home() {
         </div>
       </section>
 
-
-      {/* ====================================================
-          SECTION 7: FINAL CALL TO ACTION
-          ==================================================== */}
-      <section
-        style={{
-          padding: '90px 0',
-          background: 'linear-gradient(135deg, #124676 0%, #0B2C4D 100%)',
-          color: '#FFFFFF',
-          textAlign: 'center'
-        }}
-      >
-        <div className="container-custom scroll-reveal" style={{ maxWidth: '780px' }}>
-          <h2 style={{ fontSize: 'clamp(32px, 4.5vw, 46px)', fontWeight: '800', color: '#FFFFFF', marginBottom: '18px', letterSpacing: '-0.8px' }}>
-            Help Build a Faster Medical Delivery Network
-          </h2>
-          <p style={{ fontSize: '18px', lineHeight: '1.6', opacity: '0.9', marginBottom: '36px' }}>
-            Connect your hospital or blood bank with LifeDrone and explore
-            a smarter way to coordinate critical blood deliveries.
-          </p>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
-            <Link
-              to="/hospital/login"
-              style={{
-                backgroundColor: '#FFFFFF',
-                color: '#124676',
-                padding: '14px 28px',
-                borderRadius: '10px',
-                fontWeight: '700',
-                fontSize: '15px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.15)'
-              }}
-            >
-              <Building2 size={18} />
-              <span>Hospital Access</span>
-            </Link>
-
-            <Link
-              to="/blood-bank/login"
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                color: '#FFFFFF',
-                border: '1px solid rgba(255, 255, 255, 0.4)',
-                backdropFilter: 'blur(8px)',
-                padding: '14px 28px',
-                borderRadius: '10px',
-                fontWeight: '700',
-                fontSize: '15px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}
-            >
-              <ShieldCheck size={18} />
-              <span>Blood Bank Access</span>
-            </Link>
-          </div>
-        </div>
-      </section>
 
     </div>
   );

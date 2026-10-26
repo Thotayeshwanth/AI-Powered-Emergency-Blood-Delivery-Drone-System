@@ -152,9 +152,9 @@ export default function DeliveryTracking() {
         </div>
 
         {/* Interactive Map Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: '24px', marginBottom: '32px' }}>
+        <div className="tracking-grid-layout" style={{ marginBottom: '32px' }}>
           <div>
-            <TrackingMap delivery={delivery} height="560px" zoom={14} />
+            <TrackingMap delivery={delivery} height="520px" zoom={14} />
           </div>
 
           {/* Sidebar: Passkey verification & Event Timeline */}

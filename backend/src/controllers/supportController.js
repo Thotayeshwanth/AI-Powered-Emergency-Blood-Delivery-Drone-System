@@ -25,7 +25,7 @@ export const handleChat = async (req, res) => {
     return res.json({
       success: true,
       reply: botReply,
-      source: process.env.GEMINI_API_KEY ? 'gemini-1.5-flash' : 'lifedrone-engine',
+      source: process.env.GEMINI_API_KEY ? 'lifedrone-ai-service' : 'lifedrone-engine',
       timestamp: new Date().toISOString()
     });
   } catch (error) {

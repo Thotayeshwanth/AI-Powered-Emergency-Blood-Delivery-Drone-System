@@ -144,6 +144,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
       }}
     >
       <div
+        className="support-modal-card"
         style={{
           width: '100%',
           maxWidth: activeView === 'chatbot' ? '680px' : '620px',
@@ -210,7 +211,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
               </h3>
               <p style={{ fontSize: '12px', color: '#64748B', margin: 0 }}>
                 {activeView === 'select' && 'Choose AI Consultation or Direct Operational Contact'}
-                {activeView === 'chatbot' && 'Dedicated to LifeDrone operations • Powered by Gemini AI'}
+                {activeView === 'chatbot' && 'Dedicated to LifeDrone Operations & Services'}
                 {activeView === 'human' && 'Prakasam District Drone & Blood Logistics Ops'}
               </p>
             </div>
@@ -249,7 +250,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '18px' }}>
               {/* Option A: LifeDrone Chatbot */}
               <div
                 onClick={() => setActiveView('chatbot')}
@@ -292,7 +293,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                       border: '1px solid #B8D3E9'
                     }}
                   >
-                    Gemini AI Powered
+                    AI Assistant
                   </span>
                 </div>
 
@@ -707,7 +708,7 @@ export default function HelpSupportModal({ isOpen, onClose }) {
                 </div>
               ) : (
                 <form onSubmit={handleCallbackSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '12px' }}>
                     <div>
                       <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#475569', marginBottom: '4px' }}>
                         Your Full Name *
